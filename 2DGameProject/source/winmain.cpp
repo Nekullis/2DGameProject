@@ -22,8 +22,6 @@ int WINAPI WinMain(
 	SetMouseDispFlag(false);			// マウスポインタの有無 true→有 false→無
 	srand((unsigned)time(NULL));		// 乱数初期化
 
-	
-
 	GameMain();
 
 	//フレームレート表示

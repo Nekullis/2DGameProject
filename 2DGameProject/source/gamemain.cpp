@@ -2,14 +2,8 @@
 #include "winmain.h"
 #include "gamemain.h"
 #include "mymath.h"
-#include "s_gametitle.h"
-#include "s_gamemain.h"
-#include "s_gameover.h"
 #include "scene.h"
-#include "SceneDevUI.h"
 #include "FpsControll.h"
-
-
 
 GamePad gPad;
 
@@ -84,7 +78,7 @@ int IsColorFade () {
 void AppInit() 
 {
 	gNewScene = NULL;		// 次のシーンの初期化
-	gScene = new SceneGameTitle();		// Sceneの実体
+	//gScene = new SceneGameTitle();		// Sceneの実体
 }
 
 void AppRelease() 
@@ -95,7 +89,7 @@ void AppRelease()
 
 void FrameInput() {
 
-	gScene->Input();		// Sceneの入力呼び出し
+	//gScene->Input();		// Sceneの入力呼び出し
 	gPad.Input();
 }
 

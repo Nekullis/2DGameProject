@@ -19,59 +19,24 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="source\CharaProcess.cpp" />
     <ClCompile Include="source\FpsControll.cpp" />
-    <ClCompile Include="source\SceneGameStage3.cpp" />
-    <ClCompile Include="source\SceneGameStage2.cpp" />
-    <ClCompile Include="source\SceneGameStage1.cpp" />
     <ClCompile Include="source\camera.cpp" />
-    <ClCompile Include="source\framedata.cpp" />
     <ClCompile Include="source\gamemain.cpp" />
     <ClCompile Include="source\gamepad.cpp" />
-    <ClCompile Include="source\mapdata.cpp" />
-    <ClCompile Include="source\motiondata.cpp" />
     <ClCompile Include="source\mydraw.cpp" />
     <ClCompile Include="source\mymath.cpp" />
     <ClCompile Include="source\scene.cpp" />
-    <ClCompile Include="source\scenegamemain_chara_enemys.cpp" />
-    <ClCompile Include="source\scenegamemain_chara_gimmicks.cpp" />
-    <ClCompile Include="source\scenegamemain_chara_items.cpp" />
-    <ClCompile Include="source\scenegamemain_chara_player.cpp" />
-    <ClCompile Include="source\scenegamemain_chara_player_effect.cpp" />
-    <ClCompile Include="source\Sentence.cpp" />
-    <ClCompile Include="source\s_gamemain.cpp" />
-    <ClCompile Include="source\s_gameover.cpp" />
-    <ClCompile Include="source\s_gametitle.cpp" />
-    <ClCompile Include="source\uibase.cpp" />
     <ClCompile Include="source\winmain.cpp" />
-    <ClCompile Include="source\UIItem.cpp" />
-    <ClCompile Include="source\GameMapChange.cpp" />
-    <ClCompile Include="source\s_gameclear.cpp" />
-    <ClCompile Include="source\s_gameopening.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="source\mymaclo.h" />
     <ClInclude Include="source\FpsControll.h" />
-    <ClInclude Include="source\SceneGameStage3.h" />
-    <ClInclude Include="source\SceneGameStage2.h" />
-    <ClInclude Include="source\SceneGameStage1.h" />
     <ClInclude Include="source\camera.h" />
-    <ClInclude Include="source\framedata.h" />
     <ClInclude Include="source\gamemain.h" />
     <ClInclude Include="source\gamepad.h" />
-    <ClInclude Include="source\mapdata.h" />
-    <ClInclude Include="source\motiondata.h" />
     <ClInclude Include="source\mydraw.h" />
     <ClInclude Include="source\mymath.h" />
     <ClInclude Include="source\scene.h" />
-    <ClInclude Include="source\s_gamemain.h" />
-    <ClInclude Include="source\s_gameover.h" />
-    <ClInclude Include="source\s_gametitle.h" />
-    <ClInclude Include="source\uibase.h" />
     <ClInclude Include="source\winmain.h" />
-    <ClInclude Include="source\UIItem.h" />
-    <ClInclude Include="source\s_gameclear.h" />
-    <ClInclude Include="source\s_gameopening.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
