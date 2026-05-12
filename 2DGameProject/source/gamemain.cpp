@@ -78,7 +78,7 @@ int IsColorFade () {
 void AppInit() 
 {
 	gNewScene = NULL;		// Ÿ‚ÌƒV[ƒ“‚Ì‰Šú‰»
-	//gScene = new SceneGameTitle();		// Scene‚ÌÀ‘Ì
+	gScene = new Scene();		// Scene‚ÌÀ‘Ì
 }
 
 void AppRelease() 
