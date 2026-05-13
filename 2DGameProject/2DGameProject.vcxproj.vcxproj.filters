@@ -1,3 +1,40 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="source\FpsControll.cpp" />
+    <ClCompile Include="source\camera.cpp" />
+    <ClCompile Include="source\gamemain.cpp" />
+    <ClCompile Include="source\gamepad.cpp" />
+    <ClCompile Include="source\mydraw.cpp" />
+    <ClCompile Include="source\mymath.cpp" />
+    <ClCompile Include="source\scene.cpp" />
+    <ClCompile Include="source\winmain.cpp" />
+    <ClCompile Include="source\FileManager.cpp">
+      <Filter>File</Filter>
+    </ClCompile>
+    <ClCompile Include="source\CSVReader.cpp">
+      <Filter>File</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="source\FpsControll.h" />
+    <ClInclude Include="source\camera.h" />
+    <ClInclude Include="source\gamemain.h" />
+    <ClInclude Include="source\gamepad.h" />
+    <ClInclude Include="source\mydraw.h" />
+    <ClInclude Include="source\mymath.h" />
+    <ClInclude Include="source\scene.h" />
+    <ClInclude Include="source\winmain.h" />
+    <ClInclude Include="source\FileManager.h">
+      <Filter>File</Filter>
+    </ClInclude>
+    <ClInclude Include="source\CSVReader.h">
+      <Filter>File</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="File">
+      <UniqueIdentifier>{2ed95cd1-44e3-49dc-b59b-434352d3dac5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
 </Project>

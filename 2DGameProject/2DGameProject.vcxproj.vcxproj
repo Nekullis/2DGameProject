@@ -19,6 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="source\CSVReader.cpp" />
+    <ClCompile Include="source\FileManager.cpp" />
     <ClCompile Include="source\FpsControll.cpp" />
     <ClCompile Include="source\camera.cpp" />
     <ClCompile Include="source\gamemain.cpp" />
@@ -29,6 +31,8 @@
     <ClCompile Include="source\winmain.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="source\CSVReader.h" />
+    <ClInclude Include="source\FileManager.h" />
     <ClInclude Include="source\FpsControll.h" />
     <ClInclude Include="source\camera.h" />
     <ClInclude Include="source\gamemain.h" />

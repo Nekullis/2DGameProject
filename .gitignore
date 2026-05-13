@@ -419,3 +419,4 @@ FodyWeavers.xsd
 *.png
 2DGameProject/res/
 DxLib/
+include/
