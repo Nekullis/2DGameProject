@@ -19,6 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="source\ResourceManager.cpp" />
+    <ClCompile Include="source\JSONManager.cpp" />
     <ClCompile Include="source\CSVReader.cpp" />
     <ClCompile Include="source\FileManager.cpp" />
     <ClCompile Include="source\FpsControll.cpp" />
@@ -31,6 +33,8 @@
     <ClCompile Include="source\winmain.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="source\ResourceManager.h" />
+    <ClInclude Include="source\JSONManager.h" />
     <ClInclude Include="source\CSVReader.h" />
     <ClInclude Include="source\FileManager.h" />
     <ClInclude Include="source\FpsControll.h" />
@@ -103,11 +107,11 @@
     <LibraryPath>$(SolutionDir)DxLib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(SolutionDir)DxLib;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)include;$(SolutionDir)DxLib;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)DxLib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(SolutionDir)DxLib;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)include;$(SolutionDir)DxLib;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)DxLib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">

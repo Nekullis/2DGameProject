@@ -15,6 +15,12 @@
     <ClCompile Include="source\CSVReader.cpp">
       <Filter>File</Filter>
     </ClCompile>
+    <ClCompile Include="source\JSONManager.cpp">
+      <Filter>File</Filter>
+    </ClCompile>
+    <ClCompile Include="source\ResourceManager.cpp">
+      <Filter>File</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\FpsControll.h" />
@@ -29,6 +35,12 @@
       <Filter>File</Filter>
     </ClInclude>
     <ClInclude Include="source\CSVReader.h">
+      <Filter>File</Filter>
+    </ClInclude>
+    <ClInclude Include="source\JSONManager.h">
+      <Filter>File</Filter>
+    </ClInclude>
+    <ClInclude Include="source\ResourceManager.h">
       <Filter>File</Filter>
     </ClInclude>
   </ItemGroup>
