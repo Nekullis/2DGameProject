@@ -31,6 +31,7 @@
     <ClCompile Include="source\mymath.cpp" />
     <ClCompile Include="source\scene.cpp" />
     <ClCompile Include="source\winmain.cpp" />
+    <ClCompile Include="source\Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\ResourceManager.h" />
@@ -45,6 +46,7 @@
     <ClInclude Include="source\mymath.h" />
     <ClInclude Include="source\scene.h" />
     <ClInclude Include="source\winmain.h" />
+    <ClInclude Include="source\Texture.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
