@@ -10,6 +10,7 @@ public:
 	void SetScale(float x, float y) { m_scaleX = x; m_scaleY = y;}
 	void SetRotation(float angle) { m_angle = angle; }
 	void SetCenter(float x, float y) { m_centerX = x; m_centerY = y; }
+	void SetRect(int x, int y, int width, int height) { m_rectX = x; m_rectY = y; m_width = width; m_height = height; }
 	void Draw();
 
 private:
@@ -26,5 +27,10 @@ private:
 	//‰ñ“]’†S
 	float m_centerX;
 	float m_centerY;
+	//Œ³‰æ‘œ‚Ì‚Ç‚±‚ğØ‚èæ‚é‚©
+	int m_rectX;
+	int m_rectY;
+	int m_width;
+	int m_height;
 };
 
