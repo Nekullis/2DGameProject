@@ -4,6 +4,7 @@
 #include "mymath.h"
 #include "scene.h"
 #include "FpsControll.h"
+#include "Time.h"
 
 GamePad gPad;
 
@@ -125,7 +126,7 @@ void GameMain() {
 	while (ProcessMessage() == 0 )
 	{
 		//フレームレート制御
-		FpsControll_Update();
+		Time::Update();
 
 		//シーンを切り替えるか?
 		if (gNewScene != NULL) {

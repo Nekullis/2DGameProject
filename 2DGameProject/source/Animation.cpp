@@ -1,5 +1,6 @@
 #include "Animation.h"
 #include "Sprite.h"
+#include "Time.h"
 
 Animation::Animation() :m_currentFrame(0), m_timer(0), m_interval(10)
 {
@@ -32,9 +33,9 @@ void Animation::Update()
 		return;
 	}
 	//アニメーションタイマー加算
-	m_timer++;
+	m_timer += Time::DeltaTime();
 	//アニメーションタイマーが規定値を超えた場合、次のフレームに
-	if (m_timer >= m_interval)
+	if (m_timer >= 1.0f/8.0f)
 	{
 		m_timer = 0;
 		m_currentFrame++;
