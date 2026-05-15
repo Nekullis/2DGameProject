@@ -1,7 +1,8 @@
 #include "Sprite.h"
 #include <Dxlib.h>
 
-Sprite::Sprite(std::shared_ptr<Texture> texture) :m_Texture(texture), m_x(0), m_y(0)
+Sprite::Sprite(std::shared_ptr<Texture> texture)
+	:m_Texture(texture), m_x(0), m_y(0), m_scaleX(1.0f), m_scaleY(1.0f), m_angle(0), m_centerX(0), m_centerY(0)
 {
 }
 
@@ -12,5 +13,5 @@ void Sprite::Draw()
 		return;
 	}
 
-	DrawGraph(static_cast<int>(m_x), static_cast<int>(m_y), m_Texture->GetHandle(), TRUE);
+	DrawRotaGraph2((int)m_x, (int)m_y, m_centerX, m_centerY, m_scaleX, m_angle, m_Texture->GetHandle(), TRUE);
 }
