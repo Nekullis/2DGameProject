@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="source\Animation.cpp" />
     <ClCompile Include="source\ResourceManager.cpp" />
     <ClCompile Include="source\JSONManager.cpp" />
     <ClCompile Include="source\CSVReader.cpp" />
@@ -36,6 +37,7 @@
     <ClCompile Include="source\Sprite.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="source\Animation.h" />
     <ClInclude Include="source\ResourceManager.h" />
     <ClInclude Include="source\JSONManager.h" />
     <ClInclude Include="source\CSVReader.h" />
