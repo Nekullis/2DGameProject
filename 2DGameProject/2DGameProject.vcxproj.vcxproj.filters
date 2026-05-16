@@ -34,6 +34,7 @@
     </ClCompile>
     <ClCompile Include="source\FpsControll.cpp" />
     <ClCompile Include="source\Time.cpp" />
+    <ClCompile Include="source\InputManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\camera.h" />
@@ -69,6 +70,7 @@
     </ClInclude>
     <ClInclude Include="source\FpsControll.h" />
     <ClInclude Include="source\Time.h" />
+    <ClInclude Include="source\InputManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="File">
