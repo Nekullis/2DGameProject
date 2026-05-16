@@ -36,6 +36,9 @@
     <ClCompile Include="source\Time.cpp" />
     <ClCompile Include="source\InputManager.cpp" />
     <ClCompile Include="source\SceneManager.cpp" />
+    <ClCompile Include="source\SceneTitle.cpp">
+      <Filter>GaneFlow</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\camera.h" />
@@ -73,10 +76,16 @@
     <ClInclude Include="source\Time.h" />
     <ClInclude Include="source\InputManager.h" />
     <ClInclude Include="source\SceneManager.h" />
+    <ClInclude Include="source\SceneTitle.h">
+      <Filter>GaneFlow</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="File">
       <UniqueIdentifier>{2ed95cd1-44e3-49dc-b59b-434352d3dac5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GaneFlow">
+      <UniqueIdentifier>{2c5045e8-5888-4aa3-a15f-44bd87f14c3b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

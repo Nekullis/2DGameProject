@@ -7,6 +7,7 @@
 #include "Time.h"
 #include "InputManager.h"
 #include "SceneManager.h"
+#include "SceneTitle.h"
 
 GamePad gPad;
 
@@ -71,7 +72,7 @@ int IsColorFade () {
 
 void AppInit() 
 {
-	
+	SceneManager::ChangeScene(new SceneTitle());
 }
 
 void AppRelease() 
