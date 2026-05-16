@@ -5,17 +5,10 @@
 #include "scene.h"
 #include "FpsControll.h"
 #include "Time.h"
+#include "InputManager.h"
+#include "SceneManager.h"
 
 GamePad gPad;
-
-Scene* gScene;		// newするまで実体は無い
-
-Scene* gNewScene;		// NULL以外のセットで、シーンの切り替え
-
-void ChangeScene(Scene* scene) 
-{
-	gNewScene = scene;		// 次のシーンのセット
-}
 
 // カラーマスク用
 int gColorMaskR = 0, gColorMaskG = 0, gColorMaskB = 0, gColorMaskA = 0;
@@ -78,24 +71,21 @@ int IsColorFade () {
 
 void AppInit() 
 {
-	gNewScene = NULL;		// 次のシーンの初期化
-	gScene = new Scene();		// Sceneの実体
+	
 }
 
 void AppRelease() 
 {
-	delete gScene;		// Sceneを削除
+	
 }
 
 
-void FrameInput() {
-
-	//gScene->Input();		// Sceneの入力呼び出し
+void FrameInput() 
+{
 	gPad.Input();
 }
 
 void FrameProcess() {
-	gScene->Process();		// Sceneの計算呼び出し
 
 	if(IsColorFade() != 0) {
 		gFadeCnt++;
@@ -104,13 +94,15 @@ void FrameProcess() {
 		gColorMaskB = static_cast<int>(EasingLinear(static_cast<float>(gFadeCnt), static_cast<float>(gColorFadeStB), static_cast<float>(gColorFadeEdB), static_cast<float>(gFadeFrames)));
 		gColorMaskA = static_cast<int>(EasingLinear(static_cast<float>(gFadeCnt), static_cast<float>(gColorFadeStA), static_cast<float>(gColorFadeEdA), static_cast<float>(gFadeFrames)));
 	}
+
+	SceneManager::Update();
 }
 
 void FrameDraw() {
 
 	ClearDrawScreen();		// 画面を初期化
 
-	gScene->Draw();		// Sceneの描画呼び出し
+	SceneManager::Draw();
 
 	if(gColorMaskA > 0) {
 		SetDrawBlendMode(DX_BLENDMODE_ALPHA, gColorMaskA);	// 半透明モード
@@ -127,13 +119,6 @@ void GameMain() {
 	{
 		//フレームレート制御
 		Time::Update();
-
-		//シーンを切り替えるか?
-		if (gNewScene != NULL) {
-			delete gScene;			// 今のシーンの削除
-			gScene = gNewScene;		// 受け取ったシーンのポインタセット
-			gNewScene = NULL;		// 次のシーンの初期化
-		}
 
 		FrameInput();		// 入力
 		FrameProcess();		// 計算

@@ -8,10 +8,15 @@
 
 class Scene {
 public:
-	Scene();			// コンストラクタ
-	virtual ~Scene();	// デストラクタ
+	// コンストラクタ
+	Scene();
+	// デストラクタ
+	virtual ~Scene();	
 
-	virtual void	Input();		// 入力
-	virtual void	Process();		// 計算
-	virtual void	Draw();			// 描画
+	// 入力
+	virtual void Input() = 0;
+	// 計算
+	virtual void Process() = 0;
+	// 描画
+	virtual void Draw() = 0;
 };
