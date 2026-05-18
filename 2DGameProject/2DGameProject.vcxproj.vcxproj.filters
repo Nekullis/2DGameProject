@@ -4,8 +4,6 @@
     <ClCompile Include="source\camera.cpp" />
     <ClCompile Include="source\gamemain.cpp" />
     <ClCompile Include="source\gamepad.cpp" />
-    <ClCompile Include="source\mydraw.cpp" />
-    <ClCompile Include="source\mymath.cpp" />
     <ClCompile Include="source\scene.cpp" />
     <ClCompile Include="source\winmain.cpp" />
     <ClCompile Include="source\FileManager.cpp">
@@ -39,13 +37,18 @@
     <ClCompile Include="source\SceneTitle.cpp">
       <Filter>GaneFlow</Filter>
     </ClCompile>
+    <ClCompile Include="source\Vector2D.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="source\mydraw.cpp" />
+    <ClCompile Include="source\mymath.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\camera.h" />
     <ClInclude Include="source\gamemain.h" />
     <ClInclude Include="source\gamepad.h" />
-    <ClInclude Include="source\mydraw.h" />
-    <ClInclude Include="source\mymath.h" />
     <ClInclude Include="source\scene.h" />
     <ClInclude Include="source\winmain.h" />
     <ClInclude Include="source\FileManager.h">
@@ -79,6 +82,13 @@
     <ClInclude Include="source\SceneTitle.h">
       <Filter>GaneFlow</Filter>
     </ClInclude>
+    <ClInclude Include="source\mydraw.h" />
+    <ClInclude Include="source\Vector2D.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="source\mymath.h">
+      <Filter>Math</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="File">
@@ -86,6 +96,9 @@
     </Filter>
     <Filter Include="GaneFlow">
       <UniqueIdentifier>{2c5045e8-5888-4aa3-a15f-44bd87f14c3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math">
+      <UniqueIdentifier>{266fd5a2-fd2a-48af-91cf-d54eb6b6e0c1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

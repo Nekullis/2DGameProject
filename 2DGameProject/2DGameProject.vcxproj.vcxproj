@@ -39,6 +39,7 @@
     <ClCompile Include="source\TextureManager.cpp" />
     <ClCompile Include="source\Sprite.cpp" />
     <ClCompile Include="source\Time.cpp" />
+    <ClCompile Include="source\Vector2D.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\SceneTitle.h" />
@@ -61,6 +62,7 @@
     <ClInclude Include="source\TextureManager.h" />
     <ClInclude Include="source\Sprite.h" />
     <ClInclude Include="source\Time.h" />
+    <ClInclude Include="source\Vector2D.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

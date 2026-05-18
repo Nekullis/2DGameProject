@@ -1,7 +1,7 @@
-
 #include <math.h>
 #include "DxLib.h"
 #include "FpsControll.h"
+
 static int mStartTime;      //測定開始時刻
 static int mCount;          //カウンタ
 static float mFps;          //fps
