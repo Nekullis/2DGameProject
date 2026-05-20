@@ -44,6 +44,9 @@
     <ClCompile Include="source\mymath.cpp">
       <Filter>Math</Filter>
     </ClCompile>
+    <ClCompile Include="source\Collider.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\camera.h" />
@@ -87,6 +90,9 @@
       <Filter>Math</Filter>
     </ClInclude>
     <ClInclude Include="source\mymath.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Collider.h">
       <Filter>Math</Filter>
     </ClInclude>
   </ItemGroup>
