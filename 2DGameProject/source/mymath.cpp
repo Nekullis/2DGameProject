@@ -31,21 +31,42 @@ int IsHitBox(
 	return 0;
 }
 
+int IsHitBox(MYRECT a, MYRECT b)
+{
+    //“–‚½‚è”»’è‚ğ•Ô‚·
+    return IsHitBox(a.x, a.y, a.w, a.h, b.x, b.y, b.w, b.h);
+}
+
 
 // “–‚½‚è”»’è—pB2‚Â‚Ì‰~‚ª“–‚½‚Á‚½‚©‚ğ”»’è
 // “–‚½‚Á‚Ä‚¢‚½‚ç1, “–‚½‚Á‚Ä‚¢‚È‚©‚Á‚½‚ç0‚ğ•Ô‚·
 int IsHitCircle(
 	int x1, int y1, int r1,		// ‚Ğ‚Æ‚Â‚ß‚Ìcircle ’†S(x,y), ”¼Œar
 	int x2, int y2, int r2		// ‚Ó‚½‚Â‚ß‚Ìcircle ’†S(x,y), ”¼Œar
-) {
-	int w, h, r;
-	w = x1 - x2;
-	h = y1 - y2;
-	r = r1 + r2;
-	if (r * r > w * w + h * h) {
-		return 1;
-	}
-	return 0;
+) 
+{
+	int dx = x1 - x2;
+	int dy = y1 - y2;
+	int radius = r1 + r2;
+
+    return radius * radius > dx * dx + dy * dy;
+}
+
+int IsHitCircle(MYCIRCLE a, MYCIRCLE b)
+{
+    return IsHitCircle((int)a.x, (int)a.y, (int)a.r, (int)b.x, (int)b.y, (int)b.r);
+}
+
+int IsHitCircleBox(MYCIRCLE circle, MYRECT rect)
+{
+    //‰~’†S‚©‚çŒ©‚ÄÅ‚à‹ß‚¢‹éŒ`“_‚ğ’T‚·
+    float nearestX = Clamp((float)(rect.x + rect.w), circle.x, (float)rect.x);
+    float nearestY = Clamp((float)(rect.y + rect.h), circle.y, (float)rect.y);
+    float dx = circle.x - nearestX;
+    float dy = circle.y - nearestY;
+    float distanceSq = dx * dx + dy * dy;
+    float radiusSq = circle.r * circle.r;
+    return distanceSq <= radiusSq;
 }
 
 
