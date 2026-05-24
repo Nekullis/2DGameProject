@@ -18,7 +18,7 @@ class Collider
 public:
 	Collider();
 	//当たり判定
-	bool IsHit(const Collider& other);
+	bool IsHit(const Collider& other) const;
 	//座標設定
 	void SetPosition(const Vector2D& pos) { m_position = pos; }
 	//サイズ設定
