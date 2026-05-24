@@ -23,7 +23,7 @@ public:
 	virtual void Draw();
 
 	//À•Wİ’è
-	virtual void SetPosition(const Vector2D& pos) { m_position = pos; }
+	void SetPosition(const Vector2D& pos);
 	//À•Wæ“¾
 	Vector2D GetPosition() const { return m_position; }
 
