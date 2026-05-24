@@ -1,0 +1,43 @@
+//----------------------------------------------------------------------
+// @filename GameObject.h
+// @author: Fukuma Kyohei
+// @explanation
+// オブジェクトの基底クラス
+//----------------------------------------------------------------------
+#pragma once
+#include <memory>
+#include "Vector2D.h"
+#include "Sprite.h"
+#include "Collider.h"
+
+class GameObject
+{
+public:
+	//コンストラクタ
+	GameObject();
+	//仮想デストラクタ
+	virtual ~GameObject();
+	//更新
+	virtual void Update();
+	//描画
+	virtual void Draw();
+
+	//座標設定
+	virtual void SetPosition(const Vector2D& pos) { m_position = pos; }
+	//座標取得
+	Vector2D GetPosition() const { return m_position; }
+
+protected:
+	//座標
+	Vector2D m_position;
+	//移動速度
+	Vector2D m_velocity;
+	//使用スプライト
+	std::shared_ptr<Sprite> m_sprite;
+	//当たり判定
+	Collider m_collider;
+	//生存フラグ
+	bool m_isActive;
+
+};
+

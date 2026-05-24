@@ -47,6 +47,9 @@
     <ClCompile Include="source\Collider.cpp">
       <Filter>Math</Filter>
     </ClCompile>
+    <ClCompile Include="source\GameObject.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\camera.h" />
@@ -95,6 +98,9 @@
     <ClInclude Include="source\Collider.h">
       <Filter>Math</Filter>
     </ClInclude>
+    <ClInclude Include="source\GameObject.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="File">
@@ -105,6 +111,9 @@
     </Filter>
     <Filter Include="Math">
       <UniqueIdentifier>{266fd5a2-fd2a-48af-91cf-d54eb6b6e0c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject">
+      <UniqueIdentifier>{a67c93ee-7305-4d2d-80d4-ad889f471d7f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
