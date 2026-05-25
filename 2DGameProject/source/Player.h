@@ -24,7 +24,7 @@ private:
 	//地面接触中か
 	bool m_isGround;
 	//ジャンプ継続中か
-	bool m_isJunp;
+	bool m_isJump;
 	//長押し時間
 	float m_jumpTimer;
 	//落下速度保存
