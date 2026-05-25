@@ -22,7 +22,7 @@ void Animation::AddFrame(int x, int y, int width, int height)
 
 void Animation::SetFPS(float fps)
 {
-	m_interval = 60.0 / fps;
+	m_interval = 60.0f / fps;
 }
 
 void Animation::Update()

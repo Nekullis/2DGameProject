@@ -14,5 +14,5 @@ void Sprite::Draw()
 		return;
 	}
 
-	DrawRectRotaGraph2((int)m_x, (int)m_y, m_rectX, m_rectY, m_width, m_height, m_centerX, m_centerY, m_scaleX, m_angle, m_Texture->GetHandle(), TRUE);
+	DrawRectRotaGraph2((int)m_x, (int)m_y, m_rectX, m_rectY, m_width, m_height, (int)m_centerX, (int)m_centerY, m_scaleX, m_angle, m_Texture->GetHandle(), TRUE);
 }
