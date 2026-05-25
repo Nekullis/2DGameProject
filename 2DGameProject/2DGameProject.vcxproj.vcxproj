@@ -19,6 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="source\Player.cpp" />
+    <ClCompile Include="source\PlayerParam.cpp" />
     <ClCompile Include="source\GameObject.cpp" />
     <ClCompile Include="source\Collider.cpp" />
     <ClCompile Include="source\SceneTitle.cpp" />
@@ -44,6 +46,8 @@
     <ClCompile Include="source\Vector2D.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="source\Player.h" />
+    <ClInclude Include="source\PlayerParam.h" />
     <ClInclude Include="source\GameObject.h" />
     <ClInclude Include="source\Collider.h" />
     <ClInclude Include="source\SceneTitle.h" />
