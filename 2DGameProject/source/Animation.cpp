@@ -6,10 +6,11 @@ Animation::Animation() :m_currentFrame(0), m_timer(0), m_interval(10)
 {
 }
 
-void Animation::AddFrame(int x, int y, int width, int height)
+void Animation::AddFrame(std::shared_ptr<Texture> texture, int x, int y, int width, int height)
 {
 	//格納するためのFrame構造体を初期化
 	Frame frame;
+	frame.texture = texture;
 	frame.x = x;
 	frame.y = y;
 	frame.width = width;
@@ -22,7 +23,7 @@ void Animation::AddFrame(int x, int y, int width, int height)
 
 void Animation::SetFPS(float fps)
 {
-	m_interval = 60.0f / fps;
+	m_interval = 1.0f / fps;
 }
 
 void Animation::Update()
@@ -35,7 +36,7 @@ void Animation::Update()
 	//アニメーションタイマー加算
 	m_timer += Time::DeltaTime();
 	//アニメーションタイマーが規定値を超えた場合、次のフレームに
-	if (m_timer >= 1.0f/8.0f)
+	if (m_timer >= m_interval)
 	{
 		m_timer = 0;
 		m_currentFrame++;
@@ -49,5 +50,13 @@ void Animation::Update()
 void Animation::Apply(Sprite& sprite)
 {
 	Frame& frame = m_frames[m_currentFrame];
+	//使用画像変更
+	sprite.SetTexture(frame.texture);
 	sprite.SetRect(frame.x, frame.y, frame.width, frame.height);
+}
+
+void Animation::Reset()
+{
+	m_currentFrame = 0;
+	m_timer = 0;
 }
