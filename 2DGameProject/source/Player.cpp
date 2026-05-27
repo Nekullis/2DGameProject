@@ -5,7 +5,7 @@
 #include <DxLib.h>
 #include <cmath>
 
-Player::Player() :m_isGround(false), m_isJump(false), m_jumpTimer(0), m_landingSpeed(0), m_state(PlayerState::Idle), m_currentAnim(nullptr)
+Player::Player() :m_isGround(false), m_prevGround(false), m_isJump(false), m_jumpTimer(0), m_landingSpeed(0), m_state(PlayerState::Idle), m_currentAnim(nullptr)
 {
 	//パラメータ読み込み
 	PlayerParam::Load();
@@ -52,6 +52,7 @@ void Player::LoadAnimation()
 		m_stepAnim.AddFrame(motion_step, i * 150, 0, 150, 100);
 	}
 	m_stepAnim.SetFPS(8);
+	m_stepAnim.SetLoop(false);
 
 }
 
@@ -98,6 +99,9 @@ void Player::Update()
 
 	//更新
 	GameObject::Update();
+
+	//最後に保存
+	m_prevGround = m_isGround;
 }
 
 void Player::Input()
@@ -154,6 +158,37 @@ void Player::ApplyGravity()
 
 void Player::UpdateState()
 {
+	//着地の瞬間
+	if (!m_prevGround && m_isGround)
+	{
+		//移動していないなら
+		if (std::abs(m_velocity.x) > 0.01f)
+		{
+			m_state = PlayerState::Land;
+
+			return;
+		}
+	}
+
+	//着地アニメ中
+	if (m_state == PlayerState::Land)
+	{
+		//終了していなければ維持
+		if (!m_stepAnim.IsFinished())
+		{
+			return;
+		}
+		//終わったので移動か待機状態に
+		if (std::abs(m_velocity.x) > 0.01f)
+		{
+			m_state = PlayerState::Move;
+		}
+		else
+		{
+			m_state = PlayerState::Idle;
+		}
+	}
+
 	//空中なら優先
 	if (!m_isGround)
 	{

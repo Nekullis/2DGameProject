@@ -2,7 +2,7 @@
 #include "Sprite.h"
 #include "Time.h"
 
-Animation::Animation() :m_currentFrame(0), m_timer(0), m_interval(10)
+Animation::Animation() :m_currentFrame(0), m_timer(0), m_interval(1.0f / 8.0f), m_isLoop(true), m_isFinished(false)
 {
 }
 
@@ -33,6 +33,11 @@ void Animation::Update()
 	{
 		return;
 	}
+	//終了済みなら止める
+	if (m_isFinished)
+	{
+		return;
+	}
 	//アニメーションタイマー加算
 	m_timer += Time::DeltaTime();
 	//アニメーションタイマーが規定値を超えた場合、次のフレームに
@@ -40,9 +45,19 @@ void Animation::Update()
 	{
 		m_timer = 0;
 		m_currentFrame++;
+		//最後まで行った場合
 		if (m_currentFrame >= m_frames.size())
 		{
-			m_currentFrame = 0;
+			if (m_isLoop)
+			{
+				m_currentFrame = 0;
+			}
+			else
+			{
+				//最後固定
+				m_currentFrame = m_frames.size() - 1;
+				m_isFinished = true;
+			}
 		}
 	}
 }
@@ -59,4 +74,6 @@ void Animation::Reset()
 {
 	m_currentFrame = 0;
 	m_timer = 0;
+	m_isFinished = false;
 }
+

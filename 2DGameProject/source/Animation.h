@@ -30,11 +30,19 @@ public:
 	void Apply(Sprite& sprite);
 	//最初から
 	void Reset();
+	//ループ設定
+	void SetLoop(bool loop) { m_isLoop = loop; }
+	//再生終了設定
+	bool IsFinished() const { return m_isFinished; }
 
 private:
 	std::vector<Frame> m_frames;
 	int m_currentFrame;
 	float m_timer;
 	float m_interval;
+	//ループするか
+	bool m_isLoop;
+	//再生終了
+	bool m_isFinished;
 };
 

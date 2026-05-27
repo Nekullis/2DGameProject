@@ -45,6 +45,8 @@ private:
 
 	//地面接触中か
 	bool m_isGround;
+	//前フレーム設置状態
+	bool m_prevGround;
 	//ジャンプ継続中か
 	bool m_isJump;
 	//長押し時間
