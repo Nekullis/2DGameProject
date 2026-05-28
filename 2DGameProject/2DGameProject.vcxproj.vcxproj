@@ -45,7 +45,7 @@
     <ClCompile Include="source\Sprite.cpp" />
     <ClCompile Include="source\Time.cpp" />
     <ClCompile Include="source\Vector2D.cpp" />
-    <ClCompile Include="TileMap.cpp" />
+    <ClCompile Include="source\TileMap.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\GameObjectManager.h" />
@@ -74,7 +74,7 @@
     <ClInclude Include="source\Sprite.h" />
     <ClInclude Include="source\Time.h" />
     <ClInclude Include="source\Vector2D.h" />
-    <ClInclude Include="TileMap.h" />
+    <ClInclude Include="source\TileMap.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

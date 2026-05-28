@@ -59,7 +59,7 @@
     <ClCompile Include="source\TextureManager.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
-    <ClCompile Include="TileMap.cpp">
+    <ClCompile Include="source\TileMap.cpp">
       <Filter>Data</Filter>
     </ClCompile>
   </ItemGroup>
@@ -122,7 +122,7 @@
     <ClInclude Include="source\TextureManager.h">
       <Filter>Manager</Filter>
     </ClInclude>
-    <ClInclude Include="TileMap.h">
+    <ClInclude Include="source\TileMap.h">
       <Filter>Data</Filter>
     </ClInclude>
   </ItemGroup>

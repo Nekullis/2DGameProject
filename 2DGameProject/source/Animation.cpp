@@ -55,7 +55,7 @@ void Animation::Update()
 			else
 			{
 				//ç≈å„å≈íË
-				m_currentFrame = m_frames.size() - 1;
+				m_currentFrame = static_cast<int>(m_frames.size() - 1);
 				m_isFinished = true;
 			}
 		}
