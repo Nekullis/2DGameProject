@@ -31,6 +31,11 @@ void GameObject::Draw()
 	}
 }
 
+void GameObject::Destory()
+{
+	m_isActive = false;
+}
+
 void GameObject::SetPosition(const Vector2D& pos)
 {
 	m_position = pos;

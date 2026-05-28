@@ -6,22 +6,10 @@
     <ClCompile Include="source\gamepad.cpp" />
     <ClCompile Include="source\scene.cpp" />
     <ClCompile Include="source\winmain.cpp" />
-    <ClCompile Include="source\FileManager.cpp">
-      <Filter>File</Filter>
-    </ClCompile>
     <ClCompile Include="source\CSVReader.cpp">
       <Filter>File</Filter>
     </ClCompile>
-    <ClCompile Include="source\JSONManager.cpp">
-      <Filter>File</Filter>
-    </ClCompile>
-    <ClCompile Include="source\ResourceManager.cpp">
-      <Filter>File</Filter>
-    </ClCompile>
     <ClCompile Include="source\Texture.cpp">
-      <Filter>File</Filter>
-    </ClCompile>
-    <ClCompile Include="source\TextureManager.cpp">
       <Filter>File</Filter>
     </ClCompile>
     <ClCompile Include="source\Sprite.cpp">
@@ -56,6 +44,24 @@
     <ClCompile Include="source\Player.cpp">
       <Filter>GameObject</Filter>
     </ClCompile>
+    <ClCompile Include="source\GameObjectManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="source\JSONManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="source\ResourceManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="source\FileManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="source\TextureManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="TileMap.cpp">
+      <Filter>Data</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\camera.h" />
@@ -63,22 +69,10 @@
     <ClInclude Include="source\gamepad.h" />
     <ClInclude Include="source\scene.h" />
     <ClInclude Include="source\winmain.h" />
-    <ClInclude Include="source\FileManager.h">
-      <Filter>File</Filter>
-    </ClInclude>
     <ClInclude Include="source\CSVReader.h">
       <Filter>File</Filter>
     </ClInclude>
-    <ClInclude Include="source\JSONManager.h">
-      <Filter>File</Filter>
-    </ClInclude>
-    <ClInclude Include="source\ResourceManager.h">
-      <Filter>File</Filter>
-    </ClInclude>
     <ClInclude Include="source\Texture.h">
-      <Filter>File</Filter>
-    </ClInclude>
-    <ClInclude Include="source\TextureManager.h">
       <Filter>File</Filter>
     </ClInclude>
     <ClInclude Include="source\Sprite.h">
@@ -113,6 +107,24 @@
     <ClInclude Include="source\Player.h">
       <Filter>GameObject</Filter>
     </ClInclude>
+    <ClInclude Include="source\GameObjectManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="source\JSONManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="source\ResourceManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="source\FileManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="source\TextureManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="TileMap.h">
+      <Filter>Data</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="File">
@@ -129,6 +141,9 @@
     </Filter>
     <Filter Include="Data">
       <UniqueIdentifier>{10a221ea-4ea8-4fbd-b613-8a8858d688be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager">
+      <UniqueIdentifier>{c6ec129b-9a6c-4a32-bdb1-8982e4751108}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

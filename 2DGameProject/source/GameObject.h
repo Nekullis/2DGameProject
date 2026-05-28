@@ -21,11 +21,14 @@ public:
 	virtual void Update();
 	//描画
 	virtual void Draw();
+	//死亡フラグ
+	void Destory();
 
 	//座標設定
 	void SetPosition(const Vector2D& pos);
 	//座標取得
 	Vector2D GetPosition() const { return m_position; }
+	bool IsActive() const { return m_isActive; }
 
 protected:
 	//座標
