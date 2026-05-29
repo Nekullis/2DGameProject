@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="source\Physics.cpp" />
     <ClCompile Include="source\GameObjectManager.cpp" />
     <ClCompile Include="source\Player.cpp" />
     <ClCompile Include="source\PlayerParam.cpp" />
@@ -48,6 +49,7 @@
     <ClCompile Include="source\TileMap.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="source\Physics.h" />
     <ClInclude Include="source\GameObjectManager.h" />
     <ClInclude Include="source\Player.h" />
     <ClInclude Include="source\PlayerParam.h" />
