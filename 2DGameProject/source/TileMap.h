@@ -8,6 +8,7 @@
 #include <vector>
 #include <memory>
 #include <string>
+#include "mymath.h"
 
 class Texture;
 
@@ -21,6 +22,8 @@ public:
 	void Draw();
 	//壁判定
 	bool IsWall(int x, int y)const;
+	//壁すべてをrect化して取得する
+	std::vector<MYRECT> GetWallRects() const;
 
 private:
 	//マップデータ

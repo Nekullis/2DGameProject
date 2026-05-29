@@ -68,3 +68,32 @@ bool TileMap::IsWall(int x, int y) const
 
 	return tile == 1;
 }
+
+std::vector<MYRECT> TileMap::GetWallRects() const
+{
+	//戻り値
+	std::vector<MYRECT> walls;
+
+	//全タイル走査
+	for (int y = 0; y < m_mapData.size(); y++)
+	{
+		for (int x = 0; x < m_mapData[y].size(); x++)
+		{
+			//壁じゃない場合
+			if (m_mapData[y][x] != 1)
+			{
+				continue;
+			}
+			//Rect作成
+			MYRECT rect;
+			rect.x = x * m_tileSize;
+			rect.y = y * m_tileSize;
+			rect.w = m_tileSize;
+			rect.h = m_tileSize;
+			//追加
+			walls.push_back(rect);
+		}
+	}
+
+	return walls;
+}
