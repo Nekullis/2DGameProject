@@ -51,3 +51,20 @@ void TileMap::Draw()
 		}
 	}
 }
+
+bool TileMap::IsWall(int x, int y) const
+{
+	//範囲外チェック
+	if (x < 0 || x >= m_mapData[0].size())
+	{
+		return false;
+	}
+	if (y < 0 || y >= m_mapData.size())
+	{
+		return false;
+	}
+	
+	int tile = m_mapData[y][x];
+
+	return tile == 1;
+}

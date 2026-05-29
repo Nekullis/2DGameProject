@@ -19,6 +19,8 @@ public:
 	bool LoadCSV(const std::string& path);
 	//描画
 	void Draw();
+	//壁判定
+	bool IsWall(int x, int y)const;
 
 private:
 	//マップデータ
