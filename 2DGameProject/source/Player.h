@@ -7,6 +7,9 @@
 #pragma once
 #include "GameObject.h"
 #include "Animation.h"
+#include "mymath.h"
+
+class TileMap;
 
 //プレイヤー状態
 enum class PlayerState
@@ -26,10 +29,17 @@ enum class PlayerState
 class Player : public GameObject
 {
 public:
-	Player();
+	Player(TileMap* tilemap);
 	void Update()override;
+	//自身のrectを取得
+	MYRECT GetRect() const;
+	//当たり判定
+	void Collision();
 
 private:
+	//タイルマップ情報
+	TileMap* m_tilemap;
+
 	//左右入力
 	void Input();
 	//ジャンプ処理
@@ -65,5 +75,6 @@ private:
 	Animation m_stepAnim;
 	//現在再生中のアニメーション
 	Animation* m_currentAnim;
+
 };
 

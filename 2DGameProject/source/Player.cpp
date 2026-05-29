@@ -2,10 +2,12 @@
 #include "InputManager.h"
 #include "PlayerParam.h"
 #include "Time.h"
+#include "TileMap.h"
 #include <DxLib.h>
 #include <cmath>
+#include "Physics.h"
 
-Player::Player() :m_isGround(false), m_prevGround(false), m_isJump(false), m_jumpTimer(0), m_landingSpeed(0), m_state(PlayerState::Idle), m_currentAnim(nullptr)
+Player::Player(TileMap* tilemap) :m_tilemap(tilemap), m_isGround(false), m_prevGround(false), m_isJump(false), m_jumpTimer(0), m_landingSpeed(0), m_state(PlayerState::Idle), m_currentAnim(nullptr)
 {
 	//パラメータ読み込み
 	PlayerParam::Load();
@@ -40,12 +42,14 @@ void Player::LoadAnimation()
 		m_jumpUpAnim.AddFrame(motion_jump, i * 150, 0, 150, 100);
 	}
 	m_jumpUpAnim.SetFPS(8);
+	m_jumpUpAnim.SetLoop(false);
 	//下降
 	for (int i = 0; i < 5; i++)
 	{
 		m_jumpDownAnim.AddFrame(motion_jump, i * 150, 100, 150, 100);
 	}
 	m_jumpDownAnim.SetFPS(8);
+	m_jumpDownAnim.SetLoop(false);
 	//着地
 	for (int i = 0; i < 8; i++)
 	{
@@ -64,6 +68,8 @@ void Player::Update()
 	Jump();
 	//重力処理
 	ApplyGravity();
+	//当たり判定
+	Collision();
 	//状態更新
 	UpdateState();
 	
@@ -102,6 +108,48 @@ void Player::Update()
 
 	//最後に保存
 	m_prevGround = m_isGround;
+}
+
+MYRECT Player::GetRect() const
+{
+	MYRECT rect;
+	rect.x = (int)m_position.x;
+	rect.y = (int)m_position.y;
+	rect.w = 150;
+	rect.h = 100;
+
+	return rect;
+}
+
+void Player::Collision()
+{
+	//接地初期化
+	m_isGround = false;
+	//壁一覧取得
+	auto walls = m_tilemap->GetWallRects();
+	//プレイヤー矩形取得
+	MYRECT playerRect = GetRect();
+	//全壁と判定
+	for (auto& wall : walls)
+	{
+		bool hit = Physics::ResolveBoxCollision(playerRect, wall);
+		if (!hit)
+		{
+			continue;
+		}
+		//下方向移動中
+		if (m_velocity.y > 0)
+		{
+			m_isGround = true;
+			//落下停止
+			m_velocity.y = 0;
+			//ジャンプ終了
+			m_isJump = false;
+		}
+	}
+	//rect結果反映
+	m_position.x = (float)playerRect.x;
+	m_position.y = (float)playerRect.y;
 }
 
 void Player::Input()
