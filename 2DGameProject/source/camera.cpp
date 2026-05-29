@@ -1,7 +1,9 @@
 #include "Camera.h"
 #include "winmain.h"
+#include "Player.h"
 
-Camera::Camera() {
+Camera::Camera() :m_target(nullptr)
+{
 	// 位置がリミットを超えないように（回転は加味せず）
 	_pos = VGet(SCREEN_W / 2, SCREEN_H / 2, 0);
 	_lookat = VGet(SCREEN_W / 2, SCREEN_H / 2, 0);
@@ -12,12 +14,19 @@ Camera::Camera() {
 	_rcLimit = { 0 };
 }
 
-Camera::~Camera() {
+Camera::~Camera() 
+{
 	// 何もしない
 }
 
-void	Camera::Process() {
-
+void	Camera::Process() 
+{
+	if (m_target)
+	{
+		//プレイヤー中心へ
+		_pos.x = m_target->GetPosition().x;
+		_pos.y = m_target->GetPosition().y;
+	}
 	float left, top, right, bottom;
 	left = _rcLimit.x + _lookat.x / _scale;
 	right = (_rcLimit.x + _rcLimit.w) - _lookat.x / _scale;

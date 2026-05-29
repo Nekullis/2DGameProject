@@ -8,6 +8,8 @@
 #include "DxLib.h"		
 #include "mymath.h"
 
+class Player;
+
 class Camera {
 public:
 	Camera();
@@ -17,6 +19,7 @@ public:
 
 	//ゲッター
 	MATRIX	GetViewMatrix() const { return _mView; }
+	void  SetTarget(Player* target) { m_target = target; }
 
 public:
 	int _camControl;	// カメラ操作するなら1
@@ -26,4 +29,7 @@ public:
 	float	_scale;		// カメラの拡大率
 	float	_rotate;	// カメラの回転（degree)
 	MYRECT	_rcLimit;	// world座標でリミット設定
+
+private:
+	Player* m_target
 };
