@@ -47,6 +47,7 @@
     <ClCompile Include="source\Time.cpp" />
     <ClCompile Include="source\Vector2D.cpp" />
     <ClCompile Include="source\TileMap.cpp" />
+    <ClCompile Include="source\Stage.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\Physics.h" />
@@ -77,6 +78,11 @@
     <ClInclude Include="source\Time.h" />
     <ClInclude Include="source\Vector2D.h" />
     <ClInclude Include="source\TileMap.h" />
+    <ClInclude Include="source\Stage.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="data\csv\StageMap.csv" />
+    <None Include="data\json\Stage1.json" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

@@ -1,5 +1,5 @@
 //----------------------------------------------------------------------
-// @filename GameObject.h
+// @filename Player.h
 // @author: Fukuma Kyohei
 // @explanation
 // オブジェクトから派生したプレイアブルキャラクタークラス

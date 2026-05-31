@@ -1,0 +1,42 @@
+//----------------------------------------------------------------------
+// @filename Stage.h
+// @author: Fukuma Kyohei
+// @explanation
+// ステージの構成に関するクラス
+//----------------------------------------------------------------------
+#pragma once
+#include <memory>
+#include <string>
+
+class TileMap;
+
+class Stage
+{
+public:
+	Stage();
+	//ステージ読み込み
+	bool Load(const std::string& path);
+	//更新
+	void Update();
+	//描画
+	void Draw();
+	//ゲッター
+	TileMap* GetTileMap()const { return m_tileMap.get(); }
+	float GetPlayerSpawnX()const { return m_playerSpawnX; }
+	float GetPlayerSpawnY()const { return m_playerSpawnY; }
+
+private:
+	//ステージ名
+	std::string m_stageName;
+	//マップ
+	std::shared_ptr<TileMap> m_tileMap;
+	//プレイヤー開始位置
+	float m_playerSpawnX;
+	float m_playerSpawnY;
+	//BGM
+	std::string m_bgmPath;
+	//ゴール座標
+	float m_GoalX;
+	float m_GoalY;
+};
+

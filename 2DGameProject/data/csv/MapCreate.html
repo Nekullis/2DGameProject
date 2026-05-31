@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>Map Editor</title>
+
+<style>
+body{
+    font-family:sans-serif;
+    margin:20px;
+}
+
+.controls{
+    margin-bottom:10px;
+}
+
+#grid{
+    display:grid;
+    gap:1px;
+    width:max-content;
+    user-select:none;
+}
+
+.cell{
+    width:24px;
+    height:24px;
+    border:1px solid #ddd;
+    background:white;
+    box-sizing:border-box;
+}
+
+.wall{
+    background:black;
+}
+</style>
+</head>
+<body>
+
+<div class="controls">
+    幅:
+    <input type="number" id="width" value="20" min="1">
+
+    高さ:
+    <input type="number" id="height" value="20" min="1">
+
+    <button onclick="createMap()">生成</button>
+
+    <button onclick="saveCSV()">CSV保存</button>
+
+    <input type="file" id="csvFile" accept=".csv">
+</div>
+
+<div id="grid"></div>
+
+<script>
+
+let map = [];
+let mapWidth = 20;
+let mapHeight = 20;
+
+let mouseDown = false;
+let paintMode = 1;
+
+const grid = document.getElementById("grid");
+
+document.addEventListener("mouseup", () => {
+    mouseDown = false;
+});
+
+document.addEventListener("contextmenu", e => {
+    e.preventDefault();
+});
+
+function createMap() {
+
+    mapWidth = parseInt(
+        document.getElementById("width").value
+    );
+
+    mapHeight = parseInt(
+        document.getElementById("height").value
+    );
+
+    map = [];
+
+    grid.innerHTML = "";
+
+    grid.style.gridTemplateColumns =
+        `repeat(${mapWidth}, 24px)`;
+
+    for(let y=0;y<mapHeight;y++){
+
+        map[y] = [];
+
+        for(let x=0;x<mapWidth;x++){
+
+            map[y][x] = 0;
+
+            const cell = document.createElement("div");
+
+            cell.className = "cell";
+
+            cell.dataset.x = x;
+            cell.dataset.y = y;
+
+            cell.addEventListener("mousedown", e => {
+
+                mouseDown = true;
+
+                if(e.button === 0){
+                    paintMode = 1;
+                }
+                else if(e.button === 2){
+                    paintMode = 0;
+                }
+
+                paintCell(cell);
+            });
+
+            cell.addEventListener("mouseenter", () => {
+
+                if(mouseDown){
+                    paintCell(cell);
+                }
+            });
+
+            grid.appendChild(cell);
+        }
+    }
+}
+
+function paintCell(cell){
+
+    const x = Number(cell.dataset.x);
+    const y = Number(cell.dataset.y);
+
+    map[y][x] = paintMode;
+
+    if(paintMode){
+        cell.classList.add("wall");
+    }
+    else{
+        cell.classList.remove("wall");
+    }
+}
+
+function saveCSV(){
+
+    const csv =
+        map.map(row => row.join(","))
+           .join("\n");
+
+    const blob = new Blob(
+        [csv],
+        {type:"text/csv"}
+    );
+
+    const url =
+        URL.createObjectURL(blob);
+
+    const a =
+        document.createElement("a");
+
+    a.href = url;
+    a.download = "map.csv";
+    a.click();
+
+    URL.revokeObjectURL(url);
+}
+
+document.getElementById("csvFile")
+.addEventListener("change", e => {
+
+    const file = e.target.files[0];
+
+    if(!file){
+        return;
+    }
+
+    const reader = new FileReader();
+
+    reader.onload = event => {
+
+        const text = event.target.result
+            .trim();
+
+        const rows = text
+            .split(/\r?\n/)
+            .map(row =>
+                row.split(",")
+                   .map(Number)
+            );
+
+        mapHeight = rows.length;
+        mapWidth = rows[0].length;
+
+        document.getElementById("width").value =
+            mapWidth;
+
+        document.getElementById("height").value =
+            mapHeight;
+
+        map = rows;
+
+        rebuildGrid();
+    };
+
+    reader.readAsText(file);
+});
+
+function rebuildGrid(){
+
+    grid.innerHTML = "";
+
+    grid.style.gridTemplateColumns =
+        `repeat(${mapWidth}, 24px)`;
+
+    for(let y=0;y<mapHeight;y++){
+
+        for(let x=0;x<mapWidth;x++){
+
+            const cell =
+                document.createElement("div");
+
+            cell.className = "cell";
+
+            if(map[y][x] === 1){
+                cell.classList.add("wall");
+            }
+
+            cell.dataset.x = x;
+            cell.dataset.y = y;
+
+            cell.addEventListener("mousedown", e => {
+
+                mouseDown = true;
+
+                if(e.button === 0){
+                    paintMode = 1;
+                }
+                else if(e.button === 2){
+                    paintMode = 0;
+                }
+
+                paintCell(cell);
+            });
+
+            cell.addEventListener("mouseenter", () => {
+
+                if(mouseDown){
+                    paintCell(cell);
+                }
+            });
+
+            grid.appendChild(cell);
+        }
+    }
+}
+
+createMap();
+
+</script>
+
+</body>
+</html>
