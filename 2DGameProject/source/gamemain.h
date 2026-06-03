@@ -8,13 +8,6 @@
 // gamemain.cpp に実体を記述
 #pragma once	
 #include "scene.h"
-#include "gamepad.h"
-
-// 他のcppでも使いたいグローバル変数は、ヘッダファイルでextern宣言する
-extern GamePad gPad;
-
-// Sceneを変更する
-void ChangeScene(Scene* scene);	
 
 // カラーマスクの指定
 void ColorMask(int colorR, int colorG, int colorB, int colorA);		

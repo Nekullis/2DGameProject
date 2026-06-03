@@ -1,5 +1,6 @@
 #include "Sprite.h"
 #include <Dxlib.h>
+#include "camera.h"
 
 Sprite::Sprite(std::shared_ptr<Texture> texture)
 	:m_Texture(texture), m_x(0), m_y(0), m_scaleX(1.0f), m_scaleY(1.0f), m_angle(0), m_centerX(0), m_centerY(0),
@@ -13,6 +14,7 @@ void Sprite::Draw()
 	{
 		return;
 	}
-
-	DrawRectRotaGraph2((int)m_x, (int)m_y, m_rectX, m_rectY, m_width, m_height, (int)m_centerX, (int)m_centerY, m_scaleX, m_angle, m_Texture->GetHandle(), TRUE);
+    /*MATRIX m = MGetTranslate(VECTOR(Camera::w_camera._pos.x, 0, 0));
+    VECTOR pos = VTransform(VECTOR(m_x, m_y, 0), m);*/
+	DrawRectRotaGraph2((int)m_x - Camera::w_camera._pos.x, (int)m_y, m_rectX, m_rectY, m_width, m_height, (int)m_centerX, (int)m_centerY, m_scaleX, m_angle, m_Texture->GetHandle(), TRUE);
 }

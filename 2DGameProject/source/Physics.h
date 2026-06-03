@@ -7,10 +7,19 @@
 #pragma once
 #include "mymath.h"
 
+enum class CollisionSide
+{
+    None,
+    Left,
+    Right,
+    Top,
+    Bottom,
+};
+
 class Physics
 {
 public:
 	//Box“¯m‚ÌÕ“Ë‰ğŒˆ
-	static bool ResolveBoxCollision(MYRECT& moving, const MYRECT& wall);
+	static CollisionSide ResolveBoxCollision(MYRECT& moving, const MYRECT& wall);
 };
 

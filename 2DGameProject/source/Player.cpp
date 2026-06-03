@@ -7,58 +7,18 @@
 #include <cmath>
 #include "Physics.h"
 
+//デバッグ用
+    CollisionSide m_debugHit;
+
 Player::Player(TileMap* tilemap) :m_tilemap(tilemap), m_isGround(false), m_prevGround(false), m_isJump(false), m_jumpTimer(0), m_landingSpeed(0), m_state(PlayerState::Idle), m_currentAnim(nullptr)
 {
 	//パラメータ読み込み
 	PlayerParam::Load();
 	LoadAnimation();
 	m_currentAnim = &m_idleAnim;
+    m_debugHit = CollisionSide::None;
 }
 
-void Player::LoadAnimation()
-{
-	//アニメーション読み込み
-	auto motion_idle = std::make_shared<Texture>("res/player/player_motion/Slime_Idle.png");
-	auto motion_walk = std::make_shared<Texture>("res/player/player_motion/Slime_Walk.png");
-	auto motion_jump = std::make_shared<Texture>("res/player/player_motion/Slime_Jump.png");
-	auto motion_step = std::make_shared<Texture>("res/player/player_motion/Slime_Step.png");
-	m_sprite = std::make_shared<Sprite>(motion_idle);
-	//各アニメーションをフレーム登録
-	//待機
-	for (int i = 0; i < 9; i++)
-	{
-		m_idleAnim.AddFrame(motion_idle, i * 150, 0, 150, 100);
-	}
-	m_idleAnim.SetFPS(8);
-	//移動
-	for (int i = 0; i < 6; i++)
-	{
-		m_walkAnim.AddFrame(motion_walk, i * 150, 0, 150, 100);
-	}
-	m_walkAnim.SetFPS(8);
-	//上昇
-	for (int i = 0; i < 7; i++)
-	{
-		m_jumpUpAnim.AddFrame(motion_jump, i * 150, 0, 150, 100);
-	}
-	m_jumpUpAnim.SetFPS(8);
-	m_jumpUpAnim.SetLoop(false);
-	//下降
-	for (int i = 0; i < 5; i++)
-	{
-		m_jumpDownAnim.AddFrame(motion_jump, i * 150, 100, 150, 100);
-	}
-	m_jumpDownAnim.SetFPS(8);
-	m_jumpDownAnim.SetLoop(false);
-	//着地
-	for (int i = 0; i < 8; i++)
-	{
-		m_stepAnim.AddFrame(motion_step, i * 150, 0, 150, 100);
-	}
-	m_stepAnim.SetFPS(8);
-	m_stepAnim.SetLoop(false);
-
-}
 
 void Player::Update()
 {
@@ -68,8 +28,12 @@ void Player::Update()
 	Jump();
 	//重力処理
 	ApplyGravity();
-	//当たり判定
+    //更新
+    GameObject::Update();
+	//衝突判定
 	Collision();
+    //接地判定
+    CheckGround();
 	//状態更新
 	UpdateState();
 	
@@ -94,6 +58,9 @@ void Player::Update()
 	case PlayerState::Fall:
 		ChangeAnimation(&m_jumpDownAnim);
 		break;
+    case PlayerState::Land:
+        ChangeAnimation(&m_stepAnim);
+        break;
 	}
 
 	//アニメーション処理
@@ -103,11 +70,89 @@ void Player::Update()
 		m_currentAnim->Apply(*m_sprite);
 	}
 
-	//更新
-	GameObject::Update();
-
 	//最後に保存
 	m_prevGround = m_isGround;
+}
+
+void Player::Draw()
+{
+    static int hitCount = 0;
+    if (m_isGround)
+    {
+        hitCount++;
+    }
+    GameObject::Draw();
+    DrawFormatString(0, 40, GetColor(255, 255, 255), "Ground=%d vel=%.2f", m_isGround, m_velocity.x);
+    DrawFormatString(0, 240, GetColor(255, 255, 255), "PosX=%.2f", m_position.x);
+    DrawFormatString(0, 260, GetColor(255, 255, 255), "DT=%.6f", Time::DeltaTime());
+    DrawFormatString(0, 280, GetColor(255, 255, 255), "hit=%d", (int)m_debugHit);
+    DrawFormatString(0, 300, GetColor(255, 255, 255), "State=%d",(int)m_state);
+}
+
+
+void Player::LoadAnimation()
+{
+    //アニメーション読み込み
+    auto motion_idle = std::make_shared<Texture>("res/player/player_motion/Slime_Idle.png");
+    auto motion_walk = std::make_shared<Texture>("res/player/player_motion/Slime_Walk.png");
+    auto motion_jump = std::make_shared<Texture>("res/player/player_motion/Slime_Jump.png");
+    auto motion_step = std::make_shared<Texture>("res/player/player_motion/Slime_Step.png");
+    m_sprite = std::make_shared<Sprite>(motion_idle);
+    //各アニメーションをフレーム登録
+    //待機
+    for (int i = 0; i < 9; i++)
+    {
+        m_idleAnim.AddFrame(motion_idle, i * 150, 0, 150, 100);
+    }
+    m_idleAnim.SetFPS(10);
+    m_idleAnim.SetLoop(true);
+    //移動
+    for (int i = 0; i < 6; i++)
+    {
+        m_walkAnim.AddFrame(motion_walk, i * 150, 0, 150, 100);
+    }
+    m_walkAnim.SetFPS(10);
+    m_walkAnim.SetLoop(true);
+    //上昇
+    for (int i = 0; i < 7; i++)
+    {
+        m_jumpUpAnim.AddFrame(motion_jump, i * 150, 0, 150, 100);
+    }
+    m_jumpUpAnim.SetFPS(10);
+    m_jumpUpAnim.SetLoop(false);
+    //下降
+    for (int i = 0; i < 5; i++)
+    {
+        m_jumpDownAnim.AddFrame(motion_jump, i * 150, 100, 150, 100);
+    }
+    m_jumpDownAnim.SetFPS(10);
+    m_jumpDownAnim.SetLoop(false);
+    //着地
+    for (int i = 0; i < 8; i++)
+    {
+        m_stepAnim.AddFrame(motion_step, i * 150, 0, 150, 100);
+    }
+    m_stepAnim.SetFPS(10);
+    m_stepAnim.SetLoop(false);
+
+}
+
+void Player::CheckGround()
+{
+    m_isGround = false;
+    MYRECT footRect = GetRect();
+    //足元周りの判定強化
+    footRect.y += footRect.h;
+    footRect.h = 2;
+    auto walls = m_tilemap->GetWallRects();
+    for (auto& wall : walls)
+    {
+        if (IsHitBox(footRect, wall))
+        {
+            m_isGround = true;
+            return;
+        }
+    }
 }
 
 MYRECT Player::GetRect() const
@@ -132,24 +177,32 @@ void Player::Collision()
 	//全壁と判定
 	for (auto& wall : walls)
 	{
-		bool hit = Physics::ResolveBoxCollision(playerRect, wall);
-		if (!hit)
+		CollisionSide hit = Physics::ResolveBoxCollision(playerRect, wall);
+        if (hit == CollisionSide::None)
 		{
 			continue;
 		}
-		//下方向移動中
-		if (m_velocity.y > 0)
-		{
-			m_isGround = true;
-			//落下停止
-			m_velocity.y = 0;
-			//ジャンプ終了
-			m_isJump = false;
-		}
+        switch (hit)
+        {
+        case CollisionSide::Top:
+            m_velocity.y = 0;
+            m_isJump = false;
+            break;
+        case CollisionSide::Bottom:
+            m_velocity.y = 0;
+            break;
+        case CollisionSide::Left:
+        case CollisionSide::Right:
+            //m_velocity.x = 0;
+            break;
+        }
+        m_debugHit = hit;
+        //rect結果反映
+        m_position.x = (float)playerRect.x;
+        m_position.y = (float)playerRect.y;
+
+        m_collider.SetPosition(m_position);
 	}
-	//rect結果反映
-	m_position.x = (float)playerRect.x;
-	m_position.y = (float)playerRect.y;
 }
 
 void Player::Input()
@@ -157,7 +210,7 @@ void Player::Input()
 	//毎フレーム初期化
 	m_velocity.x = 0;
 	//適応のキーで左右に移動
-	if (InputManager::Press(KEY_INPUT_A) && !InputManager::Press(KEY_INPUT_D))
+	if (InputManager::Press(KEY_INPUT_A))
 	{
 		m_velocity.x = -PlayerParam::MoveSpeed;
 	}
@@ -172,7 +225,7 @@ void Player::Jump()
 	//ジャンプ処理
 	if (m_isGround && InputManager::Trigger(KEY_INPUT_SPACE))
 	{
-		m_velocity.y = PlayerParam::JumpPower;
+		m_velocity.y -= PlayerParam::JumpPower;
 		//空中にいる判定にする
 		m_isGround = false;
 		m_isJump = true;
@@ -184,7 +237,7 @@ void Player::Jump()
 		if (m_jumpTimer < PlayerParam::MaxJumpTime)
 		{
 			//上昇追加
-			m_velocity.y += PlayerParam::AddJumpPower * Time::DeltaTime();
+			m_velocity.y -= PlayerParam::AddJumpPower * Time::DeltaTime();
 			m_jumpTimer += Time::DeltaTime();
 		}
 	}
@@ -210,7 +263,7 @@ void Player::UpdateState()
 	if (!m_prevGround && m_isGround)
 	{
 		//移動していないなら
-		if (std::abs(m_velocity.x) > 0.01f)
+		if (std::abs(m_velocity.x) < 0.01f)
 		{
 			m_state = PlayerState::Land;
 
@@ -235,6 +288,8 @@ void Player::UpdateState()
 		{
 			m_state = PlayerState::Idle;
 		}
+
+        return;
 	}
 
 	//空中なら優先

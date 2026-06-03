@@ -15,10 +15,13 @@ public:
 	Camera();
 	~Camera();
 
+    //カメラ
+    static Camera w_camera;
+
 	void	Process();
 
 	//ゲッター
-	MATRIX	GetViewMatrix() const { return _mView; }
+	const MATRIX*	GetViewMatrix() const { return &_mView; }
 	void  SetTarget(Player* target) { m_target = target; }
 
 public:
@@ -31,5 +34,5 @@ public:
 	MYRECT	_rcLimit;	// world座標でリミット設定
 
 private:
-	Player* m_target
+    Player* m_target;
 };

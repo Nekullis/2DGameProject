@@ -8,8 +8,8 @@
 #include "InputManager.h"
 #include "SceneManager.h"
 #include "SceneTitle.h"
+#include "GameObjectManager.h"
 
-GamePad gPad;
 
 // カラーマスク用
 int gColorMaskR = 0, gColorMaskG = 0, gColorMaskB = 0, gColorMaskA = 0;
@@ -73,6 +73,7 @@ int IsColorFade () {
 void AppInit() 
 {
 	SceneManager::ChangeScene(new SceneTitle());
+    Time::Initialize();
 }
 
 void AppRelease() 
@@ -83,7 +84,7 @@ void AppRelease()
 
 void FrameInput() 
 {
-	gPad.Input();
+
 }
 
 void FrameProcess() {
@@ -104,6 +105,7 @@ void FrameDraw() {
 	ClearDrawScreen();		// 画面を初期化
 
 	SceneManager::Draw();
+    DrawFormatString(500, 0, GetColor(255, 255, 255), "DT=%.6f", Time::FPS());
 
 	if(gColorMaskA > 0) {
 		SetDrawBlendMode(DX_BLENDMODE_ALPHA, gColorMaskA);	// 半透明モード
@@ -118,6 +120,8 @@ void GameMain() {
 	AppInit();		// 初期化
 	while (ProcessMessage() == 0 )
 	{
+        //入力更新
+        InputManager::Update();
 		//フレームレート制御
 		Time::Update();
 

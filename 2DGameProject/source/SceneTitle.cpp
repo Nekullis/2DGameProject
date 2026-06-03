@@ -1,5 +1,8 @@
 #include "SceneTitle.h"
 #include <Dxlib.h>
+#include "InputManager.h"
+#include "SceneManager.h"
+#include "SceneGameMain.h"
 
 SceneTitle::SceneTitle()
 {
@@ -15,6 +18,10 @@ void SceneTitle::Input()
 
 void SceneTitle::Process()
 {
+	if (InputManager::Trigger(KEY_INPUT_RETURN))
+	{
+		SceneManager::ChangeScene(new SceneGameMain());
+	}
 }
 
 void SceneTitle::Draw()

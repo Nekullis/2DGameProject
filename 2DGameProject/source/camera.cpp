@@ -2,6 +2,7 @@
 #include "winmain.h"
 #include "Player.h"
 
+Camera Camera::w_camera;
 Camera::Camera() :m_target(nullptr)
 {
 	// 位置がリミットを超えないように（回転は加味せず）
@@ -21,19 +22,14 @@ Camera::~Camera()
 
 void	Camera::Process() 
 {
-	if (m_target)
-	{
-		//プレイヤー中心へ
-		_pos.x = m_target->GetPosition().x;
-		_pos.y = m_target->GetPosition().y;
-	}
 	float left, top, right, bottom;
 	left = _rcLimit.x + _lookat.x / _scale;
 	right = (_rcLimit.x + _rcLimit.w) - _lookat.x / _scale;
 	top = _rcLimit.y + _lookat.y / _scale;
 	bottom = (_rcLimit.y + _rcLimit.h) - _lookat.y / _scale;
-	_pos.x = Clamp(left, right, _pos.x);
-	_pos.y = Clamp(top, bottom, _pos.y);
+	/*_pos.x = Clamp(left, right, _pos.x);
+	_pos.y = Clamp(top, bottom, _pos.y);*/
+    _pos.x = m_target->GetPosition().x - SCREEN_W / 2;
 
 	// View行列の生成
 	MATRIX m = MGetTranslate(VScale(_pos, -1));				// カメラ位置を*-1する

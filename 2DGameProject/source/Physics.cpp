@@ -1,11 +1,11 @@
 #include "Physics.h"
 
-bool Physics::ResolveBoxCollision(MYRECT& moving, const MYRECT& wall)
+CollisionSide Physics::ResolveBoxCollision(MYRECT& moving, const MYRECT& wall)
 {
     //ìñÇΩÇ¡ÇƒÇ¢Ç»ÇØÇÍÇŒèIóπ
     if (!IsHitBox(moving, wall))
     {
-        return false;
+        return CollisionSide::None;
     }
 
     //movingâE - wallç∂
@@ -29,11 +29,13 @@ bool Physics::ResolveBoxCollision(MYRECT& moving, const MYRECT& wall)
         if (overlapLeft < overlapRight)
         {
             moving.x -= overlapLeft;
+            return CollisionSide::Left;
         }
         //âEë§Ç©ÇÁè’ìÀ
         else
         {
             moving.x += overlapRight;
+            return CollisionSide::Right;
         }
     }
     //ècï˚å¸ÇÃï˚Ç™êÛÇ¢
@@ -43,13 +45,15 @@ bool Physics::ResolveBoxCollision(MYRECT& moving, const MYRECT& wall)
         if (overlapTop < overlapBottom)
         {
             moving.y -= overlapTop;
+            return CollisionSide::Top;
         }
         //â∫Ç©ÇÁè’ìÀ
         else
         {
-            moving.x += overlapBottom;
+            moving.y += overlapBottom;
+            return CollisionSide::Bottom;
         }
     }
 
-    return true;
+    return CollisionSide::None;
 }

@@ -1,11 +1,9 @@
 {
-  "stageName": "Stage1",
-
-  "map": "data/csv/stage1.csv",
+  "map": "data/csv/Stage1.csv",
 
   "playerSpawn": {
-    "x": 100,
-    "y": 300
+    "x": 320,
+    "y": 254
   },
 
   "goal": {

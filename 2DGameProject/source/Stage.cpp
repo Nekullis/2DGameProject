@@ -11,8 +11,9 @@ bool Stage::Load(const std::string& path)
 {
 	//json“Ç‚İ‚İ
 	json data = JSONManager::Read(path);
-	if (!data.empty())
+	if (data.empty())
 	{
+        printf("Stage json load failed : %s\n", path.c_str());
 		return false;
 	}
 

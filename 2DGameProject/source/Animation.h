@@ -35,6 +35,8 @@ public:
 	//Ä¶I—¹İ’è
 	bool IsFinished() const { return m_isFinished; }
 
+    int GetFrame() { return m_currentFrame; }
+
 private:
 	std::vector<Frame> m_frames;
 	int m_currentFrame;

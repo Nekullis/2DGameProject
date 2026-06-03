@@ -29,7 +29,7 @@ bool FpsControll_Update() {
 }
 //FPS•\Ž¦
 void FpsControll_Draw() {
-    DrawFormatString(0, 0, GetColor(255, 255, 255), "%.1f", mFps);
+    DrawFormatString(0, 500, GetColor(255, 255, 255), "%.1f", mFps);
 }
 void FpsControll_Wait() {
     int tookTime = GetNowCount() - mStartTime;  //‚©‚©‚Á‚½ŽžŠÔ

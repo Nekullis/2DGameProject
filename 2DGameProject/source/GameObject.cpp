@@ -13,7 +13,7 @@ GameObject::~GameObject()
 void GameObject::Update()
 {
 	//座標更新
-	m_position = m_velocity * Time::DeltaTime();
+	m_position += m_velocity * Time::DeltaTime();
 	//collider位置同期
 	m_collider.SetPosition(m_position);
 	//Sprite位置同期

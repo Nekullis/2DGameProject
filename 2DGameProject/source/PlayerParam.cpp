@@ -20,7 +20,7 @@ void PlayerParam::Load()
 	}
 
 	//jsonファイル読み込み
-	auto json = JSONManager::Read("Data/Json/Player.json");
+	auto json = JSONManager::Read("data/json/PlayerParam.json");
 
 	//各パラメータに代入
 	MoveSpeed = json["Player"]["MoveSpeed"];

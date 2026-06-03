@@ -14,9 +14,10 @@ void Time::Update()
 {
 	int current = GetNowCount();
 	//ms
-	int elapsed = current - m_prevTime;
+	float elapsed = current - m_prevTime;
 	//•b•ÏŠ·
 	m_deltaTime = elapsed / 1000.0f;
+
 	//FPS
 	if (elapsed > 0)
 	{

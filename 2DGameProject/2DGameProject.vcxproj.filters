@@ -1,216 +1,185 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="ソース ファイル">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="ヘッダー ファイル">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
-    <Filter Include="リソース ファイル">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\My.h">
-      <UniqueIdentifier>{d512cd98-a73d-4ce5-9894-31870af1e390}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\Ui.h">
-      <UniqueIdentifier>{a76ca4cf-45e1-4881-8f50-105c045c4e3d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\CharaMovement.h">
-      <UniqueIdentifier>{5d0a782a-517e-4f95-9120-46f82d6d30ab}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\GameFlow.cpp">
-      <UniqueIdentifier>{84abc57a-8898-42ea-88d5-89783f09e610}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\GameFlow.cpp\SceneGameStage">
-      <UniqueIdentifier>{4afa8810-e171-46a9-b7f2-da69579263ad}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\CharaMovemane.cpp">
-      <UniqueIdentifier>{023d3a9a-5e1a-4ff2-9848-0fb1f1cb1225}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\My.cpp">
-      <UniqueIdentifier>{bd6a3ed2-7a57-4232-9726-47cf60413f1e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Ui.cpp">
-      <UniqueIdentifier>{cf7f610d-24b9-4908-86c5-687298cb508f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\External.cpp">
-      <UniqueIdentifier>{fba8ddbe-e088-40a0-bfb1-51a6e41dc03e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\External.h">
-      <UniqueIdentifier>{5f20dfff-2efe-4d90-b62f-3a0d5d6b9e80}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\CharaProcess.cpp">
-      <UniqueIdentifier>{5d203aab-e6bc-4580-860b-962dc2ae0e9e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\CharaProcess.cpp\chara_group_cpp">
-      <UniqueIdentifier>{eff378fb-89ec-4988-a3dc-380804e4a01a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\GameFlow.h">
-      <UniqueIdentifier>{4bc505fe-18b3-445d-876e-eb024193d17e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\GameFlow.h\GameStage.h">
-      <UniqueIdentifier>{f837d6ed-9979-4076-9623-9ae64fd5593b}</UniqueIdentifier>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="source\winmain.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="source\camera.cpp" />
+    <ClCompile Include="source\gamemain.cpp" />
+    <ClCompile Include="source\gamepad.cpp" />
+    <ClCompile Include="source\scene.cpp" />
+    <ClCompile Include="source\winmain.cpp" />
+    <ClCompile Include="source\CSVReader.cpp">
+      <Filter>File</Filter>
     </ClCompile>
-    <ClCompile Include="source\scenegamemain_chara_enemys.cpp">
-      <Filter>ソース ファイル\CharaProcess.cpp\chara_group_cpp</Filter>
+    <ClCompile Include="source\Texture.cpp">
+      <Filter>File</Filter>
     </ClCompile>
-    <ClCompile Include="source\scenegamemain_chara_gimmicks.cpp">
-      <Filter>ソース ファイル\CharaProcess.cpp\chara_group_cpp</Filter>
+    <ClCompile Include="source\Sprite.cpp">
+      <Filter>File</Filter>
     </ClCompile>
-    <ClCompile Include="source\scenegamemain_chara_items.cpp">
-      <Filter>ソース ファイル\CharaProcess.cpp\chara_group_cpp</Filter>
+    <ClCompile Include="source\Animation.cpp">
+      <Filter>File</Filter>
     </ClCompile>
-    <ClCompile Include="source\scenegamemain_chara_player.cpp">
-      <Filter>ソース ファイル\CharaProcess.cpp\chara_group_cpp</Filter>
+    <ClCompile Include="source\FpsControll.cpp" />
+    <ClCompile Include="source\Time.cpp" />
+    <ClCompile Include="source\SceneTitle.cpp">
+      <Filter>GaneFlow</Filter>
     </ClCompile>
-    <ClCompile Include="source\scenegamemain_chara_player_effect.cpp">
-      <Filter>ソース ファイル\CharaProcess.cpp\chara_group_cpp</Filter>
+    <ClCompile Include="source\Vector2D.cpp">
+      <Filter>Math</Filter>
     </ClCompile>
-    <ClCompile Include="source\SceneGameStage1.cpp">
-      <Filter>ソース ファイル\GameFlow.cpp\SceneGameStage</Filter>
-    </ClCompile>
-    <ClCompile Include="source\SceneGameStage2.cpp">
-      <Filter>ソース ファイル\GameFlow.cpp\SceneGameStage</Filter>
-    </ClCompile>
-    <ClCompile Include="source\GameMapChange.cpp">
-      <Filter>ソース ファイル\GameFlow.cpp\SceneGameStage</Filter>
-    </ClCompile>
-    <ClCompile Include="source\s_gamemain.cpp">
-      <Filter>ソース ファイル\GameFlow.cpp</Filter>
-    </ClCompile>
-    <ClCompile Include="source\s_gameover.cpp">
-      <Filter>ソース ファイル\GameFlow.cpp</Filter>
-    </ClCompile>
-    <ClCompile Include="source\s_gametitle.cpp">
-      <Filter>ソース ファイル\GameFlow.cpp</Filter>
-    </ClCompile>
-    <ClCompile Include="source\framedata.cpp">
-      <Filter>ソース ファイル\CharaMovemane.cpp</Filter>
-    </ClCompile>
-    <ClCompile Include="source\motiondata.cpp">
-      <Filter>ソース ファイル\CharaMovemane.cpp</Filter>
-    </ClCompile>
-    <ClCompile Include="source\mydraw.cpp">
-      <Filter>ソース ファイル\My.cpp</Filter>
-    </ClCompile>
+    <ClCompile Include="source\mydraw.cpp" />
     <ClCompile Include="source\mymath.cpp">
-      <Filter>ソース ファイル\My.cpp</Filter>
+      <Filter>Math</Filter>
     </ClCompile>
-    <ClCompile Include="source\uibase.cpp">
-      <Filter>ソース ファイル\Ui.cpp</Filter>
+    <ClCompile Include="source\Collider.cpp">
+      <Filter>Math</Filter>
     </ClCompile>
-    <ClCompile Include="source\UIItem.cpp">
-      <Filter>ソース ファイル\Ui.cpp</Filter>
+    <ClCompile Include="source\GameObject.cpp">
+      <Filter>GameObject</Filter>
     </ClCompile>
-    <ClCompile Include="source\camera.cpp">
-      <Filter>ソース ファイル\External.cpp</Filter>
+    <ClCompile Include="source\PlayerParam.cpp">
+      <Filter>Data</Filter>
     </ClCompile>
-    <ClCompile Include="source\mapdata.cpp">
-      <Filter>ソース ファイル\External.cpp</Filter>
+    <ClCompile Include="source\Player.cpp">
+      <Filter>GameObject</Filter>
     </ClCompile>
-    <ClCompile Include="source\gamepad.cpp">
-      <Filter>ソース ファイル\CharaMovemane.cpp</Filter>
+    <ClCompile Include="source\GameObjectManager.cpp">
+      <Filter>Manager</Filter>
     </ClCompile>
-    <ClCompile Include="source\gamemain.cpp">
-      <Filter>ソース ファイル\GameFlow.cpp</Filter>
+    <ClCompile Include="source\JSONManager.cpp">
+      <Filter>Manager</Filter>
     </ClCompile>
-    <ClCompile Include="source\scene.cpp">
-      <Filter>ソース ファイル\GameFlow.cpp</Filter>
+    <ClCompile Include="source\ResourceManager.cpp">
+      <Filter>Manager</Filter>
     </ClCompile>
-    <ClCompile Include="source\Sentence.cpp">
-      <Filter>ソース ファイル\External.cpp</Filter>
+    <ClCompile Include="source\FileManager.cpp">
+      <Filter>Manager</Filter>
     </ClCompile>
-    <ClCompile Include="source\SceneGameStage3.cpp">
-      <Filter>ソース ファイル\GameFlow.cpp\SceneGameStage</Filter>
+    <ClCompile Include="source\TextureManager.cpp">
+      <Filter>Manager</Filter>
     </ClCompile>
-    <ClCompile Include="source\s_gameclear.cpp">
-      <Filter>ソース ファイル\GameFlow.cpp</Filter>
+    <ClCompile Include="source\TileMap.cpp">
+      <Filter>Data</Filter>
     </ClCompile>
-    <ClCompile Include="source\CharaProcess.cpp">
-      <Filter>ソース ファイル\CharaProcess.cpp</Filter>
+    <ClCompile Include="source\Physics.cpp">
+      <Filter>Math</Filter>
     </ClCompile>
-    <ClCompile Include="source\FpsControll.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="source\Stage.cpp" />
+    <ClCompile Include="source\SceneGameMain.cpp">
+      <Filter>GaneFlow</Filter>
     </ClCompile>
-    <ClCompile Include="source\s_gameopening.cpp">
-      <Filter>ソース ファイル\GameFlow.cpp</Filter>
+    <ClCompile Include="source\SceneManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="source\InputManager.cpp">
+      <Filter>Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="source\winmain.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="source\camera.h" />
+    <ClInclude Include="source\gamemain.h" />
+    <ClInclude Include="source\gamepad.h" />
+    <ClInclude Include="source\scene.h" />
+    <ClInclude Include="source\winmain.h" />
+    <ClInclude Include="source\CSVReader.h">
+      <Filter>File</Filter>
     </ClInclude>
-    <ClInclude Include="source\SceneGameStage1.h">
-      <Filter>ヘッダー ファイル\GameFlow.h\GameStage.h</Filter>
+    <ClInclude Include="source\Texture.h">
+      <Filter>File</Filter>
     </ClInclude>
-    <ClInclude Include="source\SceneGameStage2.h">
-      <Filter>ヘッダー ファイル\GameFlow.h\GameStage.h</Filter>
+    <ClInclude Include="source\Sprite.h">
+      <Filter>File</Filter>
     </ClInclude>
-    <ClInclude Include="source\s_gametitle.h">
-      <Filter>ヘッダー ファイル\GameFlow.h</Filter>
+    <ClInclude Include="source\Animation.h">
+      <Filter>File</Filter>
     </ClInclude>
-    <ClInclude Include="source\s_gameover.h">
-      <Filter>ヘッダー ファイル\GameFlow.h</Filter>
+    <ClInclude Include="source\FpsControll.h" />
+    <ClInclude Include="source\Time.h" />
+    <ClInclude Include="source\SceneTitle.h">
+      <Filter>GaneFlow</Filter>
     </ClInclude>
-    <ClInclude Include="source\mydraw.h">
-      <Filter>ヘッダー ファイル\My.h</Filter>
+    <ClInclude Include="source\mydraw.h" />
+    <ClInclude Include="source\Vector2D.h">
+      <Filter>Math</Filter>
     </ClInclude>
     <ClInclude Include="source\mymath.h">
-      <Filter>ヘッダー ファイル\My.h</Filter>
+      <Filter>Math</Filter>
     </ClInclude>
-    <ClInclude Include="source\gamemain.h">
-      <Filter>ヘッダー ファイル\GameFlow.h</Filter>
+    <ClInclude Include="source\Collider.h">
+      <Filter>Math</Filter>
     </ClInclude>
-    <ClInclude Include="source\scene.h">
-      <Filter>ヘッダー ファイル\GameFlow.h</Filter>
+    <ClInclude Include="source\GameObject.h">
+      <Filter>GameObject</Filter>
     </ClInclude>
-    <ClInclude Include="source\uibase.h">
-      <Filter>ヘッダー ファイル\Ui.h</Filter>
+    <ClInclude Include="source\PlayerParam.h">
+      <Filter>Data</Filter>
     </ClInclude>
-    <ClInclude Include="source\UIItem.h">
-      <Filter>ヘッダー ファイル\Ui.h</Filter>
+    <ClInclude Include="source\Player.h">
+      <Filter>GameObject</Filter>
     </ClInclude>
-    <ClInclude Include="source\camera.h">
-      <Filter>ヘッダー ファイル\External.h</Filter>
+    <ClInclude Include="source\GameObjectManager.h">
+      <Filter>Manager</Filter>
     </ClInclude>
-    <ClInclude Include="source\mapdata.h">
-      <Filter>ヘッダー ファイル\External.h</Filter>
+    <ClInclude Include="source\JSONManager.h">
+      <Filter>Manager</Filter>
     </ClInclude>
-    <ClInclude Include="source\framedata.h">
-      <Filter>ヘッダー ファイル\CharaMovement.h</Filter>
+    <ClInclude Include="source\ResourceManager.h">
+      <Filter>Manager</Filter>
     </ClInclude>
-    <ClInclude Include="source\gamepad.h">
-      <Filter>ヘッダー ファイル\CharaMovement.h</Filter>
+    <ClInclude Include="source\FileManager.h">
+      <Filter>Manager</Filter>
     </ClInclude>
-    <ClInclude Include="source\motiondata.h">
-      <Filter>ヘッダー ファイル\CharaMovement.h</Filter>
+    <ClInclude Include="source\TextureManager.h">
+      <Filter>Manager</Filter>
     </ClInclude>
-    <ClInclude Include="source\s_gamemain.h">
-      <Filter>ヘッダー ファイル\GameFlow.h</Filter>
+    <ClInclude Include="source\TileMap.h">
+      <Filter>Data</Filter>
     </ClInclude>
-    <ClInclude Include="source\SceneGameStage3.h">
-      <Filter>ヘッダー ファイル\GameFlow.h\GameStage.h</Filter>
+    <ClInclude Include="source\Physics.h">
+      <Filter>Math</Filter>
     </ClInclude>
-    <ClInclude Include="source\s_gameclear.h">
-      <Filter>ヘッダー ファイル\GameFlow.h</Filter>
+    <ClInclude Include="source\Stage.h" />
+    <ClInclude Include="source\SceneGameMain.h">
+      <Filter>GaneFlow</Filter>
     </ClInclude>
-    <ClInclude Include="source\FpsControll.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="source\SceneManager.h">
+      <Filter>Manager</Filter>
     </ClInclude>
-    <ClInclude Include="source\s_gameopening.h">
-      <Filter>ヘッダー ファイル\GameFlow.h</Filter>
+    <ClInclude Include="source\InputManager.h">
+      <Filter>Manager</Filter>
     </ClInclude>
-    <ClInclude Include="source\mymaclo.h">
-      <Filter>ヘッダー ファイル\My.h</Filter>
-    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="File">
+      <UniqueIdentifier>{2ed95cd1-44e3-49dc-b59b-434352d3dac5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GaneFlow">
+      <UniqueIdentifier>{2c5045e8-5888-4aa3-a15f-44bd87f14c3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math">
+      <UniqueIdentifier>{266fd5a2-fd2a-48af-91cf-d54eb6b6e0c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject">
+      <UniqueIdentifier>{a67c93ee-7305-4d2d-80d4-ad889f471d7f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data">
+      <UniqueIdentifier>{10a221ea-4ea8-4fbd-b613-8a8858d688be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager">
+      <UniqueIdentifier>{c6ec129b-9a6c-4a32-bdb1-8982e4751108}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DataSouece">
+      <UniqueIdentifier>{1a161742-3978-4256-a20c-6474fa111a70}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="data\json\StageMap.json">
+      <Filter>DataSouece</Filter>
+    </None>
+    <None Include="data\csv\Stage1.csv">
+      <Filter>DataSouece</Filter>
+    </None>
+    <None Include="data\json\PlayerParam.json">
+      <Filter>DataSouece</Filter>
+    </None>
   </ItemGroup>
 </Project>

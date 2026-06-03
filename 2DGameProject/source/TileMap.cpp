@@ -2,10 +2,11 @@
 #include "CSVReader.h"
 #include "Texture.h"
 #include <Dxlib.h>
+#include "camera.h"
 
 TileMap::TileMap() :m_tileSize(64)
 {
-	m_tileTexture = std::make_shared<Texture>("res/map/.png");
+	m_tileTexture = std::make_shared<Texture>("res/map/MapChip.png");
 }
 
 bool TileMap::LoadCSV(const std::string& path)
@@ -47,7 +48,10 @@ void TileMap::Draw()
 				continue;
 			}
 			//ƒ^ƒCƒ‹•`‰æ
-			DrawGraph(x * m_tileSize, y * m_tileSize, m_tileTexture->GetHandle(), TRUE);
+            MATRIX m = MGetTranslate(VECTOR(Camera::w_camera._pos.x, 0, 0));
+            VECTOR pos = VTransform(VECTOR(x, y, 0), m);
+            //DrawRectRotaGraph2(pos.x,pos.)
+            DrawGraph(x * m_tileSize - Camera::w_camera._pos.x, y * m_tileSize - pos.y, m_tileTexture->GetHandle(), TRUE);
 		}
 	}
 }

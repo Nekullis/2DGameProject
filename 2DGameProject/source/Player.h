@@ -31,6 +31,7 @@ class Player : public GameObject
 public:
 	Player(TileMap* tilemap);
 	void Update()override;
+    void Draw()override;
 	//自身のrectを取得
 	MYRECT GetRect() const;
 	//当たり判定
@@ -52,6 +53,8 @@ private:
 	void ChangeAnimation(Animation* anim);
 	//アニメーション登録
 	void LoadAnimation();
+    //接地判定
+    void CheckGround();
 
 	//地面接触中か
 	bool m_isGround;
