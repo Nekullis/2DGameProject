@@ -2,6 +2,9 @@
 #include <fstream>
 #include <sstream>
 
+int CSVReader::csv_width = 0;
+int CSVReader::csv_height = 0;
+
 std::vector<std::vector<std::string>> CSVReader::ReadCSV(const std::string& path)
 {
 	//csv‘S‘Ì‚ğ•Û‘¶‚·‚é2ŸŒ³”z—ñ
@@ -33,5 +36,7 @@ std::vector<std::vector<std::string>> CSVReader::ReadCSV(const std::string& path
 		//1s•ª‚ğdata‚É’Ç‰Á
 		data.push_back(row);
 	}
+    csv_width = data.empty() ? 0 : data[0].size();
+    csv_height = data.size();
 	return data;
 }

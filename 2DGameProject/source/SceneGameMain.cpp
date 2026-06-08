@@ -1,4 +1,5 @@
 #include "SceneGameMain.h"
+#include "TileMap.h"
 
 SceneGameMain::SceneGameMain()
 {
@@ -24,6 +25,12 @@ void SceneGameMain::Input()
 void SceneGameMain::Process()
 {
     m_objectManager.Update();
+    MYRECT camLimit{};
+    camLimit.x = 0;
+    camLimit.y = 0;
+    camLimit.w = m_Stage->GetTileMap()->GetMapWidth() * 64;
+    camLimit.h = m_Stage->GetTileMap()->GetMapHeight() * 64;
+    Camera::w_camera._rcLimit = camLimit;
     Camera::w_camera.Process();
 }
 

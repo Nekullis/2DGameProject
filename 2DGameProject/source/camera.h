@@ -35,4 +35,5 @@ public:
 
 private:
     Player* m_target;
+    float m_offsetX;
 };

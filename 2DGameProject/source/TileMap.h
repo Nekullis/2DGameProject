@@ -24,6 +24,10 @@ public:
 	bool IsWall(int x, int y)const;
 	//壁すべてをrect化して取得する
 	std::vector<MYRECT> GetWallRects() const;
+    int GetMapWidth() const { return m_MapWidth; }
+    int GetMapHeight() const { return m_Mapheight; }
+    void SetWidth(int width) { m_MapWidth = width; }
+    void SetHeight(int height) { m_Mapheight = height; }
 
 private:
 	//マップデータ
@@ -32,5 +36,7 @@ private:
 	std::shared_ptr<Texture> m_tileTexture;
 	//タイルサイズ
 	int m_tileSize;
+    int m_MapWidth;
+    int m_Mapheight;
 };
 

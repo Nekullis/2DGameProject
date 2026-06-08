@@ -30,6 +30,9 @@ bool TileMap::LoadCSV(const std::string& path)
 		}
 		m_mapData.push_back(mapRow);
 	}
+
+    m_MapWidth = reader.csv_width;
+    m_Mapheight = reader.csv_height;
 	return true;
 }
 
@@ -51,7 +54,7 @@ void TileMap::Draw()
             MATRIX m = MGetTranslate(VECTOR(Camera::w_camera._pos.x, 0, 0));
             VECTOR pos = VTransform(VECTOR(x, y, 0), m);
             //DrawRectRotaGraph2(pos.x,pos.)
-            DrawGraph(x * m_tileSize - Camera::w_camera._pos.x, y * m_tileSize - pos.y, m_tileTexture->GetHandle(), TRUE);
+            DrawGraph(x * m_tileSize - Camera::w_camera._pos.x, y * m_tileSize - Camera::w_camera._pos.y, m_tileTexture->GetHandle(), TRUE);
 		}
 	}
 }
@@ -89,7 +92,7 @@ std::vector<MYRECT> TileMap::GetWallRects() const
 				continue;
 			}
 			//RectçÏê¨
-			MYRECT rect;
+            MYRECT rect{};
 			rect.x = x * m_tileSize;
 			rect.y = y * m_tileSize;
 			rect.w = m_tileSize;

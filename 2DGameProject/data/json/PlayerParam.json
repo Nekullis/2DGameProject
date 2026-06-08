@@ -2,8 +2,8 @@
   "Player": {
     "MoveSpeed": 500,
     "Gravity": 1000,
-    "JumpPower": 600,
+    "JumpPower": 300,
     "MaxJumpTime": 3,
-    "AddJumpPower": 500
+    "AddJumpPower": 1500
   }
 }

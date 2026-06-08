@@ -7,16 +7,12 @@
 #include <cmath>
 #include "Physics.h"
 
-//デバッグ用
-    CollisionSide m_debugHit;
-
 Player::Player(TileMap* tilemap) :m_tilemap(tilemap), m_isGround(false), m_prevGround(false), m_isJump(false), m_jumpTimer(0), m_landingSpeed(0), m_state(PlayerState::Idle), m_currentAnim(nullptr)
 {
 	//パラメータ読み込み
 	PlayerParam::Load();
 	LoadAnimation();
 	m_currentAnim = &m_idleAnim;
-    m_debugHit = CollisionSide::None;
 }
 
 
@@ -82,10 +78,11 @@ void Player::Draw()
         hitCount++;
     }
     GameObject::Draw();
+
     DrawFormatString(0, 40, GetColor(255, 255, 255), "Ground=%d vel=%.2f", m_isGround, m_velocity.x);
-    DrawFormatString(0, 240, GetColor(255, 255, 255), "PosX=%.2f", m_position.x);
+    DrawFormatString(0, 240, GetColor(255, 255, 255), "PosX=%.2f, PosY=%.2f", m_position.x,m_position.y);
     DrawFormatString(0, 260, GetColor(255, 255, 255), "DT=%.6f", Time::DeltaTime());
-    DrawFormatString(0, 280, GetColor(255, 255, 255), "hit=%d", (int)m_debugHit);
+    //DrawFormatString(0, 280, GetColor(255, 255, 255), "hit=%d", (int)m_debugHit);
     DrawFormatString(0, 300, GetColor(255, 255, 255), "State=%d",(int)m_state);
 }
 
@@ -196,7 +193,6 @@ void Player::Collision()
             //m_velocity.x = 0;
             break;
         }
-        m_debugHit = hit;
         //rect結果反映
         m_position.x = (float)playerRect.x;
         m_position.y = (float)playerRect.y;

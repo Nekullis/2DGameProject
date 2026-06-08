@@ -28,6 +28,8 @@ public:
 	void SetPosition(const Vector2D& pos);
 	//À•Wæ“¾
 	Vector2D GetPosition() const { return m_position; }
+    //ˆÚ“®‘¬“xæ“¾
+    Vector2D GetVelocity() const { return m_velocity; }
 	bool IsActive() const { return m_isActive; }
 
 protected:

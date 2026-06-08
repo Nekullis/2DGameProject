@@ -14,7 +14,5 @@ void Sprite::Draw()
 	{
 		return;
 	}
-    /*MATRIX m = MGetTranslate(VECTOR(Camera::w_camera._pos.x, 0, 0));
-    VECTOR pos = VTransform(VECTOR(m_x, m_y, 0), m);*/
-	DrawRectRotaGraph2((int)m_x - Camera::w_camera._pos.x, (int)m_y, m_rectX, m_rectY, m_width, m_height, (int)m_centerX, (int)m_centerY, m_scaleX, m_angle, m_Texture->GetHandle(), TRUE);
+    DrawRectRotaGraph2((int)m_x - Camera::w_camera._pos.x, (int)m_y - Camera::w_camera._pos.y, m_rectX, m_rectY, m_width, m_height, (int)m_centerX, (int)m_centerY, m_scaleX, m_angle, m_Texture->GetHandle(), TRUE);
 }
