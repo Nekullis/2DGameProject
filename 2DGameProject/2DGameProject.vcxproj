@@ -19,6 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="source\Bat.cpp" />
+    <ClCompile Include="source\Enemy.cpp" />
     <ClCompile Include="source\SceneGameMain.cpp" />
     <ClCompile Include="source\Physics.cpp" />
     <ClCompile Include="source\GameObjectManager.cpp" />
@@ -51,6 +53,8 @@
     <ClCompile Include="source\Stage.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="source\Bat.h" />
+    <ClInclude Include="source\Enemy.h" />
     <ClInclude Include="source\SceneGameMain.h" />
     <ClInclude Include="source\Physics.h" />
     <ClInclude Include="source\GameObjectManager.h" />

@@ -73,6 +73,12 @@
     <ClCompile Include="source\InputManager.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
+    <ClCompile Include="source\Enemy.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Bat.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\camera.h" />
@@ -146,6 +152,12 @@
     </ClInclude>
     <ClInclude Include="source\InputManager.h">
       <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Enemy.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Bat.h">
+      <Filter>GameObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
