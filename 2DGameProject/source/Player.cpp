@@ -72,18 +72,7 @@ void Player::Update()
 
 void Player::Draw()
 {
-    static int hitCount = 0;
-    if (m_isGround)
-    {
-        hitCount++;
-    }
     GameObject::Draw();
-
-    DrawFormatString(0, 40, GetColor(255, 255, 255), "Ground=%d vel=%.2f", m_isGround, m_velocity.x);
-    DrawFormatString(0, 240, GetColor(255, 255, 255), "PosX=%.2f, PosY=%.2f", m_position.x,m_position.y);
-    DrawFormatString(0, 260, GetColor(255, 255, 255), "DT=%.6f", Time::DeltaTime());
-    //DrawFormatString(0, 280, GetColor(255, 255, 255), "hit=%d", (int)m_debugHit);
-    DrawFormatString(0, 300, GetColor(255, 255, 255), "State=%d",(int)m_state);
 }
 
 

@@ -1,0 +1,8 @@
+{
+  "Bat": {
+    "MoveSpeed": 400.0,
+    "DetectRange": 500.0,
+    "LostRange": 300.0,
+    "ReturnRange": 10.0
+  }
+}

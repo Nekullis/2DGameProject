@@ -1,5 +1,6 @@
 #include "SceneGameMain.h"
 #include "TileMap.h"
+#include "EnemyParamManager.h"
 
 SceneGameMain::SceneGameMain()
 {
@@ -11,6 +12,9 @@ SceneGameMain::SceneGameMain()
     //oŒ»ˆÊ’u
     m_Player->SetPosition(Vector2D(m_Stage->GetPlayerSpawnX(), m_Stage->GetPlayerSpawnY()));
     m_objectManager.Add(m_Player);
+    //“Gî•ñæ“¾
+    EnemyParamManager::Load();
+    //ƒJƒƒ‰İ’è
     Camera::w_camera.SetTarget(m_Player.get());
 }
 

@@ -79,6 +79,9 @@
     <ClCompile Include="source\Bat.cpp">
       <Filter>GameObject</Filter>
     </ClCompile>
+    <ClCompile Include="source\EnemyParamManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\camera.h" />
@@ -159,6 +162,9 @@
     <ClInclude Include="source\Bat.h">
       <Filter>GameObject</Filter>
     </ClInclude>
+    <ClInclude Include="source\EnemyParamManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="File">
@@ -191,6 +197,9 @@
       <Filter>DataSouece</Filter>
     </None>
     <None Include="data\json\PlayerParam.json">
+      <Filter>DataSouece</Filter>
+    </None>
+    <None Include="data\json\EnemyParam.json">
       <Filter>DataSouece</Filter>
     </None>
   </ItemGroup>

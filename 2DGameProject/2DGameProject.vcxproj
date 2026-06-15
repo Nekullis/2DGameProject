@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="source\EnemyParamManager.cpp" />
     <ClCompile Include="source\Bat.cpp" />
     <ClCompile Include="source\Enemy.cpp" />
     <ClCompile Include="source\SceneGameMain.cpp" />
@@ -53,6 +54,7 @@
     <ClCompile Include="source\Stage.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="source\EnemyParamManager.h" />
     <ClInclude Include="source\Bat.h" />
     <ClInclude Include="source\Enemy.h" />
     <ClInclude Include="source\SceneGameMain.h" />
@@ -90,6 +92,7 @@
     <None Include="data\csv\Stage1.csv" />
     <None Include="data\json\StageMap.json" />
     <None Include="data\json\PlayerParam.json" />
+    <None Include="data\json\EnemyParam.json" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

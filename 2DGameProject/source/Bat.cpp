@@ -4,7 +4,6 @@
 Bat::Bat(Player* player) :m_state(BAT_STATE::Idle), m_moveSpeed(0.0f)
 {
     m_player = player;
-
 }
 
 void Bat::Update()
