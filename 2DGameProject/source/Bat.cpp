@@ -1,9 +1,12 @@
 #include "Bat.h"
 #include "Player.h"
+#include "EnemyParamManager.h"
 
 Bat::Bat(Player* player) :m_state(BAT_STATE::Idle), m_moveSpeed(0.0f)
 {
     m_player = player;
+
+    EnemyParamManager::Get("Bat");
 }
 
 void Bat::Update()

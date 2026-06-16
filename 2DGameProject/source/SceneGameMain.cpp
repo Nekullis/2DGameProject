@@ -9,11 +9,14 @@ SceneGameMain::SceneGameMain()
     m_Stage->Load("data/json/StageMap.json");
     //プレイヤー生成
     m_Player = std::make_shared<Player>(m_Stage->GetTileMap());
-    //出現位置
+    //プレイヤー出現位置
     m_Player->SetPosition(Vector2D(m_Stage->GetPlayerSpawnX(), m_Stage->GetPlayerSpawnY()));
     m_objectManager.Add(m_Player);
     //敵情報取得
     EnemyParamManager::Load();
+    //敵生成
+    
+    //敵出現
     //カメラ設定
     Camera::w_camera.SetTarget(m_Player.get());
 }
