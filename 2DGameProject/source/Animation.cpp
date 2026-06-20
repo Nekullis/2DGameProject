@@ -15,6 +15,8 @@ void Animation::AddFrame(std::shared_ptr<Texture> texture, int x, int y, int wid
 	frame.y = y;
 	frame.width = width;
 	frame.height = height;
+    frame.centerX = width / 2.0f;
+    frame.centerY = height / 2.0f;
 
 	//––”ö‚É’Ç‰Á
 	m_frames.push_back(frame);
@@ -68,6 +70,7 @@ void Animation::Apply(Sprite& sprite)
 	//g—p‰æ‘œ•ÏX
 	sprite.SetTexture(frame.texture);
 	sprite.SetRect(frame.x, frame.y, frame.width, frame.height);
+    sprite.SetCenter(frame.centerX, frame.centerY);
 }
 
 void Animation::Reset()

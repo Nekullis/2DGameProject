@@ -15,7 +15,6 @@ public:
 
 protected:
     class Player* m_player;
-    Vector2D m_spawnPos;
     //ŒŸo”ÍˆÍ
     float m_detectRange;
     //Œ©¸‚¤‹——£

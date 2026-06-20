@@ -1,7 +1,7 @@
 #include "GameObject.h"
 #include "Time.h"
 
-GameObject::GameObject() :m_position(0, 0), m_velocity(0, 0), m_isActive(true)
+GameObject::GameObject() :m_position(0, 0), m_velocity(0, 0), m_isActive(true), m_currentAnim(nullptr)
 {
 }
 
@@ -36,6 +36,18 @@ void GameObject::Destory()
 	m_isActive = false;
 }
 
+void GameObject::ChangeAnimation(Animation* anim)
+{
+    //同じアニメーションならなにもしない
+    if (m_currentAnim == anim)
+    {
+        return;
+    }
+    //切り替え
+    m_currentAnim = anim;
+    m_currentAnim->Reset();
+}
+
 void GameObject::SetPosition(const Vector2D& pos)
 {
 	m_position = pos;
@@ -44,4 +56,14 @@ void GameObject::SetPosition(const Vector2D& pos)
 	{
 		m_sprite->SetPosition(pos.x, pos.y);
 	}
+}
+
+void GameObject::SetSpawnPos(const Vector2D& pos)
+{
+    m_spawnPos = m_position = pos;
+    m_collider.SetPosition(pos);
+    if (m_sprite)
+    {
+        m_sprite->SetPosition(pos.x, pos.y);
+    }
 }

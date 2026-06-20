@@ -23,16 +23,19 @@ public:
     Bat(Player* player);
     void Update() override;
 
-private:
+protected:
+    void LoadAnimation();
     void UpdateIdle();
     void UpdateChase();
     void UpdateReturn();
 
     //ステータス
     BAT_STATE m_state;
-    //出現場所
-    Vector2D m_spawnPos;
     //移動量
     float m_moveSpeed;
+    //アニメーション関連
+    Animation m_idleAnim;
+    Animation m_ChaseAnim;
+    Animation m_ReturnAnim;
 };
 

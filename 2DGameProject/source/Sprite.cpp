@@ -14,5 +14,14 @@ void Sprite::Draw()
 	{
 		return;
 	}
-    DrawRectRotaGraph2((int)m_x - Camera::w_camera._pos.x, (int)m_y - Camera::w_camera._pos.y, m_rectX, m_rectY, m_width, m_height, (int)m_centerX, (int)m_centerY, m_scaleX, m_angle, m_Texture->GetHandle(), TRUE);
+    DrawRectRotaGraph3(
+        (int)(m_x + m_centerX) - Camera::w_camera._pos.x, (int)(m_y + m_centerY) - Camera::w_camera._pos.y,
+        m_rectX, m_rectY, m_width, m_height, (int)m_centerX, (int)m_centerY, 
+        m_scaleX, m_scaleY, m_angle, m_Texture->GetHandle(), TRUE);
+
+}
+
+void Sprite::SetFlipX(bool flip)
+{
+    m_scaleX = flip ? -1.0 : 1.0;
 }

@@ -7,8 +7,16 @@
 #pragma once
 #include <memory>
 #include <string>
+#include <vector>
 
 class TileMap;
+
+struct EnemySpawnData
+{
+    std::string type;
+    float x;
+    float y;
+};
 
 class Stage
 {
@@ -24,6 +32,7 @@ public:
 	TileMap* GetTileMap()const { return m_tileMap.get(); }
 	float GetPlayerSpawnX()const { return m_playerSpawnX; }
 	float GetPlayerSpawnY()const { return m_playerSpawnY; }
+    const std::vector<EnemySpawnData>& GetEnemySpawns() const { return m_enemySpawns; }
 
 private:
 	//ステージ名
@@ -33,6 +42,8 @@ private:
 	//プレイヤー開始位置
 	float m_playerSpawnX;
 	float m_playerSpawnY;
+    //敵出現位置
+    std::vector<EnemySpawnData> m_enemySpawns;
 	//BGM
 	std::string m_bgmPath;
 	//ゴール座標

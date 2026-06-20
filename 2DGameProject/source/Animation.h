@@ -14,6 +14,9 @@ struct Frame
 	//サイズ
 	int width;
 	int height;
+    //回転中心
+    float centerX;
+    float centerY;
 };
 
 class Animation

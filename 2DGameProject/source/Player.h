@@ -6,7 +6,6 @@
 //----------------------------------------------------------------------
 #pragma once
 #include "GameObject.h"
-#include "Animation.h"
 #include "mymath.h"
 
 class TileMap;
@@ -24,6 +23,12 @@ enum class PlayerState
 	Fall,
 	//着地
 	Land
+};
+
+enum class Direction
+{
+    Left,
+    Right
 };
 
 class Player : public GameObject
@@ -49,8 +54,6 @@ private:
 	void ApplyGravity();
 	//状態更新
 	void UpdateState();
-	//アニメーション変更
-	void ChangeAnimation(Animation* anim);
 	//アニメーション登録
 	void LoadAnimation();
     //接地判定
@@ -70,14 +73,15 @@ private:
 	//プレイヤー状態
 	PlayerState m_state;
 
+    //左右の向き
+    Direction m_direction;
+
 	//アニメーション関連
 	Animation m_idleAnim;
 	Animation m_walkAnim;
 	Animation m_jumpUpAnim;
 	Animation m_jumpDownAnim;
 	Animation m_stepAnim;
-	//現在再生中のアニメーション
-	Animation* m_currentAnim;
 
 };
 

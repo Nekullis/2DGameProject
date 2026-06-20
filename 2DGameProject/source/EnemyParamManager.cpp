@@ -14,8 +14,8 @@ void EnemyParamManager::Load()
     {
         EnemyData param{};
         param.MoveSpeed = enemy.value()["MoveSpeed"];
-        param.DetactRange = enemy.value()["DetactRange"];
-        param.LoatRange = enemy.value()["LoatRange"];
+        param.DetectRange = enemy.value()["DetectRange"];
+        param.LostRange = enemy.value()["LostRange"];
         param.ReturnRange = enemy.value()["ReturnRange"];
 
         m_param[enemy.key()] = param;

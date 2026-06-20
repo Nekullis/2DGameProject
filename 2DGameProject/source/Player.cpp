@@ -6,8 +6,9 @@
 #include <DxLib.h>
 #include <cmath>
 #include "Physics.h"
+#include "Animation.h"
 
-Player::Player(TileMap* tilemap) :m_tilemap(tilemap), m_isGround(false), m_prevGround(false), m_isJump(false), m_jumpTimer(0), m_landingSpeed(0), m_state(PlayerState::Idle), m_currentAnim(nullptr)
+Player::Player(TileMap* tilemap) :m_tilemap(tilemap), m_isGround(false), m_prevGround(false), m_isJump(false), m_jumpTimer(0), m_landingSpeed(0), m_state(PlayerState::Idle), m_direction(Direction::Right)
 {
 	//パラメータ読み込み
 	PlayerParam::Load();
@@ -64,6 +65,7 @@ void Player::Update()
 	{
 		m_currentAnim->Update();
 		m_currentAnim->Apply(*m_sprite);
+        m_sprite->SetFlipX(m_direction == Direction::Left);
 	}
 
 	//最後に保存
@@ -198,10 +200,12 @@ void Player::Input()
 	if (InputManager::Press(KEY_INPUT_A))
 	{
 		m_velocity.x = -PlayerParam::MoveSpeed;
+        m_direction = Direction::Left;
 	}
 	else if (InputManager::Press(KEY_INPUT_D))
 	{
 		m_velocity.x = PlayerParam::MoveSpeed;
+        m_direction = Direction::Right;
 	}
 }
 
@@ -305,18 +309,6 @@ void Player::UpdateState()
 	{
 		m_state = PlayerState::Idle;
 	}
-}
-
-void Player::ChangeAnimation(Animation* anim)
-{
-	//同じアニメーションならなにもしない
-	if (m_currentAnim == anim)
-	{
-		return;
-	}
-	//切り替え
-	m_currentAnim = anim;
-	m_currentAnim->Reset();
 }
 
 

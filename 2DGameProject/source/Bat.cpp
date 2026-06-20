@@ -1,12 +1,16 @@
 #include "Bat.h"
 #include "Player.h"
 #include "EnemyParamManager.h"
+#include "Animation.h"
 
 Bat::Bat(Player* player) :m_state(BAT_STATE::Idle), m_moveSpeed(0.0f)
 {
     m_player = player;
-
-    EnemyParamManager::Get("Bat");
+    m_currentAnim = &m_idleAnim;
+    m_moveSpeed = EnemyParamManager::Get("Bat").MoveSpeed;
+    m_detectRange = EnemyParamManager::Get("Bat").DetectRange;
+    m_lostRange = EnemyParamManager::Get("Bat").LostRange;
+    LoadAnimation();
 }
 
 void Bat::Update()
@@ -15,16 +19,54 @@ void Bat::Update()
     switch (m_state)
     {
     case BAT_STATE::Idle:
+        ChangeAnimation(&m_idleAnim);
         UpdateIdle();
         break;
     case BAT_STATE::Chase:
+        ChangeAnimation(&m_ChaseAnim);
         UpdateChase();
         break;
     case BAT_STATE::Return:
+        ChangeAnimation(&m_ReturnAnim);
         UpdateReturn();
         break;
     }
     GameObject::Update();
+
+    //アニメーション処理
+    if (m_currentAnim && m_sprite)
+    {
+        m_currentAnim->Update();
+        m_currentAnim->Apply(*m_sprite);
+    }
+}
+
+void Bat::LoadAnimation()
+{
+    //アニメーション読み込み
+    auto motion_idle = std::make_shared<Texture>("res/enemy/bat/Bat_Idle.png");
+    auto motion_move = std::make_shared<Texture>("res/enemy/bat/Bat_Move.png");
+    //各アニメーションをフレーム登録
+    //待機
+    for (int i = 0; i < 5; i++)
+    {
+        m_idleAnim.AddFrame(motion_idle, i * 100, 0, 100, 100);
+    }
+    m_idleAnim.SetFPS(10);
+    m_idleAnim.SetLoop(true);
+    for (int i = 0; i < 4; i++)
+    {
+        m_ChaseAnim.AddFrame(motion_move, i * 200, 0, 200, 100);
+    }
+    m_ChaseAnim.SetFPS(10);
+    m_ChaseAnim.SetLoop(true);
+    for (int i = 0; i < 4; i++)
+    {
+        m_ReturnAnim.AddFrame(motion_move, i * 200, 0, 200, 100);
+    }
+    m_ReturnAnim.SetFPS(10);
+    m_ReturnAnim.SetLoop(true);
+    m_sprite = std::make_shared<Sprite>(motion_idle);
 }
 
 void Bat::UpdateIdle()
@@ -42,7 +84,7 @@ void Bat::UpdateChase()
     //移動の向きを設定
     Vector2D dir = m_player->GetPosition() - m_position;
     //正規化
-    dir.Normalize();
+    dir = dir.Normalize();
     //移動量設定
     m_velocity = dir * m_moveSpeed;
     //一定距離離れると帰還する
@@ -67,6 +109,6 @@ void Bat::UpdateReturn()
         return;
     }
     //向きの正規化
-    dir.Normalize();
+    dir = dir.Normalize();
     m_velocity = dir * m_moveSpeed;
 }

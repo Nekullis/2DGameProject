@@ -1,5 +1,6 @@
 #include "Time.h"
 #include <Dxlib.h>
+#include <algorithm>
 
 int Time::m_prevTime = 0;
 float Time::m_deltaTime = 0;
@@ -15,6 +16,7 @@ void Time::Update()
 	int current = GetNowCount();
 	//ms
 	float elapsed = current - m_prevTime;
+    elapsed = MIN(elapsed, (1000.0f / 60.0f) * 6);
 	//•b•ÏŠ·
 	m_deltaTime = elapsed / 1000.0f;
 

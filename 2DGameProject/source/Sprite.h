@@ -11,6 +11,7 @@ public:
 	void SetRotation(float angle) { m_angle = angle; }
 	void SetCenter(float x, float y) { m_centerX = x; m_centerY = y; }
 	void SetRect(int x, int y, int width, int height) { m_rectX = x; m_rectY = y; m_width = width; m_height = height; }
+    void SetFlipX(bool flip);
 	void SetTexture(std::shared_ptr<Texture> texture) { m_Texture = texture; }
 	void Draw();
 
@@ -33,5 +34,7 @@ private:
 	int m_rectY;
 	int m_width;
 	int m_height;
+    //”½“]—p
+    bool m_flipX;
 };
 

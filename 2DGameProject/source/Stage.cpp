@@ -24,6 +24,18 @@ bool Stage::Load(const std::string& path)
 	m_playerSpawnX = data["playerSpawn"]["x"];
 	m_playerSpawnY = data["playerSpawn"]["y"];
 
+    //敵スポーン位置読み込み
+    auto enemies = data["enemies"];
+    for (auto& enemy : enemies)
+    {
+        EnemySpawnData spawn;
+        spawn.type = enemy["type"];
+        spawn.x = enemy["x"];
+        spawn.y = enemy["y"];
+
+        m_enemySpawns.push_back(spawn);
+    }
+
 	//ゴール
 	m_GoalX = data["goal"]["x"];
 	m_GoalY = data["goal"]["y"];

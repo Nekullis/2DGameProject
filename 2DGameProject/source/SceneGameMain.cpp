@@ -1,22 +1,33 @@
 #include "SceneGameMain.h"
 #include "TileMap.h"
 #include "EnemyParamManager.h"
+#include "Bat.h"
 
 SceneGameMain::SceneGameMain()
 {
     //ステージ生成
     m_Stage = std::make_shared<Stage>();
     m_Stage->Load("data/json/StageMap.json");
+
     //プレイヤー生成
     m_Player = std::make_shared<Player>(m_Stage->GetTileMap());
     //プレイヤー出現位置
-    m_Player->SetPosition(Vector2D(m_Stage->GetPlayerSpawnX(), m_Stage->GetPlayerSpawnY()));
+    m_Player->SetSpawnPos(Vector2D(m_Stage->GetPlayerSpawnX(), m_Stage->GetPlayerSpawnY()));
     m_objectManager.Add(m_Player);
+
     //敵情報取得
     EnemyParamManager::Load();
     //敵生成
-    
-    //敵出現
+    for (auto& spawn : m_Stage->GetEnemySpawns())
+    {
+        if (spawn.type == "Bat")
+        {
+            auto bat = std::make_shared<Bat>(m_Player.get());
+            bat->SetSpawnPos(Vector2D(spawn.x, spawn.y));
+            m_objectManager.Add(bat);
+        }
+    }
+
     //カメラ設定
     Camera::w_camera.SetTarget(m_Player.get());
 }

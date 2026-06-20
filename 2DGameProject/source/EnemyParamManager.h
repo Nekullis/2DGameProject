@@ -11,8 +11,8 @@
 struct EnemyData
 {
     float MoveSpeed;
-    float DetactRange;
-    float LoatRange;
+    float DetectRange;
+    float LostRange;
     float ReturnRange;
 };
 
