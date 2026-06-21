@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="source\SonarRenderer.cpp" />
     <ClCompile Include="source\EnemyParamManager.cpp" />
     <ClCompile Include="source\Bat.cpp" />
     <ClCompile Include="source\Enemy.cpp" />
@@ -54,6 +55,7 @@
     <ClCompile Include="source\Stage.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="source\SonarRenderer.h" />
     <ClInclude Include="source\EnemyParamManager.h" />
     <ClInclude Include="source\Bat.h" />
     <ClInclude Include="source\Enemy.h" />

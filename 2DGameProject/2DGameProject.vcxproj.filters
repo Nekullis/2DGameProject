@@ -82,6 +82,9 @@
     <ClCompile Include="source\EnemyParamManager.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
+    <ClCompile Include="source\SonarRenderer.cpp">
+      <Filter>Render</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\camera.h" />
@@ -165,6 +168,9 @@
     <ClInclude Include="source\EnemyParamManager.h">
       <Filter>Manager</Filter>
     </ClInclude>
+    <ClInclude Include="source\SonarRenderer.h">
+      <Filter>Render</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="File">
@@ -187,6 +193,9 @@
     </Filter>
     <Filter Include="DataSouece">
       <UniqueIdentifier>{1a161742-3978-4256-a20c-6474fa111a70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Render">
+      <UniqueIdentifier>{2c39c2fc-6cc4-44f7-bf93-7b845f850921}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
