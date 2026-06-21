@@ -10,6 +10,7 @@
 
 Player::Player(TileMap* tilemap) :m_tilemap(tilemap), m_isGround(false), m_prevGround(false), m_isJump(false), m_jumpTimer(0), m_landingSpeed(0), m_state(PlayerState::Idle), m_direction(Direction::Right)
 {
+    m_objType = ObjectType::Player;
 	//ƒpƒ‰ƒ[ƒ^“Ç‚İ‚İ
 	PlayerParam::Load();
 	LoadAnimation();

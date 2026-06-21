@@ -12,6 +12,8 @@ public:
     SonarRenderer();
 
     bool Init();
+    void End();
+    void Composite();
     void BeginStage();
     void BeginEnemy();
     void BeginMask();

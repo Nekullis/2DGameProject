@@ -7,8 +7,7 @@
 #pragma once
 #include <vector>
 #include <memory>
-
-class GameObject;
+#include "GameObject.h"
 
 class GameObjectManager
 {
@@ -17,11 +16,10 @@ public:
 	void Add(std::shared_ptr<GameObject> obj);
 	//çXêV
 	void Update();
-	//ï`âÊ
-	void Draw();
+	//ï`âÊÇ‹Ç∆Çﬂ
+	void DrawByType(ObjectType type);
 
 protected:
 	std::vector<std::shared_ptr<GameObject>> m_objects;
-	
 };
 

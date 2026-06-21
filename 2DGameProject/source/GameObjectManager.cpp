@@ -28,15 +28,20 @@ void GameObjectManager::Update()
 	);
 }
 
-void GameObjectManager::Draw()
+void GameObjectManager::DrawByType(ObjectType type)
 {
-	//各オブジェクトの描画処理
-	for (auto& obj : m_objects)
-	{
-		if (!obj->IsActive())
-		{
-			continue;
-		}
-		obj->Draw();
-	}
+    //プレイヤーオブジェクトの描画処理
+    for (auto& obj : m_objects)
+    {
+        if (!obj->IsActive())
+        {
+            continue;
+        }
+        if (obj->GetType() != type)
+        {
+            continue;
+        }
+        obj->Draw();
+    }
 }
+

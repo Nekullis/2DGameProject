@@ -20,6 +20,19 @@ bool SonarRenderer::Init()
     return true;
 }
 
+void SonarRenderer::End()
+{
+    SetDrawScreen(DX_SCREEN_BACK);
+}
+
+void SonarRenderer::Composite()
+{
+    SetDrawScreen(DX_SCREEN_BACK);
+    DrawGraph(0, 0, m_rtStage, TRUE);
+
+
+}
+
 void SonarRenderer::BeginStage()
 {
     SetDrawScreen(m_rtStage);

@@ -1,7 +1,7 @@
 #include "GameObject.h"
 #include "Time.h"
 
-GameObject::GameObject() :m_position(0, 0), m_velocity(0, 0), m_isActive(true), m_currentAnim(nullptr)
+GameObject::GameObject() :m_objType(ObjectType::None),m_position(0, 0), m_velocity(0, 0), m_isActive(true), m_currentAnim(nullptr)
 {
 }
 

@@ -10,6 +10,7 @@
 #include "Player.h"
 #include "camera.h"
 #include "GameObjectManager.h"
+#include "SonarRenderer.h"
 
 class SceneGameMain : public Scene
 {
@@ -33,5 +34,7 @@ private:
     std::shared_ptr<Player> m_Player;
     //オブジェクト管理
     GameObjectManager m_objectManager;
+    //レンダー
+    SonarRenderer m_sonarRenderer;
 };
 

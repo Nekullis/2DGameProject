@@ -11,6 +11,14 @@
 #include "Collider.h"
 #include "Animation.h"
 
+enum class ObjectType
+{
+    None,
+    Player,
+    Enemy,
+    Item
+};
+
 class GameObject
 {
 public:
@@ -27,6 +35,8 @@ public:
     //アニメーション変更
     virtual void ChangeAnimation(Animation* anim);
 
+    //オブジェクトタイプ
+    ObjectType GetType() const { return m_objType; }
 	//座標設定
 	void SetPosition(const Vector2D& pos);
     //出現場所設定
@@ -38,6 +48,7 @@ public:
 	bool IsActive() const { return m_isActive; }
 
 protected:
+    ObjectType m_objType;
 	//座標
 	Vector2D m_position;
     //出現場所

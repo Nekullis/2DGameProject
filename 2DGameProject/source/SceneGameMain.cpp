@@ -5,6 +5,8 @@
 
 SceneGameMain::SceneGameMain()
 {
+    m_sonarRenderer.Init();
+
     //ステージ生成
     m_Stage = std::make_shared<Stage>();
     m_Stage->Load("data/json/StageMap.json");
@@ -54,6 +56,19 @@ void SceneGameMain::Process()
 
 void SceneGameMain::Draw()
 {
+    m_sonarRenderer.BeginStage();
     m_Stage->Draw();
-    m_objectManager.Draw();
+    m_objectManager.DrawByType(ObjectType::Player);
+
+    m_sonarRenderer.BeginEnemy();
+    m_objectManager.DrawByType(ObjectType::Enemy);
+
+    m_sonarRenderer.End();
+    //レンダーターゲット終了
+    m_sonarRenderer.End();
+
+    // 最終描画
+    DrawGraph(0, 0, m_sonarRenderer.GetStageHandle(), TRUE);
+    DrawGraph(0, 0, m_sonarRenderer.GetEnemyHandle(), TRUE);
+
 }
