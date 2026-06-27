@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="source\ShaderUtility.cpp" />
     <ClCompile Include="source\SonarRenderer.cpp" />
     <ClCompile Include="source\EnemyParamManager.cpp" />
     <ClCompile Include="source\Bat.cpp" />
@@ -55,6 +56,7 @@
     <ClCompile Include="source\Stage.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="source\ShaderUtility.h" />
     <ClInclude Include="source\SonarRenderer.h" />
     <ClInclude Include="source\EnemyParamManager.h" />
     <ClInclude Include="source\Bat.h" />
@@ -95,6 +97,13 @@
     <None Include="data\json\StageMap.json" />
     <None Include="data\json\PlayerParam.json" />
     <None Include="data\json\EnemyParam.json" />
+    <None Include="shader\SonarPS.cso" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="shader\SonarPS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+    </FxCompile>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

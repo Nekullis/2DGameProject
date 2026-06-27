@@ -85,6 +85,7 @@
     <ClCompile Include="source\SonarRenderer.cpp">
       <Filter>Render</Filter>
     </ClCompile>
+    <ClCompile Include="source\ShaderUtility.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\camera.h" />
@@ -171,6 +172,7 @@
     <ClInclude Include="source\SonarRenderer.h">
       <Filter>Render</Filter>
     </ClInclude>
+    <ClInclude Include="source\ShaderUtility.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="File">
@@ -211,5 +213,9 @@
     <None Include="data\json\EnemyParam.json">
       <Filter>DataSouece</Filter>
     </None>
+    <None Include="shader\SonarPS.cso" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="shader\SonarPS.hlsl" />
   </ItemGroup>
 </Project>

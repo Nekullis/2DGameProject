@@ -63,12 +63,13 @@ void SceneGameMain::Draw()
     m_sonarRenderer.BeginEnemy();
     m_objectManager.DrawByType(ObjectType::Enemy);
 
-    m_sonarRenderer.End();
+    //Mask
+    m_sonarRenderer.BeginMask();
+    DrawCircle(900, 500, 300, GetColor(255, 255, 255), TRUE);
+
     //レンダーターゲット終了
     m_sonarRenderer.End();
 
     // 最終描画
-    DrawGraph(0, 0, m_sonarRenderer.GetStageHandle(), TRUE);
-    DrawGraph(0, 0, m_sonarRenderer.GetEnemyHandle(), TRUE);
-
+    m_sonarRenderer.Composite();
 }

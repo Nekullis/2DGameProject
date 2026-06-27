@@ -23,6 +23,7 @@ public:
     int GetMaskHandle()const { return m_rtMask; };
 
 private:
+    int m_psHandle;
     int m_rtStage;
     int m_rtEnemy;
     int m_rtMask;
