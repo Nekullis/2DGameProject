@@ -12,20 +12,19 @@ public:
     SonarRenderer();
 
     bool Init();
-    void End();
     void Composite();
-    void BeginStage();
-    void BeginEnemy();
+    void BeginScene();
+    void EndScene();
     void BeginMask();
+    void EndMask();
+    void ResolveRT();
 
-    int GetStageHandle() const { return m_rtStage; }
-    int GetEnemyHandle()const { return m_rtEnemy; };
+    int GetSceneHandle() const { return m_rtScene; }
     int GetMaskHandle()const { return m_rtMask; };
 
 private:
     int m_psHandle;
-    int m_rtStage;
-    int m_rtEnemy;
     int m_rtMask;
+    int m_rtScene;
 };
 

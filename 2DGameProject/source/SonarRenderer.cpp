@@ -3,18 +3,17 @@
 #include "ShaderUtility.h"
 #include <DxLib.h>
 
-SonarRenderer::SonarRenderer() :m_psHandle(-1),m_rtStage(-1), m_rtEnemy(-1), m_rtMask(-1)
+SonarRenderer::SonarRenderer() :m_psHandle(-1), m_rtMask(-1), m_rtScene(-1)
 {
 }
 
 bool SonarRenderer::Init()
 {
     m_psHandle = LoadPixelShader("shader/SonarPS.cso");
-    m_rtStage = MakeScreen(SCREEN_W, SCREEN_H, TRUE);
-    m_rtEnemy = MakeScreen(SCREEN_W, SCREEN_H, TRUE);
-    m_rtMask = MakeScreen(SCREEN_W, SCREEN_H, TRUE);
+    m_rtScene = MakeScreen(SCREEN_W, SCREEN_H, TRUE);
+    m_rtMask = MakeScreen(SCREEN_W, SCREEN_H, FALSE);
 
-    if (m_rtStage == -1 || m_rtEnemy == -1 || m_rtMask == -1)
+    if (m_rtScene == -1 || m_rtMask == -1)
     {
         return false;
     }
@@ -22,43 +21,61 @@ bool SonarRenderer::Init()
     return true;
 }
 
-void SonarRenderer::End()
-{
-    SetDrawScreen(DX_SCREEN_BACK);
-}
-
 void SonarRenderer::Composite()
 {
     SetDrawScreen(DX_SCREEN_BACK);
-    //ステージとプレイヤー
-    DrawGraph(0, 0, m_rtStage, TRUE);
     //シェーダー有効化
     SetUsePixelShader(m_psHandle);
-    //シェーダーへテクスチャを渡す
-    SetUseTextureToShader(0, m_rtEnemy);
-    SetUseTextureToShader(1, m_rtMask);
-    //画面全体ポリゴン描画
+
     VERTEX2DSHADER vertices[6];
     ShaderUtility::CreateFullScreenQuad(vertices, SCREEN_W, SCREEN_H);
-    DrawPolygon2DToShader(vertices,2);
+
+    SetUseTextureToShader(0, m_rtScene);
+    SetUseTextureToShader(1, m_rtMask);
+
+    DrawPolygon2DToShader(vertices, 2);
+
     //シェーダー解除
     SetUsePixelShader(-1);
 }
 
-void SonarRenderer::BeginStage()
+void SonarRenderer::BeginScene()
 {
-    SetDrawScreen(m_rtStage);
+    SetDrawScreen(m_rtScene);
     ClearDrawScreen();
 }
 
-void SonarRenderer::BeginEnemy()
+void SonarRenderer::EndScene()
 {
-    SetDrawScreen(m_rtEnemy);
-    ClearDrawScreen();
+    SetDrawScreen(DX_SCREEN_BACK);
 }
 
 void SonarRenderer::BeginMask()
 {
     SetDrawScreen(m_rtMask);
     ClearDrawScreen();
+}
+
+void SonarRenderer::EndMask()
+{
+    SetDrawScreen(DX_SCREEN_BACK);
+}
+
+void SonarRenderer::ResolveRT()
+{
+    // SceneRT → バックバッファへ
+    //SetDrawScreen(DX_SCREEN_BACK);
+    //(0, 0, SCREEN_W, SCREEN_H, m_rtScene, TRUE);
+
+    //// もう一回 SceneRTに焼き戻し
+    //SetDrawScreen(m_rtScene);
+    //DrawExtendGraph(0, 0, SCREEN_W, SCREEN_H, DX_SCREEN_BACK, TRUE);
+
+    // MaskRT → バックバッファへ
+    //SetDrawScreen(DX_SCREEN_BACK);
+    //DrawExtendGraph(0, 0, SCREEN_W, SCREEN_H, m_rtMask, TRUE);
+
+    //// MaskRTに焼き戻し
+    //SetDrawScreen(m_rtMask);
+    //DrawExtendGraph(0, 0, SCREEN_W, SCREEN_H, DX_SCREEN_BACK, TRUE);
 }

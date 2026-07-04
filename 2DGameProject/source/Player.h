@@ -7,6 +7,7 @@
 #pragma once
 #include "GameObject.h"
 #include "mymath.h"
+#include <functional>
 
 class TileMap;
 
@@ -37,10 +38,13 @@ public:
 	Player(TileMap* tilemap);
 	void Update()override;
     void Draw()override;
-	//自身のrectを取得
-	MYRECT GetRect() const;
 	//当たり判定
 	void Collision();
+    //ゲッター
+    MYRECT GetRect() const;
+    MYRECT GetFootRect()const;
+    //セッター
+    void SetLandCallback(std::function<void(const Vector2D&, float)> callback) { m_onLand = callback; }
 
 private:
 	//タイルマップ情報
@@ -58,6 +62,9 @@ private:
 	void LoadAnimation();
     //接地判定
     void CheckGround();
+
+    //着地通知用
+    std::function<void(const Vector2D&, float)> m_onLand;
 
 	//地面接触中か
 	bool m_isGround;

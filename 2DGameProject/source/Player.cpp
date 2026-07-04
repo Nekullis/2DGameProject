@@ -129,14 +129,10 @@ void Player::LoadAnimation()
 void Player::CheckGround()
 {
     m_isGround = false;
-    MYRECT footRect = GetRect();
-    //ë´å≥é¸ÇËÇÃîªíËã≠âª
-    footRect.y += footRect.h;
-    footRect.h = 2;
     auto walls = m_tilemap->GetWallRects();
     for (auto& wall : walls)
     {
-        if (IsHitBox(footRect, wall))
+        if (IsHitBox(GetFootRect(), wall))
         {
             m_isGround = true;
             return;
@@ -153,6 +149,15 @@ MYRECT Player::GetRect() const
 	rect.h = 100;
 
 	return rect;
+}
+
+MYRECT Player::GetFootRect() const
+{
+    MYRECT footRect = GetRect();
+    //ë´å≥é¸ÇËÇÃîªíËã≠âª
+    footRect.y += footRect.h;
+    footRect.h = 2;
+    return footRect;
 }
 
 void Player::Collision()
@@ -252,6 +257,13 @@ void Player::UpdateState()
 	//íÖínÇÃèuä‘
 	if (!m_prevGround && m_isGround)
 	{
+        if (m_onLand)
+        {
+            Vector2D emitPos = m_position;
+            emitPos.y += GetRect().h;
+            m_onLand(emitPos, m_landingSpeed);
+        }
+
 		//à⁄ìÆÇµÇƒÇ¢Ç»Ç¢Ç»ÇÁ
 		if (std::abs(m_velocity.x) < 0.01f)
 		{

@@ -2,6 +2,8 @@
 #include "TileMap.h"
 #include "EnemyParamManager.h"
 #include "Bat.h"
+#include "SonarParam.h"
+#include "winmain.h"
 
 SceneGameMain::SceneGameMain()
 {
@@ -15,6 +17,9 @@ SceneGameMain::SceneGameMain()
     m_Player = std::make_shared<Player>(m_Stage->GetTileMap());
     //プレイヤー出現位置
     m_Player->SetSpawnPos(Vector2D(m_Stage->GetPlayerSpawnX(), m_Stage->GetPlayerSpawnY()));
+    //着地時にソナーが出るようにコールバック
+    m_Player->SetLandCallback([this](const Vector2D& pos, float speed) {m_sonarManager.Emit(pos, speed);});
+    //コンテナに追加
     m_objectManager.Add(m_Player);
 
     //敵情報取得
@@ -22,13 +27,19 @@ SceneGameMain::SceneGameMain()
     //敵生成
     for (auto& spawn : m_Stage->GetEnemySpawns())
     {
+        //コウモリ生成
         if (spawn.type == "Bat")
         {
             auto bat = std::make_shared<Bat>(m_Player.get());
+            //初期位置設定
             bat->SetSpawnPos(Vector2D(spawn.x, spawn.y));
+            //コンテナ追加
             m_objectManager.Add(bat);
         }
     }
+
+    //ソナー情報登録
+    SonarParam::Load();
 
     //カメラ設定
     Camera::w_camera.SetTarget(m_Player.get());
@@ -52,24 +63,25 @@ void SceneGameMain::Process()
     camLimit.h = m_Stage->GetTileMap()->GetMapHeight() * 64;
     Camera::w_camera._rcLimit = camLimit;
     Camera::w_camera.Process();
+    m_sonarManager.Update();
 }
 
 void SceneGameMain::Draw()
 {
-    m_sonarRenderer.BeginStage();
+    //通常シーンをRTへ
+    m_sonarRenderer.BeginScene();
     m_Stage->Draw();
-    m_objectManager.DrawByType(ObjectType::Player);
-
-    m_sonarRenderer.BeginEnemy();
     m_objectManager.DrawByType(ObjectType::Enemy);
+    m_sonarRenderer.EndScene();
 
-    //Mask
+    //Mask生成
     m_sonarRenderer.BeginMask();
-    DrawCircle(900, 500, 300, GetColor(255, 255, 255), TRUE);
+    m_sonarManager.Draw();
+    m_sonarRenderer.EndMask();
 
-    //レンダーターゲット終了
-    m_sonarRenderer.End();
-
-    // 最終描画
+    //合成
     m_sonarRenderer.Composite();
+
+    //プレイヤー描画
+    m_objectManager.DrawByType(ObjectType::Player);
 }

@@ -5,10 +5,10 @@
 // ソナー時の描画に関するhlslファイル
 //----------------------------------------------------------------------
 
-//敵画像
-Texture2D EnemyTexture : register(t0);
+//本体
+Texture2D Tex0 : register(t0);
 //マスク画像
-Texture2D MaskTexture : register(t1);
+Texture2D Tex1 : register(t1);
 //テクスチャから色を取得するための変数
 SamplerState Samp : register(s0);
 
@@ -22,15 +22,8 @@ struct PS_INPUT
 
 float4 main(PS_INPUT input) : SV_Target
 {
-    //色を取得
-    float4 enemy = EnemyTexture.Sample(Samp, input.Tex);
-    float4 mask = MaskTexture.Sample(Samp, input.Tex);
-    
-    //黒ならピクセルを描かないように
-    if (mask.r < 0.1f)
-    {
-        discard;
-    }
-    
-    return enemy;
+    float4 scene = Tex0.Sample(Samp, input.Tex);
+    float4 mask = Tex1.Sample(Samp, input.Tex);
+
+    return mask * scene;
 }

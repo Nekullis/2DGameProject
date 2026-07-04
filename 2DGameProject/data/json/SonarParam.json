@@ -1,0 +1,9 @@
+{
+  "Speed": 300.0,
+
+  "MaxRadius": 500.0,
+
+  "RadiusScale": 1.0,
+
+  "MinLandingSpeed": 2.0
+}

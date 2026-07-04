@@ -11,6 +11,7 @@
 #include "camera.h"
 #include "GameObjectManager.h"
 #include "SonarRenderer.h"
+#include "SonarManager.h"
 
 class SceneGameMain : public Scene
 {
@@ -36,5 +37,7 @@ private:
     GameObjectManager m_objectManager;
     //レンダー
     SonarRenderer m_sonarRenderer;
+    //ソナー
+    SonarManager m_sonarManager;
 };
 

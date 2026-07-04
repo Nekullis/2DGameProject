@@ -89,13 +89,13 @@ void FrameInput()
 
 void FrameProcess() {
 
-	if(IsColorFade() != 0) {
+	/*if(IsColorFade() != 0) {
 		gFadeCnt++;
 		gColorMaskR = static_cast<int>(EasingLinear(static_cast<float>(gFadeCnt), static_cast<float>(gColorFadeStR), static_cast<float>(gColorFadeEdR), static_cast<float>(gFadeFrames)));
 		gColorMaskG = static_cast<int>(EasingLinear(static_cast<float>(gFadeCnt), static_cast<float>(gColorFadeStG), static_cast<float>(gColorFadeEdG), static_cast<float>(gFadeFrames)));
 		gColorMaskB = static_cast<int>(EasingLinear(static_cast<float>(gFadeCnt), static_cast<float>(gColorFadeStB), static_cast<float>(gColorFadeEdB), static_cast<float>(gFadeFrames)));
 		gColorMaskA = static_cast<int>(EasingLinear(static_cast<float>(gFadeCnt), static_cast<float>(gColorFadeStA), static_cast<float>(gColorFadeEdA), static_cast<float>(gFadeFrames)));
-	}
+	}*/
 
 	SceneManager::Update();
 }
@@ -107,11 +107,11 @@ void FrameDraw() {
 	SceneManager::Draw();
     DrawFormatString(500, 0, GetColor(255, 255, 255), "DT=%.6f", Time::FPS());
 
-	if(gColorMaskA > 0) {
-		SetDrawBlendMode(DX_BLENDMODE_ALPHA, gColorMaskA);	// 半透明モード
-		DrawBox(0, 0, SCREEN_W, SCREEN_H, GetColor(gColorMaskR, gColorMaskG, gColorMaskB), TRUE);
-		SetDrawBlendMode(DX_BLENDMODE_NOBLEND, gColorMaskA);
-	}
+	//if(gColorMaskA > 0) {
+	//	SetDrawBlendMode(DX_BLENDMODE_ALPHA, gColorMaskA);	// 半透明モード
+	//	DrawBox(0, 0, SCREEN_W, SCREEN_H, GetColor(gColorMaskR, gColorMaskG, gColorMaskB), TRUE);
+	//	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, gColorMaskA);
+	//}
 	ScreenFlip();		// 裏画面を表画面に反映
 }
 
