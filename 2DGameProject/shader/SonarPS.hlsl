@@ -23,7 +23,7 @@ struct PS_INPUT
 float4 main(PS_INPUT input) : SV_Target
 {
     float4 scene = Tex0.Sample(Samp, input.Tex);
-    float4 mask = Tex1.Sample(Samp, input.Tex);
+    float mask = Tex1.Sample(Samp, input.Tex).r;
 
-    return mask * scene;
+    return float4(scene.rgb * mask, scene.a);
 }

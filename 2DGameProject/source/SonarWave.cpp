@@ -4,7 +4,7 @@
 #include "camera.h"
 #include "SonarParam.h"
 
-SonarWave::SonarWave() :m_radius(0.0f), m_speed(0.0f), m_maxRadius(0.0f), m_active(false)
+SonarWave::SonarWave() :m_radius(0.0f), m_speed(0.0f), m_maxRadius(0.0f), m_alpha(1.0f), m_active(false)
 {
 }
 
@@ -32,7 +32,11 @@ void SonarWave::Update()
     //ソナー範囲が最大値なら終了
     if (m_radius >= m_maxRadius)
     {
-        m_active = false;
+        m_alpha -= Time::DeltaTime() * 2.0f;
+        if (m_alpha <= 0.0f)
+        {
+            m_active = false;
+        }
     }
 }
 
@@ -49,5 +53,17 @@ void SonarWave::Draw() const
         m_position.x - Camera::w_camera._pos.x,
         m_position.y - Camera::w_camera._pos.y
     };
-    DrawCircle(pos.x, pos.y, (int)m_radius, GetColor(100, 100, 100), TRUE);
+
+    int ringwidth = SonarParam::RingWidth;
+    for (int i = 0; i < ringwidth; i++)
+    {
+        float t = (float)i / ringwidth;
+        float intensity = powf(1.0f - t, 0.5f);
+        //外側ほど明るくする
+        int alpha = static_cast<int>(255 * intensity * m_alpha);
+        SetDrawBlendMode(DX_BLENDMODE_ALPHA, alpha);
+        DrawCircle(pos.x, pos.y, (int)m_radius - i, GetColor(255, 255, 255), FALSE);
+    }
+    SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
+    
 }

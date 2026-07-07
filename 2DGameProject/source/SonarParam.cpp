@@ -5,6 +5,7 @@ float SonarParam::Speed = 0.0f;
 float SonarParam::MaxRadius = 0.0f;
 float SonarParam::RadiusScale = 0.0f;
 float SonarParam::MinLandingSpeed = 0.0f;
+int SonarParam::RingWidth = 0;
 
 void SonarParam::Load()
 {
@@ -14,4 +15,5 @@ void SonarParam::Load()
     MaxRadius = json["MaxRadius"];
     RadiusScale = json["RadiusScale"];
     MinLandingSpeed = json["MinLandingSpeed"];
+    RingWidth = json["RingWidth"];
 }

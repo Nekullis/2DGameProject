@@ -79,6 +79,7 @@ void SceneGameMain::Draw()
     m_sonarManager.Draw();
     m_sonarRenderer.EndMask();
 
+    m_sonarRenderer.UpdateHistoryMask();
     //‡¬
     m_sonarRenderer.Composite();
 

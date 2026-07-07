@@ -15,5 +15,6 @@ public:
     static float MaxRadius;
     static float RadiusScale;
     static float MinLandingSpeed;
+    static int RingWidth;
 };
 

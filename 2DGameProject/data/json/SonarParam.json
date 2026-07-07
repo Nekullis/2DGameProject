@@ -5,5 +5,7 @@
 
   "RadiusScale": 1.0,
 
-  "MinLandingSpeed": 2.0
+  "MinLandingSpeed": 2.0,
+
+  "RingWidth": 30.0
 }

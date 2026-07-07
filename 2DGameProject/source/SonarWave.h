@@ -30,6 +30,8 @@ private:
     float m_maxRadius;
     //“ž’B‘¬“x
     float m_speed;
+    //ƒ¿’l
+    float m_alpha;
     bool m_active;
 };
 

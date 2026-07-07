@@ -17,14 +17,15 @@ public:
     void EndScene();
     void BeginMask();
     void EndMask();
-    void ResolveRT();
+    void UpdateHistoryMask();
 
     int GetSceneHandle() const { return m_rtScene; }
-    int GetMaskHandle()const { return m_rtMask; };
+    int GetMaskHandle()const { return m_rtCurrentMask; };
 
 private:
     int m_psHandle;
-    int m_rtMask;
     int m_rtScene;
+    int m_rtCurrentMask;
+    int m_rtHistoryMask;
 };
 
