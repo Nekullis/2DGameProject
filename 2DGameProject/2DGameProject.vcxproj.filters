@@ -236,9 +236,13 @@
     <None Include="data\json\SonarParam.json">
       <Filter>DataSouece</Filter>
     </None>
+    <None Include="shader\MakeFadePS.cso" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="shader\SonarPS.hlsl">
+      <Filter>Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="shader\MakeFadePS.hlsl">
       <Filter>Shader</Filter>
     </FxCompile>
   </ItemGroup>

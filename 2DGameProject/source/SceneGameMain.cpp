@@ -79,9 +79,12 @@ void SceneGameMain::Draw()
     m_sonarManager.Draw();
     m_sonarRenderer.EndMask();
 
-    m_sonarRenderer.UpdateHistoryMask();
-    //合成
+    //履歴更新
+    m_sonarRenderer.FadeHistory();
+    //最終合成
     m_sonarRenderer.Composite();
+
+    //DrawExtendGraph(0, 0, SCREEN_W, SCREEN_H, m_sonarRenderer.GetHistoryMaskHandle(), TRUE);
 
     //プレイヤー描画
     m_objectManager.DrawByType(ObjectType::Player);

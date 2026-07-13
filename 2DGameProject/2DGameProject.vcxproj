@@ -104,9 +104,14 @@
     <None Include="data\json\StageMap.json" />
     <None Include="data\json\PlayerParam.json" />
     <None Include="data\json\EnemyParam.json" />
+    <None Include="shader\MakeFadePS.cso" />
     <None Include="shader\SonarPS.cso" />
   </ItemGroup>
   <ItemGroup>
+    <FxCompile Include="shader\MakeFadePS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+    </FxCompile>
     <FxCompile Include="shader\SonarPS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>

@@ -13,6 +13,7 @@ public:
 
     bool Init();
     void Composite();
+    void FadeHistory();
     void BeginScene();
     void EndScene();
     void BeginMask();
@@ -20,12 +21,15 @@ public:
     void UpdateHistoryMask();
 
     int GetSceneHandle() const { return m_rtScene; }
-    int GetMaskHandle()const { return m_rtCurrentMask; };
+    int GetCurrentMaskHandle()const { return m_rtCurrentMask; };
+    int GetHistoryMaskHandle()const { return m_rtHistoryMask[m_historyIndex]; }
 
 private:
     int m_psHandle;
+    int m_fadePS;
     int m_rtScene;
     int m_rtCurrentMask;
-    int m_rtHistoryMask;
+    int m_rtHistoryMask[2];
+    int m_historyIndex;
 };
 
