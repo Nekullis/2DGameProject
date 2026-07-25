@@ -22,6 +22,7 @@ class Bat : public Enemy
 public:
     Bat(Player* player);
     void Update() override;
+    void ChangeState(BAT_STATE state);
 
 protected:
     void LoadAnimation();
@@ -33,6 +34,12 @@ protected:
     BAT_STATE m_state;
     //移動量
     float m_moveSpeed;
+    //羽ばたき用のタイマー
+    float m_waveTimer;
+    //揺れの速さ
+    float m_waveSpeed;
+    //揺れ幅
+    float m_waveAmplitude;
     //アニメーション関連
     Animation m_idleAnim;
     Animation m_ChaseAnim;

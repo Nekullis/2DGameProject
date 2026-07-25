@@ -45,3 +45,21 @@ void GameObjectManager::DrawByType(ObjectType type)
     }
 }
 
+void GameObjectManager::CheckCollision()
+{
+    //‘S‘–¸‚µ‚Ä“–‚½‚è”»’è‚ğ’²‚×‚é
+    for (size_t i = 0; i < m_objects.size(); i++)
+    {
+        for (size_t j = i + 1; j < m_objects.size(); j++)
+        {
+            if (!m_objects[i]->IsActive() || !m_objects[j]->IsActive()) { continue; }
+
+            if (m_objects[i]->GetCollider().IsHit(m_objects[j]->GetCollider()))
+            {
+                m_objects[i]->OnCollision(m_objects[j].get());
+                m_objects[j]->OnCollision(m_objects[i].get());
+            }
+        }
+    }
+}
+

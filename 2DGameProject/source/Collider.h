@@ -13,6 +13,15 @@ enum class ColliderType
 	Circle
 };
 
+enum class CollisionLayer
+{
+    None,
+    Player,
+    Enemy,
+    Stage,
+    Gorl
+};
+
 class Collider
 {
 public:
@@ -33,6 +42,10 @@ public:
 	float GetWidth() const { return m_width; }
 	//高さ
 	float GetHeight() const { return m_height; }
+    //レイヤー取得
+    CollisionLayer GetLayer() const { return m_layer; }
+    //レイヤー設定
+    void SetLayer(CollisionLayer layer) { m_layer = layer; }
 
 private:
 	//左上座標
@@ -45,6 +58,8 @@ private:
 	float m_radius;
 	//当たり判定タイプ
 	ColliderType m_type;
+    //当たり判定レイヤー
+    CollisionLayer m_layer;
 
 };
 

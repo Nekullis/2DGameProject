@@ -1,12 +1,25 @@
 #include "Collider.h"
 #include "mymath.h"
 
-Collider::Collider() :m_position(0, 0), m_width(0), m_height(0), m_radius(0), m_type(ColliderType::Box)
+Collider::Collider() :m_position(0, 0), m_width(0), m_height(0), m_radius(0), m_type(ColliderType::Box), m_layer(CollisionLayer::None)
 {
+}
+
+namespace
+{
+    bool CanCollide(CollisionLayer a, CollisionLayer b)
+    {
+        //PlayerÇ∆Enemy
+        if (a == CollisionLayer::Player && b == CollisionLayer::Enemy) { return true; }
+        if (a == CollisionLayer::Enemy && b == CollisionLayer::Player) { return true; }
+
+        return false;
+    }
 }
 
 bool Collider::IsHit(const Collider& other) const
 {
+    if (!CanCollide(m_layer, other.m_layer)) { return false; }
 	//Ç«ÇøÇÁÇ‡ãÈå`ÇÃèÍçá
 	if (m_type == ColliderType::Box && other.m_type == ColliderType::Box)
 	{

@@ -2,8 +2,9 @@
 #include "Player.h"
 #include "EnemyParamManager.h"
 #include "Animation.h"
+#include "Time.h"
 
-Bat::Bat(Player* player) :m_state(BAT_STATE::Idle), m_moveSpeed(0.0f)
+Bat::Bat(Player* player) :m_state(BAT_STATE::Idle), m_moveSpeed(0.0f), m_waveTimer(0.0f), m_waveSpeed(4.0f), m_waveAmplitude(0.4f)
 {
     m_player = player;
     m_currentAnim = &m_idleAnim;
@@ -15,6 +16,8 @@ Bat::Bat(Player* player) :m_state(BAT_STATE::Idle), m_moveSpeed(0.0f)
 
 void Bat::Update()
 {
+    m_waveTimer += Time::DeltaTime();
+
     //各状態の処理
     switch (m_state)
     {
@@ -39,6 +42,18 @@ void Bat::Update()
         m_currentAnim->Update();
         m_currentAnim->Apply(*m_sprite);
     }
+
+    if (!m_player->IsActive())
+    {
+        m_velocity = Vector2D(0, 0);
+    }
+}
+
+void Bat::ChangeState(BAT_STATE state)
+{
+    if (m_state == state) { return; }
+
+    m_state = state;
 }
 
 void Bat::LoadAnimation()
@@ -71,27 +86,33 @@ void Bat::LoadAnimation()
 
 void Bat::UpdateIdle()
 {
+    m_velocity = Vector2D(0, 0);
     //近づいたら追跡状態に
     float dist = Vector2D::Distance(m_position,m_player->GetPosition());
     if (dist <= m_detectRange)
     {
-        m_state = BAT_STATE::Chase;
+        ChangeState(BAT_STATE::Chase);
     }
 }
 
 void Bat::UpdateChase()
 {
     //移動の向きを設定
-    Vector2D dir = m_player->GetPosition() - m_position;
-    //正規化
-    dir = dir.Normalize();
+    Vector2D dir = (m_player->GetPosition() - m_position).Normalize();
+    //進行方向に対して垂直なベクトル
+    Vector2D perp(-dir.y, dir.x);
+    //サイン波で左右に揺らす
+    float offset = sinf(m_waveTimer * m_waveSpeed) * m_waveAmplitude;
+    //揺れを加える
+    Vector2D moveDir = (dir + perp * offset).Normalize();
+
     //移動量設定
-    m_velocity = dir * m_moveSpeed;
+    m_velocity = moveDir * m_moveSpeed;
     //一定距離離れると帰還する
     float dist = Vector2D::Distance(m_position, m_player->GetPosition());
-    if (dist > m_detectRange)
+    if (dist > m_lostRange)
     {
-        m_state = BAT_STATE::Return;
+        ChangeState(BAT_STATE::Return);
     }
 }
 
@@ -105,7 +126,7 @@ void Bat::UpdateReturn()
     {
         m_position = m_spawnPos;
         m_velocity = Vector2D(0.0f, 0.0f);
-        m_state = BAT_STATE::Idle;
+        ChangeState(BAT_STATE::Idle);
         return;
     }
     //向きの正規化

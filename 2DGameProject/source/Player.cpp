@@ -15,6 +15,7 @@ Player::Player(TileMap* tilemap) :m_tilemap(tilemap), m_isGround(false), m_prevG
 	PlayerParam::Load();
 	LoadAnimation();
 	m_currentAnim = &m_idleAnim;
+    m_collider.SetLayer(CollisionLayer::Player);
 }
 
 
@@ -29,7 +30,7 @@ void Player::Update()
     //更新
     GameObject::Update();
 	//衝突判定
-	Collision();
+	MapCollision();
     //接地判定
     CheckGround();
 	//状態更新
@@ -160,7 +161,7 @@ MYRECT Player::GetFootRect() const
     return footRect;
 }
 
-void Player::Collision()
+void Player::MapCollision()
 {
 	//接地初期化
 	m_isGround = false;
@@ -196,6 +197,19 @@ void Player::Collision()
 
         m_collider.SetPosition(m_position);
 	}
+}
+
+void Player::OnCollision(GameObject* other)
+{
+    if (other->GetType() == ObjectType::Enemy)
+    {
+        Damage();
+    }
+}
+
+void Player::Damage()
+{
+
 }
 
 void Player::Input()

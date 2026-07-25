@@ -48,6 +48,11 @@ void GameObject::ChangeAnimation(Animation* anim)
     m_currentAnim->Reset();
 }
 
+void GameObject::OnCollision(GameObject* other)
+{
+    //‚È‚É‚à‚µ‚È‚¢
+}
+
 void GameObject::SetPosition(const Vector2D& pos)
 {
 	m_position = pos;

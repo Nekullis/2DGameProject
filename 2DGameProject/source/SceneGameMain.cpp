@@ -56,6 +56,7 @@ void SceneGameMain::Input()
 void SceneGameMain::Process()
 {
     m_objectManager.Update();
+    m_objectManager.CheckCollision();
     MYRECT camLimit{};
     camLimit.x = 0;
     camLimit.y = 0;
@@ -69,22 +70,20 @@ void SceneGameMain::Process()
 void SceneGameMain::Draw()
 {
     //通常シーンをRTへ
-    m_sonarRenderer.BeginScene();
+    //m_sonarRenderer.BeginScene();
     m_Stage->Draw();
     m_objectManager.DrawByType(ObjectType::Enemy);
-    m_sonarRenderer.EndScene();
+    //m_sonarRenderer.EndScene();
 
     //Mask生成
-    m_sonarRenderer.BeginMask();
+    //m_sonarRenderer.BeginMask();
     m_sonarManager.Draw();
-    m_sonarRenderer.EndMask();
+    //m_sonarRenderer.EndMask();
 
     //履歴更新
-    m_sonarRenderer.FadeHistory();
+    //m_sonarRenderer.FadeHistory();
     //最終合成
-    m_sonarRenderer.Composite();
-
-    //DrawExtendGraph(0, 0, SCREEN_W, SCREEN_H, m_sonarRenderer.GetHistoryMaskHandle(), TRUE);
+    //m_sonarRenderer.Composite();
 
     //プレイヤー描画
     m_objectManager.DrawByType(ObjectType::Player);

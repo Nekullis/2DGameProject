@@ -39,7 +39,9 @@ public:
 	void Update()override;
     void Draw()override;
 	//ìñÇΩÇËîªíË
-	void Collision();
+	void MapCollision();
+    void OnCollision(GameObject* other) override;
+    void Damage();
     //ÉQÉbÉ^Å[
     MYRECT GetRect() const;
     MYRECT GetFootRect()const;

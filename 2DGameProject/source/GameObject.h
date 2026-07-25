@@ -34,6 +34,8 @@ public:
 	void Destory();
     //アニメーション変更
     virtual void ChangeAnimation(Animation* anim);
+    //接触イベント
+    virtual void OnCollision(GameObject* other);
 
     //オブジェクトタイプ
     ObjectType GetType() const { return m_objType; }
@@ -46,6 +48,9 @@ public:
     //移動速度取得
     Vector2D GetVelocity() const { return m_velocity; }
 	bool IsActive() const { return m_isActive; }
+
+    Collider& GetCollider() { return m_collider; }
+    const Collider& GetCollider() const { return m_collider; }
 
 protected:
     ObjectType m_objType;

@@ -18,6 +18,8 @@ public:
 	void Update();
 	//描画まとめ
 	void DrawByType(ObjectType type);
+    //オブジェクト同士の当たり判定
+    void CheckCollision();
 
 protected:
 	std::vector<std::shared_ptr<GameObject>> m_objects;
