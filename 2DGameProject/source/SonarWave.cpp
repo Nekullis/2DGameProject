@@ -68,3 +68,13 @@ void SonarWave::Draw() const
     SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
     
 }
+
+bool SonarWave::HasHitObject(GameObject* object) const
+{
+    return m_hitobjects.find(object) != m_hitobjects.end();
+}
+
+void SonarWave::AddHitObject(GameObject* object)
+{
+    m_hitobjects.insert(object);
+}

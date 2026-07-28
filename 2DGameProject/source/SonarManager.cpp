@@ -25,7 +25,11 @@ void SonarManager::Update()
             float dist = Vector2D::Distance(wave.GetPosition(), object->GetPosition());
             if (dist <= wave.GetRadius())
             {
-                object->OnSonarHit();
+                if (!wave.HasHitObject(object))
+                {
+                    wave.AddHitObject(object);
+                    object->OnSonarHit();
+                }
             }
         }
     }

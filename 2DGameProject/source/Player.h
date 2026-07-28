@@ -42,6 +42,7 @@ public:
 	void MapCollision();
     void OnCollision(GameObject* other) override;
     void Damage();
+    virtual void OnSonarHit()override;
     //ÉQÉbÉ^Å[
     MYRECT GetRect() const;
     MYRECT GetFootRect()const;

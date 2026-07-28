@@ -20,6 +20,10 @@ public:
     void Draw()const;
 
     bool IsActive()const { return m_active; }
+    //既に通知済み
+    bool HasHitObject(GameObject* object) const;
+    //通知済みに登録
+    void AddHitObject(GameObject* object);
 
     //ゲッター
     Vector2D GetPosition()const { return m_position; }

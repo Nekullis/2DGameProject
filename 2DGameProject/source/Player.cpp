@@ -212,6 +212,11 @@ void Player::Damage()
 
 }
 
+void Player::OnSonarHit()
+{
+    GameObject::OnSonarHit();
+}
+
 void Player::Input()
 {
 	//–ˆƒtƒŒ[ƒ€‰Šú‰»
