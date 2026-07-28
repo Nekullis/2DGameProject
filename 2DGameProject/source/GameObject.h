@@ -37,6 +37,11 @@ public:
     //接触イベント
     virtual void OnCollision(GameObject* other);
 
+    //ソナーが当たった
+    virtual void OnSonarHit();
+    //ソナー演出更新
+    void UpdateSonarEffect();
+
     //オブジェクトタイプ
     ObjectType GetType() const { return m_objType; }
 	//座標設定
@@ -51,6 +56,9 @@ public:
 
     Collider& GetCollider() { return m_collider; }
     const Collider& GetCollider() const { return m_collider; }
+
+    bool IsHitSonar() const { return m_isSonarHit; }
+    float GetSonarHitTimer() const { return m_sonarHitTimer; }
 
 protected:
     ObjectType m_objType;
@@ -68,6 +76,11 @@ protected:
 	bool m_isActive;
     //現在再生中のアニメーション
     Animation* m_currentAnim;
+    //ソナー関連
+    //ソナーに反応中か
+    bool m_isSonarHit;
+    //演出タイマー
+    float m_sonarHitTimer;
 
 };
 

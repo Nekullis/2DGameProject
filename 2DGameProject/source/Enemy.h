@@ -11,7 +11,8 @@ class Enemy : public GameObject
 {
 public:
     Enemy();
-    virtual void Update() = 0;
+    virtual void Update()override;
+    virtual void OnSonarHit()override;
 
 protected:
     class Player* m_player;

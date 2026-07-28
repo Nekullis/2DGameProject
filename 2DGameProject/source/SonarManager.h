@@ -9,6 +9,8 @@
 #include <vector>
 #include "SonarWave.h"
 
+class GameObject;
+
 class SonarManager
 {
 public:
@@ -17,9 +19,13 @@ public:
     void Update();
     void Draw();
 
+    //ƒ\ƒi[”»’è‘ÎÛ‚Ì“G‚ğ“o˜^
+    void AddSonarTargetObject(GameObject* object);
+    //ƒQƒbƒ^[
     std::vector<SonarWave> GetWavws() { return m_waves; }
 
 private:
     std::vector<SonarWave> m_waves;
+    std::vector<GameObject*> m_objects;
 };
 

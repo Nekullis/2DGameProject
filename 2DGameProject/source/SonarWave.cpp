@@ -17,6 +17,7 @@ void SonarWave::Start(const Vector2D& pos, float landingSpeed)
     //m_maxRadius = SonarParam::MaxRadius + landingSpeed;
     m_maxRadius = SonarParam::MaxRadius;
     m_active = true;
+    m_hitobjects.clear();
 }
 
 void SonarWave::Update()

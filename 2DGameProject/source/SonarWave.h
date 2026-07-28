@@ -6,6 +6,9 @@
 //----------------------------------------------------------------------
 #pragma once
 #include "Vector2D.h"
+#include <unordered_set>
+
+class GameObject;
 
 class SonarWave
 {
@@ -19,7 +22,8 @@ public:
     bool IsActive()const { return m_active; }
 
     //ゲッター
-    Vector2D GetPos() { return m_position; }
+    Vector2D GetPosition()const { return m_position; }
+    float GetRadius()const { return m_radius; }
 
 private:
     //位置
@@ -33,5 +37,8 @@ private:
     //α値
     float m_alpha;
     bool m_active;
+    //このソナーが既に反応させたオブジェクト
+    std::unordered_set<GameObject*> m_hitobjects;
+
 };
 

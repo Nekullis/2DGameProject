@@ -34,7 +34,7 @@ void Bat::Update()
         UpdateReturn();
         break;
     }
-    GameObject::Update();
+    Enemy::Update();
 
     //アニメーション処理
     if (m_currentAnim && m_sprite)
@@ -54,6 +54,11 @@ void Bat::ChangeState(BAT_STATE state)
     if (m_state == state) { return; }
 
     m_state = state;
+}
+
+void Bat::OnSonarHit()
+{
+    Enemy::OnSonarHit();
 }
 
 void Bat::LoadAnimation()

@@ -35,6 +35,7 @@ SceneGameMain::SceneGameMain()
             bat->SetSpawnPos(Vector2D(spawn.x, spawn.y));
             //ƒRƒ“ƒeƒi’Ç‰Á
             m_objectManager.Add(bat);
+            m_sonarManager.AddSonarTargetObject(bat.get());
         }
     }
 

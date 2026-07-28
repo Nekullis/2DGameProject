@@ -1,7 +1,7 @@
 #include "GameObject.h"
 #include "Time.h"
 
-GameObject::GameObject() :m_objType(ObjectType::None),m_position(0, 0), m_velocity(0, 0), m_isActive(true), m_currentAnim(nullptr)
+GameObject::GameObject() :m_objType(ObjectType::None),m_position(0, 0), m_velocity(0, 0), m_isActive(true), m_currentAnim(nullptr), m_isSonarHit(false), m_sonarHitTimer(0.0f)
 {
 }
 
@@ -21,6 +21,7 @@ void GameObject::Update()
 	{
 		m_sprite->SetPosition(m_position.x, m_position.y);
 	}
+    UpdateSonarEffect();
 }
 
 void GameObject::Draw()
@@ -51,6 +52,29 @@ void GameObject::ChangeAnimation(Animation* anim)
 void GameObject::OnCollision(GameObject* other)
 {
     //なにもしない
+}
+
+
+void GameObject::OnSonarHit()
+{
+    //演出開始
+    m_isSonarHit = true;
+    //タイマーリセット
+    m_sonarHitTimer = 0.5;
+}
+
+void GameObject::UpdateSonarEffect()
+{
+    if (!m_isSonarHit) { return; }
+
+    //時間を減らす
+    m_sonarHitTimer -= Time::DeltaTime();
+    //終了
+    if (m_sonarHitTimer <= 0)
+    {
+        m_sonarHitTimer = 0.0f;
+        m_isSonarHit = false;
+    }
 }
 
 void GameObject::SetPosition(const Vector2D& pos)

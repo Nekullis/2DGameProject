@@ -1,4 +1,5 @@
 #include "SonarManager.h"
+#include "GameObject.h"
 
 void SonarManager::Emit(const Vector2D& pos, float power)
 {
@@ -13,6 +14,20 @@ void SonarManager::Update()
     for (auto& wave : m_waves)
     {
         wave.Update();
+
+        //ƒ\ƒi[‚ªÁ‚¦‚Ä‚¢‚é‚È‚ç”»’è‚µ‚È‚¢
+        if (!wave.IsActive()) { continue; }
+
+        for (auto* object : m_objects)
+        {
+            if (!object->IsActive()) { continue; }
+            //‹——£”»’è
+            float dist = Vector2D::Distance(wave.GetPosition(), object->GetPosition());
+            if (dist <= wave.GetRadius())
+            {
+                object->OnSonarHit();
+            }
+        }
     }
 
     m_waves.erase(std::remove_if(m_waves.begin(), m_waves.end(), 
@@ -30,4 +45,9 @@ void SonarManager::Draw()
     {
         wave.Draw();
     }
+}
+
+void SonarManager::AddSonarTargetObject(GameObject* object)
+{
+    m_objects.push_back(object);
 }

@@ -23,6 +23,7 @@ public:
     Bat(Player* player);
     void Update() override;
     void ChangeState(BAT_STATE state);
+    void OnSonarHit()override;
 
 protected:
     void LoadAnimation();
