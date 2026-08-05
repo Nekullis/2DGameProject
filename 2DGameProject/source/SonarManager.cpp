@@ -23,10 +23,15 @@ void SonarManager::Update()
             if (!object->IsActive()) { continue; }
             //‹——£”»’è
             float dist = Vector2D::Distance(wave.GetPosition(), object->GetPosition());
-            if (dist <= wave.GetRadius())
+            if (dist <= wave.GetRadius() + object->GetSonarRadius())
             {
                 if (!wave.HasHitObject(object))
                 {
+                    //ƒvƒŒƒCƒ„[‚©‚ç“G‚Ö‚Ì•ûŒüŽæ“¾
+                    Vector2D dir = object->GetPosition() - wave.GetPosition();
+                    //˜c‚Ý’Ç‰Á
+                    wave.AddDistortion(atan2(dir.y, dir.x), 50.0f, 1.0f);
+
                     wave.AddHitObject(object);
                     object->OnSonarHit();
                 }

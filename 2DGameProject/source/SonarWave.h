@@ -10,6 +10,18 @@
 
 class GameObject;
 
+struct DistortionEvent
+{
+    //歪ませる方向(ラジアン)
+    float angle;
+
+    //歪みの強さ
+    float power;
+
+    //歪みを維持する時間
+    float time;
+};
+
 class SonarWave
 {
 public:
@@ -20,10 +32,16 @@ public:
     void Draw()const;
 
     bool IsActive()const { return m_active; }
+    //リング描画
+    void DrawRing(const Vector2D& pos, float radius, int alpha)const;
     //既に通知済み
     bool HasHitObject(GameObject* object) const;
     //通知済みに登録
     void AddHitObject(GameObject* object);
+    //歪みを追加
+    void AddDistortion(float angle, float power, float time);
+    //指定角度の歪み量を計算
+    float CalcDistortion(float angle) const;
 
     //ゲッター
     Vector2D GetPosition()const { return m_position; }
@@ -40,7 +58,10 @@ private:
     float m_speed;
     //α値
     float m_alpha;
+    //ソナー発動中
     bool m_active;
+    //現在発生している歪み演出
+    std::vector<DistortionEvent> m_distortions;
     //このソナーが既に反応させたオブジェクト
     std::unordered_set<GameObject*> m_hitobjects;
 

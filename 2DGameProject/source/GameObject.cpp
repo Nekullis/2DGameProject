@@ -1,7 +1,7 @@
 #include "GameObject.h"
 #include "Time.h"
 
-GameObject::GameObject() :m_objType(ObjectType::None),m_position(0, 0), m_velocity(0, 0), m_isActive(true), m_currentAnim(nullptr), m_isSonarHit(false), m_sonarHitTimer(0.0f)
+GameObject::GameObject() :m_objType(ObjectType::None), m_position(0, 0), m_velocity(0, 0), m_isActive(true), m_currentAnim(nullptr), m_isSonarHit(false), m_sonarHitTimer(0.0f), m_sonarRadius(0.0f)
 {
 }
 

@@ -44,20 +44,24 @@ public:
 
     //オブジェクトタイプ
     ObjectType GetType() const { return m_objType; }
-	//座標設定
-	void SetPosition(const Vector2D& pos);
-    //出現場所設定
-    void SetSpawnPos(const Vector2D& pos);
-	//座標取得
-	Vector2D GetPosition() const { return m_position; }
+    //座標取得
+    Vector2D GetPosition() const { return m_position; }
+    //ソナー検知半径取得
+    float GetSonarRadius()const { return m_sonarRadius; }
     //移動速度取得
     Vector2D GetVelocity() const { return m_velocity; }
+	//座標設定
+	void SetPosition(const Vector2D& pos);
+    //ソナー検知半径設定
+    void SetSonarRadius(float radius) { m_sonarRadius = radius; }
+    //出現場所設定
+    void SetSpawnPos(const Vector2D& pos);
 	bool IsActive() const { return m_isActive; }
 
     Collider& GetCollider() { return m_collider; }
     const Collider& GetCollider() const { return m_collider; }
 
-    bool IsHitSonar() const { return m_isSonarHit; }
+    bool IsSonarHit() const { return m_isSonarHit; }
     float GetSonarHitTimer() const { return m_sonarHitTimer; }
 
 protected:
@@ -76,11 +80,13 @@ protected:
 	bool m_isActive;
     //現在再生中のアニメーション
     Animation* m_currentAnim;
+
     //ソナー関連
     //ソナーに反応中か
     bool m_isSonarHit;
     //演出タイマー
     float m_sonarHitTimer;
-
+    //ソナー反応半径
+    float m_sonarRadius;
 };
 

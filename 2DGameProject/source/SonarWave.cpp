@@ -39,6 +39,40 @@ void SonarWave::Update()
             m_active = false;
         }
     }
+
+    for (auto& distortion : m_distortions)
+    {
+        //歪み時間を減らす
+        if (distortion.time > 0.0f)
+        {
+            distortion.time -= Time::DeltaTime();
+
+            //時間が切れたら減衰開始
+            if (distortion.time < 0.0f)
+            {
+                distortion.time = 0.0f;
+            }
+        }
+
+        //歪みが残っている場合、徐々に弱める
+        if (distortion.power > 0.0f)
+        {
+            //徐々にゆがみ始める
+            distortion.power -= 20.0f * Time::DeltaTime();
+
+            //0未満にならないように
+            if (distortion.power < 0.0f)
+            {
+                distortion.power = 0.0f;
+            }
+        }
+    }
+    
+    //歪みが無くなったものを削除
+    m_distortions.erase(std::remove_if(m_distortions.begin(), m_distortions.end(),
+        [](const DistortionEvent& distortion){return distortion.power <= 0.0;}),
+        m_distortions.end());
+    
 }
 
 void SonarWave::Draw() const
@@ -56,17 +90,54 @@ void SonarWave::Draw() const
     };
 
     int ringwidth = SonarParam::RingWidth;
+    //ソナーリング本体の描画
     for (int i = 0; i < ringwidth; i++)
     {
+        //外側ほど明るくなるよう補間値を計算
         float t = (float)i / ringwidth;
         float intensity = powf(1.0f - t, 0.5f);
-        //外側ほど明るくする
+
+        //α値設定
         int alpha = static_cast<int>(255 * intensity * m_alpha);
-        SetDrawBlendMode(DX_BLENDMODE_ALPHA, alpha);
-        DrawCircle(pos.x, pos.y, (int)m_radius - i, GetColor(255, 255, 255), FALSE);
+        DrawRing(pos, m_radius - i, alpha);
     }
+
+    //発光表現用
+    const int glowWidth = 8;
+    //外側へ向かって薄く描画
+    for (int i = 1; i <= glowWidth; i++)
+    {
+        int alpha = static_cast<int>(80.0f * (1.0f - (float)i / glowWidth) * m_alpha);
+        DrawRing(pos, m_radius + i, alpha);
+    }
+
+    //ブレンドモードに戻す
     SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
     
+}
+
+void SonarWave::DrawRing(const Vector2D& pos, float radius, int alpha) const
+{
+    const int DIV = 64;
+    SetDrawBlendMode(DX_BLENDMODE_ALPHA, alpha);
+
+    for (int i = 1; i < DIV; i++)
+    {
+        //現在の頂点と次の頂点の角度
+        float angle1 = DX_PI_F * 2.0f * i / DIV;
+        float angle2 = DX_PI_F * 2.0f * (i + 1) / DIV;
+
+        //サイン波で半径を変化させ、リングを波立たせる
+        float noise1 = CalcDistortion(angle1);
+        float noise2 = CalcDistortion(angle2);
+
+        //ノイズを加えた半径
+        float r1 = radius + noise1;
+        float r2 = radius + noise2;
+
+        //円周上の2点を線で結び、リングを描画
+        DrawLine(pos.x + cosf(angle1) * r1, pos.y + sinf(angle1) * r1, pos.x + cosf(angle2) * r2, pos.y + sinf(angle2) * r2, GetColor(255, 255, 255));
+    }
 }
 
 bool SonarWave::HasHitObject(GameObject* object) const
@@ -77,4 +148,44 @@ bool SonarWave::HasHitObject(GameObject* object) const
 void SonarWave::AddHitObject(GameObject* object)
 {
     m_hitobjects.insert(object);
+}
+
+void SonarWave::AddDistortion(float angle, float power, float time)
+{
+    DistortionEvent distortion;
+
+    distortion.angle = angle;
+    distortion.power = power;
+    distortion.time = time;
+
+    m_distortions.push_back(distortion);
+}
+
+float SonarWave::CalcDistortion(float angle) const
+{
+    float noise = 0.0f;
+
+    //発生中の歪みをすべて加算
+    for (const auto& distortion : m_distortions)
+    {
+        //現在の頂点と歪み方向との角度差
+        float diff = fabsf(angle - distortion.angle);
+        //角度差を0からπに補正
+        if (diff > DX_PI_F)
+        {
+            diff = DX_PI_F * 2.0f - diff;
+        }
+
+        //正面ほど影響が強いように
+        float influence = cosf(diff);
+        if (influence < 0.0f)
+        {
+            influence = 0.0f;
+        }
+
+        //歪みを加算
+        noise += sinf(angle * 10.0f + m_radius * 0.08f) * distortion.power * influence;
+    }
+
+    return noise;
 }

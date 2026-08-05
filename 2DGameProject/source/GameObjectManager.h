@@ -21,6 +21,9 @@ public:
     //オブジェクト同士の当たり判定
     void CheckCollision();
 
+    //ゲッター
+    std::vector<std::shared_ptr<GameObject>> GetObjects() const { return m_objects; }
+
 protected:
 	std::vector<std::shared_ptr<GameObject>> m_objects;
 };
