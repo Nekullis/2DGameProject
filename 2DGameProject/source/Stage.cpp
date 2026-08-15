@@ -1,10 +1,12 @@
 #include "Stage.h"
 #include "TileMap.h"
 #include "JSONManager.h"
+#include "CaveBackground.h"
 
 Stage::Stage() :m_playerSpawnX(0), m_playerSpawnY(0), m_GoalX(0), m_GoalY(0)
 {
 	m_tileMap = std::make_shared<TileMap>();
+    m_backGround = std::make_shared<CaveBackground>();
 }
 
 bool Stage::Load(const std::string& path)
@@ -47,6 +49,8 @@ bool Stage::Load(const std::string& path)
 	m_tileMap = std::make_shared<TileMap>();
 	m_tileMap->LoadCSV(mapPath);
 
+    m_backGround->Generate(m_tileMap->GetMapWidth(), m_tileMap->GetMapHeight(), m_tileMap->GetTileSize());
+
 	return true;
 }
 
@@ -56,5 +60,6 @@ void Stage::Update()
 
 void Stage::Draw()
 {
+    m_backGround->Draw();
 	m_tileMap->Draw();
 }

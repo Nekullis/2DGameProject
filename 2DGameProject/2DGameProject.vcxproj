@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="source\CaveBackground.cpp" />
     <ClCompile Include="source\SonarManager.cpp" />
     <ClCompile Include="source\SonarParam.cpp" />
     <ClCompile Include="source\SonarWave.cpp" />
@@ -59,6 +60,7 @@
     <ClCompile Include="source\Stage.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="source\CaveBackground.h" />
     <ClInclude Include="source\SonarManager.h" />
     <ClInclude Include="source\SonarParam.h" />
     <ClInclude Include="source\SonarWave.h" />

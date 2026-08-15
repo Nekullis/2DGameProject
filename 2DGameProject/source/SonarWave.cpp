@@ -121,7 +121,7 @@ void SonarWave::DrawRing(const Vector2D& pos, float radius, int alpha) const
     const int DIV = 64;
     SetDrawBlendMode(DX_BLENDMODE_ALPHA, alpha);
 
-    for (int i = 1; i < DIV; i++)
+    for (int i = 1; i <= DIV; i++)
     {
         //Œ»Ý‚Ì’¸“_‚ÆŽŸ‚Ì’¸“_‚ÌŠp“x
         float angle1 = DX_PI_F * 2.0f * i / DIV;
@@ -184,7 +184,7 @@ float SonarWave::CalcDistortion(float angle) const
         }
 
         //˜c‚Ý‚ð‰ÁŽZ
-        noise += sinf(angle * 10.0f + m_radius * 0.08f) * distortion.power * influence;
+        noise += sinf(angle * 5.0f + m_radius * 0.08f) * distortion.power * influence;
     }
 
     return noise;

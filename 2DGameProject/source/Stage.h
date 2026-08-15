@@ -10,6 +10,7 @@
 #include <vector>
 
 class TileMap;
+class CaveBackground;
 
 struct EnemySpawnData
 {
@@ -39,6 +40,8 @@ private:
 	std::string m_stageName;
 	//マップ
 	std::shared_ptr<TileMap> m_tileMap;
+    //背景
+    std::shared_ptr<CaveBackground> m_backGround;
 	//プレイヤー開始位置
 	float m_playerSpawnX;
 	float m_playerSpawnY;
@@ -49,5 +52,6 @@ private:
 	//ゴール座標
 	float m_GoalX;
 	float m_GoalY;
+
 };
 

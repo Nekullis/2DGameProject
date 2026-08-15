@@ -24,6 +24,7 @@ public:
 	bool IsWall(int x, int y)const;
 	//•Ç‚·‚×‚Ä‚ðrect‰»‚µ‚ÄŽæ“¾‚·‚é
 	std::vector<MYRECT> GetWallRects() const;
+    int GetTileSize() const { return m_tileSize; }
     int GetMapWidth() const { return m_MapWidth; }
     int GetMapHeight() const { return m_Mapheight; }
     void SetWidth(int width) { m_MapWidth = width; }

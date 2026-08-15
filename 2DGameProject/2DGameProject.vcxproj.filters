@@ -93,6 +93,7 @@
     <ClCompile Include="source\SonarManager.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
+    <ClCompile Include="source\CaveBackground.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\camera.h" />
@@ -187,6 +188,7 @@
     <ClInclude Include="source\SonarManager.h">
       <Filter>Manager</Filter>
     </ClInclude>
+    <ClInclude Include="source\CaveBackground.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="File">

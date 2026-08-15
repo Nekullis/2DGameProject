@@ -53,7 +53,6 @@ void TileMap::Draw()
 			//ƒ^ƒCƒ‹•`‰æ
             MATRIX m = MGetTranslate(VECTOR(Camera::w_camera._pos.x, 0, 0));
             VECTOR pos = VTransform(VECTOR(x, y, 0), m);
-            //DrawRectRotaGraph2(pos.x,pos.)
             DrawGraph(x * m_tileSize - Camera::w_camera._pos.x, y * m_tileSize - Camera::w_camera._pos.y, m_tileTexture->GetHandle(), TRUE);
 		}
 	}
