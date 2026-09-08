@@ -32,8 +32,6 @@ public:
     void Draw()const;
 
     bool IsActive()const { return m_active; }
-    //ƒŠƒ“ƒO•`‰æ
-    void DrawRing(const Vector2D& pos, float radius, int alpha)const;
     //Šù‚É’Ê’mÏ‚İ
     bool HasHitObject(GameObject* object) const;
     //’Ê’mÏ‚İ‚É“o˜^

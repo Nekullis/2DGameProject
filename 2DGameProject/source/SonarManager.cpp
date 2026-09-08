@@ -30,7 +30,7 @@ void SonarManager::Update()
                     //ƒvƒŒƒCƒ„[‚©‚ç“G‚Ö‚Ì•ûŒüŽæ“¾
                     Vector2D dir = object->GetPosition() - wave.GetPosition();
                     //˜c‚Ý’Ç‰Á
-                    wave.AddDistortion(atan2(dir.y, dir.x), 25.0f, 1.0f);
+                    wave.AddDistortion(atan2(dir.y, dir.x), 50.0f, 1.0f);
 
                     wave.AddHitObject(object);
                     object->OnSonarHit();
@@ -40,10 +40,7 @@ void SonarManager::Update()
     }
 
     m_waves.erase(std::remove_if(m_waves.begin(), m_waves.end(), 
-        [](const SonarWave& wave)
-        {
-            return !wave.IsActive();
-        }),
+        [](const SonarWave& wave){return !wave.IsActive();}),
         m_waves.end()
     );
 }

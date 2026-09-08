@@ -3,6 +3,7 @@
 #include <DxLib.h>
 #include "camera.h"
 #include "SonarParam.h"
+#include "mydraw.h"
 
 SonarWave::SonarWave() :m_radius(0.0f), m_speed(0.0f), m_maxRadius(0.0f), m_alpha(1.0f), m_active(false)
 {
@@ -89,55 +90,54 @@ void SonarWave::Draw() const
         m_position.y - Camera::w_camera._pos.y
     };
 
-    int ringwidth = SonarParam::RingWidth;
+    int ringwidth = SonarParam::RingWidth / 2;
+
+    auto drawRing = [&](const Vector2D& pos, float radius, int alpha)->void
+    {
+        int color = GetColor(255, 255, 255);
+        const int DIV = 64;
+        SetDrawBlendMode(DX_BLENDMODE_ALPHA, alpha * 255);
+
+        for (int i = 1; i <= DIV; i++)
+        {
+            //現在の頂点と次の頂点の角度
+            float angle1 = DX_PI_F * 2.0f * i / DIV;
+            float angle2 = DX_PI_F * 2.0f * (i + 1) / DIV;
+
+            //サイン波で半径を変化させ、リングを波立たせる
+            float noise1 = CalcDistortion(angle1);
+            float noise2 = CalcDistortion(angle2);
+
+            //ノイズを加えた半径
+            float r1 = radius + noise1;
+            float r2 = radius + noise2;
+
+            float verCos1 = cosf(angle1);
+            float verCos2 = cosf(angle2);
+            float verSin1 = sinf(angle1);
+            float verSin2 = sinf(angle2);
+
+            //4頂点の設定
+            VECTOR vertex[4] =
+            {
+                VGet(pos.x + verCos1 * (r1 + ringwidth),pos.y + verSin1 * (r1 + ringwidth),0.0f),
+                VGet(pos.x + verCos2 * (r2 + ringwidth),pos.y + verSin2 * (r2 + ringwidth),0.0f),
+                VGet(pos.x + verCos1 * (r1 - ringwidth),pos.y + verSin1 * (r1 - ringwidth),0.0f),
+                VGet(pos.x + verCos2 * (r2 - ringwidth),pos.y + verSin2 * (r2 - ringwidth),0.0f)
+            };
+
+            //4頂点から四角形を描画
+            MyDraw4PointBox(MGetIdent(), vertex, color, true);
+        }
+    };
+
     //ソナーリング本体の描画
-    for (int i = 0; i < ringwidth; i++)
-    {
-        //外側ほど明るくなるよう補間値を計算
-        float t = (float)i / ringwidth;
-        float intensity = powf(1.0f - t, 0.5f);
-
-        //α値設定
-        int alpha = static_cast<int>(255 * intensity * m_alpha);
-        DrawRing(pos, m_radius - i, alpha);
-    }
-
-    //発光表現用
-    const int glowWidth = 8;
-    //外側へ向かって薄く描画
-    for (int i = 1; i <= glowWidth; i++)
-    {
-        int alpha = static_cast<int>(80.0f * (1.0f - (float)i / glowWidth) * m_alpha);
-        DrawRing(pos, m_radius + i, alpha);
-    }
+    int alpha = static_cast<int>(m_alpha);
+    drawRing(pos, m_radius, alpha);
 
     //ブレンドモードに戻す
     SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
     
-}
-
-void SonarWave::DrawRing(const Vector2D& pos, float radius, int alpha) const
-{
-    const int DIV = 64;
-    SetDrawBlendMode(DX_BLENDMODE_ALPHA, alpha);
-
-    for (int i = 1; i <= DIV; i++)
-    {
-        //現在の頂点と次の頂点の角度
-        float angle1 = DX_PI_F * 2.0f * i / DIV;
-        float angle2 = DX_PI_F * 2.0f * (i + 1) / DIV;
-
-        //サイン波で半径を変化させ、リングを波立たせる
-        float noise1 = CalcDistortion(angle1);
-        float noise2 = CalcDistortion(angle2);
-
-        //ノイズを加えた半径
-        float r1 = radius + noise1;
-        float r2 = radius + noise2;
-
-        //円周上の2点を線で結び、リングを描画
-        DrawLine(pos.x + cosf(angle1) * r1, pos.y + sinf(angle1) * r1, pos.x + cosf(angle2) * r2, pos.y + sinf(angle2) * r2, GetColor(255, 255, 255));
-    }
 }
 
 bool SonarWave::HasHitObject(GameObject* object) const
@@ -152,7 +152,7 @@ void SonarWave::AddHitObject(GameObject* object)
 
 void SonarWave::AddDistortion(float angle, float power, float time)
 {
-    DistortionEvent distortion;
+    DistortionEvent distortion{};
 
     distortion.angle = angle;
     distortion.power = power;
