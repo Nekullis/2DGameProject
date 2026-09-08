@@ -23,7 +23,9 @@ enum class PlayerState
 	//下降
 	Fall,
 	//着地
-	Land
+	Land,
+    //ダメージ
+    Damage
 };
 
 enum class Direction
@@ -79,6 +81,8 @@ private:
 	float m_jumpTimer;
 	//落下速度保存
 	float m_landingSpeed;
+    //ダメージを受けているか
+    bool m_isDamage;
 
 	//プレイヤー状態
 	PlayerState m_state;
@@ -92,6 +96,7 @@ private:
 	Animation m_jumpUpAnim;
 	Animation m_jumpDownAnim;
 	Animation m_stepAnim;
+    Animation m_damageAnim;
 
 };
 

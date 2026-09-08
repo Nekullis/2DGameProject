@@ -3,7 +3,7 @@
     "MoveSpeed": 500,
     "Gravity": 1000,
     "JumpPower": 300,
-    "MaxJumpTime": 3,
-    "AddJumpPower": 1500
+    "MaxJumpTime": 1.5,
+    "AddJumpPower": 1000
   }
 }

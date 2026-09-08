@@ -8,7 +8,7 @@
 #include "Physics.h"
 #include "Animation.h"
 
-Player::Player(TileMap* tilemap) :m_tilemap(tilemap), m_isGround(false), m_prevGround(false), m_isJump(false), m_jumpTimer(0), m_landingSpeed(0), m_state(PlayerState::Idle), m_direction(Direction::Right)
+Player::Player(TileMap* tilemap) :m_tilemap(tilemap), m_isGround(false), m_prevGround(false), m_isJump(false), m_jumpTimer(0), m_isDamage(false), m_landingSpeed(0), m_state(PlayerState::Idle), m_direction(Direction::Right)
 {
     m_objType = ObjectType::Player;
 	//パラメータ読み込み
@@ -16,6 +16,8 @@ Player::Player(TileMap* tilemap) :m_tilemap(tilemap), m_isGround(false), m_prevG
 	LoadAnimation();
 	m_currentAnim = &m_idleAnim;
     m_collider.SetLayer(CollisionLayer::Player);
+    m_collider.SetType(ColliderType::Box);
+    m_collider.SetSize(100.0f,100.0f);
 }
 
 
@@ -60,6 +62,9 @@ void Player::Update()
     case PlayerState::Land:
         ChangeAnimation(&m_stepAnim);
         break;
+    case PlayerState::Damage:
+        ChangeAnimation(&m_damageAnim);
+        break;
 	}
 
 	//アニメーション処理
@@ -87,6 +92,7 @@ void Player::LoadAnimation()
     auto motion_walk = std::make_shared<Texture>("res/player/player_motion/Slime_Walk.png");
     auto motion_jump = std::make_shared<Texture>("res/player/player_motion/Slime_Jump.png");
     auto motion_step = std::make_shared<Texture>("res/player/player_motion/Slime_Step.png");
+    auto motion_damege = std::make_shared<Texture>("res/player/player_motion/Slime_Dead.png");
     m_sprite = std::make_shared<Sprite>(motion_idle);
     //各アニメーションをフレーム登録
     //待機
@@ -124,6 +130,13 @@ void Player::LoadAnimation()
     }
     m_stepAnim.SetFPS(10);
     m_stepAnim.SetLoop(false);
+    //ダメージ
+    for (int i = 0; i < 9; i++)
+    {
+        m_damageAnim.AddFrame(motion_damege, i * 150, 0, 150, 100);
+    }
+    m_damageAnim.SetFPS(10);
+    m_damageAnim.SetLoop(false);
 
 }
 
@@ -209,6 +222,15 @@ void Player::OnCollision(GameObject* other)
 
 void Player::Damage()
 {
+    //ダメージを受けているならスキップ
+    if (m_isDamage)
+    {
+        return;
+    }
+
+    m_velocity.x = 0;
+    m_isDamage = true;
+    m_state = PlayerState::Damage;
 
 }
 
@@ -219,19 +241,23 @@ void Player::OnSonarHit()
 
 void Player::Input()
 {
-	//毎フレーム初期化
-	m_velocity.x = 0;
-	//適応のキーで左右に移動
-	if (InputManager::Press(KEY_INPUT_A))
-	{
-		m_velocity.x = -PlayerParam::MoveSpeed;
-        m_direction = Direction::Left;
-	}
-	else if (InputManager::Press(KEY_INPUT_D))
-	{
-		m_velocity.x = PlayerParam::MoveSpeed;
-        m_direction = Direction::Right;
-	}
+    if (!m_isDamage)
+    {
+        //毎フレーム初期化
+        m_velocity.x = 0;
+        //適応のキーで左右に移動
+        if (InputManager::Press(KEY_INPUT_A))
+        {
+            m_velocity.x = -PlayerParam::MoveSpeed;
+            m_direction = Direction::Left;
+        }
+        else if (InputManager::Press(KEY_INPUT_D))
+        {
+            m_velocity.x = PlayerParam::MoveSpeed;
+            m_direction = Direction::Right;
+        }
+    }
+	
 }
 
 void Player::Jump()
@@ -273,74 +299,86 @@ void Player::ApplyGravity()
 
 void Player::UpdateState()
 {
-	//着地の瞬間
-	if (!m_prevGround && m_isGround)
-	{
-        if (m_onLand)
+    if (!m_isDamage)
+    {
+        //着地の瞬間
+        if (!m_prevGround && m_isGround)
         {
-            Vector2D emitPos = m_position;
-            emitPos.y += GetRect().h;
-            m_onLand(emitPos, m_landingSpeed);
+            if (m_onLand)
+            {
+                Vector2D emitPos = m_position;
+                emitPos.x += GetRect().w / 2.0f;
+                emitPos.y += GetRect().h;
+                m_onLand(emitPos, m_landingSpeed);
+            }
+
+            //移動していないなら
+            if (std::abs(m_velocity.x) < 0.01f)
+            {
+                m_state = PlayerState::Land;
+
+                return;
+            }
         }
 
-		//移動していないなら
-		if (std::abs(m_velocity.x) < 0.01f)
-		{
-			m_state = PlayerState::Land;
+        //着地アニメ中
+        if (m_state == PlayerState::Land)
+        {
+            //終了していなければ維持
+            if (!m_stepAnim.IsFinished())
+            {
+                return;
+            }
+            //終わったので移動か待機状態に
+            if (std::abs(m_velocity.x) > 0.01f)
+            {
+                m_state = PlayerState::Move;
+            }
+            else
+            {
+                m_state = PlayerState::Idle;
+            }
 
-			return;
-		}
-	}
+            return;
+        }
 
-	//着地アニメ中
-	if (m_state == PlayerState::Land)
-	{
-		//終了していなければ維持
-		if (!m_stepAnim.IsFinished())
-		{
-			return;
-		}
-		//終わったので移動か待機状態に
-		if (std::abs(m_velocity.x) > 0.01f)
-		{
-			m_state = PlayerState::Move;
-		}
-		else
-		{
-			m_state = PlayerState::Idle;
-		}
+        //空中なら優先
+        if (!m_isGround)
+        {
+            //上昇速度が0でないなら上昇モーションに
+            if (m_velocity.y < 0)
+            {
+                m_state = PlayerState::Jump;
+            }
+            //下降モーションに
+            else
+            {
+                m_state = PlayerState::Fall;
+            }
 
-        return;
-	}
+            return;
+        }
 
-	//空中なら優先
-	if (!m_isGround)
-	{
-		//上昇速度が0でないなら上昇モーションに
-		if (m_velocity.y < 0)
-		{
-			m_state = PlayerState::Jump;
-		}
-		//下降モーションに
-		else
-		{
-			m_state = PlayerState::Fall;
-		}
-
-		return;
-	}
-
-	//左右移動中
-	//移動量が0でなければ移動モーションに
-	if (std::abs(m_velocity.x) > 0.01f)
-	{
-		m_state = PlayerState::Move;
-	}
-	//待機モーションに
-	else
-	{
-		m_state = PlayerState::Idle;
-	}
+        //左右移動中
+        //移動量が0でなければ移動モーションに
+        if (std::abs(m_velocity.x) > 0.01f)
+        {
+            m_state = PlayerState::Move;
+        }
+        //待機モーションに
+        else
+        {
+            m_state = PlayerState::Idle;
+        }
+    }
+    else
+    {
+        if (m_currentAnim->IsFinished())
+        {
+            m_isActive = false;
+        }
+    }
+	
 }
 
 

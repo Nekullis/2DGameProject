@@ -47,6 +47,8 @@ public:
     //ƒŒƒCƒ„[İ’è
     void SetLayer(CollisionLayer layer) { m_layer = layer; }
 
+    void DebugDraw();
+
 private:
 	//¶ãÀ•W
 	Vector2D m_position;

@@ -4,8 +4,9 @@
 #include "Bat.h"
 #include "SonarParam.h"
 #include "winmain.h"
+#include "Time.h"
 
-SceneGameMain::SceneGameMain()
+SceneGameMain::SceneGameMain() :m_gameState(GameState::Playing), m_gameStateTimer(0.0f)
 {
     m_sonarRenderer.Init();
 
@@ -56,16 +57,29 @@ void SceneGameMain::Input()
 
 void SceneGameMain::Process()
 {
-    m_objectManager.Update();
-    m_objectManager.CheckCollision();
-    MYRECT camLimit{};
-    camLimit.x = 0;
-    camLimit.y = 0;
-    camLimit.w = m_Stage->GetTileMap()->GetMapWidth() * 64;
-    camLimit.h = m_Stage->GetTileMap()->GetMapHeight() * 64;
-    Camera::w_camera._rcLimit = camLimit;
-    Camera::w_camera.Process();
-    m_sonarManager.Update();
+    switch (m_gameState)
+    {
+    case GameState::Playing:
+        ProcessPlaying();
+        break;
+
+    case GameState::MovingStage:
+        ProcessMovingStage();
+        break;
+
+    case GameState::GameOverEffect:
+        ProcessGameOverEffect();
+        break;
+
+    case GameState::GameOverMenu:
+        ProcessGameOverMenu();
+        break;
+
+    case GameState::GameClearEffect:
+        ProcessGameClearEffect();
+        break;
+
+    }
 }
 
 void SceneGameMain::Draw()
@@ -104,4 +118,65 @@ void SceneGameMain::Draw()
 
     //プレイヤー描画
     m_objectManager.DrawByType(ObjectType::Player);
+}
+
+void SceneGameMain::ChangeGameState(GameState state)
+{
+    m_gameState = state;
+    m_gameStateTimer = 0.0f;
+}
+
+void SceneGameMain::ProcessPlaying()
+{
+    //タイマー加算
+    m_gameStateTimer += Time::DeltaTime();
+
+    //オブジェクト更新
+    m_objectManager.Update();
+
+    //当たり判定
+    m_objectManager.CheckCollision();
+
+    //カメラ範囲設定
+    MYRECT camLimit{};
+    camLimit.x = 0;
+    camLimit.y = 0;
+    camLimit.w = m_Stage->GetTileMap()->GetMapWidth() * 64;
+    camLimit.h = m_Stage->GetTileMap()->GetMapHeight() * 64;
+    Camera::w_camera._rcLimit = camLimit;
+    //カメラ更新
+    Camera::w_camera.Process();
+
+    //ソナー更新
+    m_sonarManager.Update();
+}
+
+void SceneGameMain::ProcessMovingStage()
+{
+
+}
+
+void SceneGameMain::ProcessGameOverEffect()
+{
+    //タイマー加算
+    m_gameStateTimer += Time::DeltaTime();
+
+    //死亡演出
+
+    //一定時間経過でゲームオーバーメニュー出現
+    if (m_gameStateTimer >= 1.5f)
+    {
+        ChangeGameState(GameState::GameOverMenu);
+    }
+
+}
+
+void SceneGameMain::ProcessGameOverMenu()
+{
+
+}
+
+void SceneGameMain::ProcessGameClearEffect()
+{
+
 }

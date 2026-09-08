@@ -1,5 +1,7 @@
 #include "Collider.h"
 #include "mymath.h"
+#include <DxLib.h>
+#include "camera.h"
 
 Collider::Collider() :m_position(0, 0), m_width(0), m_height(0), m_radius(0), m_type(ColliderType::Box), m_layer(CollisionLayer::None)
 {
@@ -71,4 +73,15 @@ bool Collider::IsHit(const Collider& other) const
 		return other.IsHit(*this);
 	}
 	return false;
+}
+
+void Collider::DebugDraw()
+{
+    Vector2D pos =
+    {
+        m_position.x - Camera::w_camera._pos.x,
+        m_position.y - Camera::w_camera._pos.y
+    };
+
+    DrawBox(pos.x, pos.y, pos.x + m_width, pos.y + m_height, GetColor(255, 0, 0), TRUE);
 }

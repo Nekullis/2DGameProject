@@ -8,6 +8,7 @@ Bat::Bat(Player* player) :m_state(BAT_STATE::Idle), m_moveSpeed(0.0f), m_waveTim
 {
     m_player = player;
     m_currentAnim = &m_idleAnim;
+    m_collider.SetSize(100.0f, 100.0f);
     m_moveSpeed = EnemyParamManager::Get("Bat").MoveSpeed;
     m_detectRange = EnemyParamManager::Get("Bat").DetectRange;
     m_lostRange = EnemyParamManager::Get("Bat").LostRange;

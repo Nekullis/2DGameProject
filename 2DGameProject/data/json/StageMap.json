@@ -1,16 +1,16 @@
 {
-  "map": "data/csv/Stage1.csv",
+  "map": "data/csv/Stage_Start.csv",
 
   "playerSpawn": {
     "x": 320,
-    "y": 2560
+    "y": 1088
   },
 
   "enemies": [
     {
       "type": "Bat",
-      "x": 3840,
-      "y": 2560
+      "x": 640,
+      "y": 1080
     },
     {
       "type": "Bat",
@@ -18,7 +18,7 @@
       "y": 2560
     }
   ],
-  
+
 
   "goal": {
     "x": 2000,

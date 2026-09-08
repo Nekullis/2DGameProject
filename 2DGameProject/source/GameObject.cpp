@@ -30,6 +30,7 @@ void GameObject::Draw()
 	{
 		m_sprite->Draw();
 	}
+    //m_collider.DebugDraw();
 }
 
 void GameObject::Destory()
