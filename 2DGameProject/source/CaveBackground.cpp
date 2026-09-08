@@ -23,11 +23,12 @@ void CaveBackground::Generate(int mapWidth, int mapHeight, int tileSize)
         {
             BackgroundRock rock;
 
+            float random = static_cast<float>(GetRand(80));
             //格子状に配置
-            rock.position.x = x + GetRand(80) - 40;
-            rock.position.y = y + GetRand(80) - 40;
+            rock.position.x = x + random - 40.0f;
+            rock.position.y = y + random - 40.0f;
             //岩の大きさ
-            float baseRadius = GetRand(80) + 120;
+            float baseRadius = random + 120.0f;
             //円を何個重ねるか
             int circleCount = GetRand(3) + 5;
 
