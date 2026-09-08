@@ -4,7 +4,7 @@
 #include <Dxlib.h>
 #include "camera.h"
 
-TileMap::TileMap() :m_tileSize(64)
+TileMap::TileMap() :m_tileSize(64), m_MapWidth(0), m_Mapheight(0)
 {
 	m_tileTexture = std::make_shared<Texture>("res/map/MapChip.png");
 }
@@ -39,21 +39,23 @@ bool TileMap::LoadCSV(const std::string& path)
 void TileMap::Draw()
 {
 	//yçs
-	for (int y = 0; y < m_mapData.size(); y++)
+    int mapSizeH = static_cast<int>(m_mapData.size());
+	for (int h = 0; h < mapSizeH; h++)
 	{
 		//xóÒ
-		for (int x = 0; x < m_mapData[y].size(); x++)
+        int mapSizeW = static_cast<int>(m_mapData[h].size());
+		for (int w = 0; w < mapSizeW; w++)
 		{
-			int tile = m_mapData[y][x];
+			int tile = m_mapData[h][w];
 			//0ÇÕãÛ
 			if (tile == 0)
 			{
 				continue;
 			}
 			//É^ÉCÉãï`âÊ
-            MATRIX m = MGetTranslate(VECTOR(Camera::w_camera._pos.x, 0, 0));
-            VECTOR pos = VTransform(VECTOR(x, y, 0), m);
-            DrawGraph(x * m_tileSize - Camera::w_camera._pos.x, y * m_tileSize - Camera::w_camera._pos.y, m_tileTexture->GetHandle(), TRUE);
+            DrawGraph(w * m_tileSize - static_cast<int>(Camera::w_camera._pos.x), 
+                      h * m_tileSize - static_cast<int>(Camera::w_camera._pos.y), 
+                      m_tileTexture->GetHandle(), TRUE);
 		}
 	}
 }

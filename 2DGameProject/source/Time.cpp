@@ -15,7 +15,7 @@ void Time::Update()
 {
 	int current = GetNowCount();
 	//ms
-	float elapsed = current - m_prevTime;
+	float elapsed = static_cast<float>(current - m_prevTime);
     elapsed = MIN(elapsed, (1000.0f / 60.0f) * 6);
 	//•b•ÏŠ·
 	m_deltaTime = elapsed / 1000.0f;

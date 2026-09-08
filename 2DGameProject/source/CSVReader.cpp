@@ -36,7 +36,7 @@ std::vector<std::vector<std::string>> CSVReader::ReadCSV(const std::string& path
 		//1s•ª‚ğdata‚É’Ç‰Á
 		data.push_back(row);
 	}
-    csv_width = data.empty() ? 0 : data[0].size();
-    csv_height = data.size();
+    csv_width = data.empty() ? 0 : static_cast<int>(data[0].size());
+    csv_height = static_cast<int>(data.size());
 	return data;
 }
