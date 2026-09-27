@@ -11,27 +11,27 @@ SceneGameMain::SceneGameMain() :m_gameState(GameState::Playing), m_gameStateTime
     m_sonarRenderer.Init();
 
     //ステージ生成
-    m_Stage = std::make_shared<Stage>();
-    m_Stage->Load("data/json/StageMap.json");
+    m_stage = std::make_shared<Stage>();
+    m_stage->Load("data/json/StageMap.json");
 
     //プレイヤー生成
-    m_Player = std::make_shared<Player>(m_Stage->GetTileMap());
+    m_player = std::make_shared<Player>(m_stage->GetTileMap());
     //プレイヤー出現位置
-    m_Player->SetSpawnPos(Vector2D(m_Stage->GetPlayerSpawnX(), m_Stage->GetPlayerSpawnY()));
+    m_player->SetSpawnPos(Vector2D(m_stage->GetPlayerSpawnX(), m_stage->GetPlayerSpawnY()));
     //着地時にソナーが出るようにコールバック
-    m_Player->SetLandCallback([this](const Vector2D& pos, float speed) {m_sonarManager.Emit(pos, speed);});
+    m_player->SetLandCallback([this](const Vector2D& pos, float speed) {m_sonarManager.Emit(pos, speed);});
     //コンテナに追加
-    m_objectManager.Add(m_Player);
+    m_objectManager.Add(m_player);
 
     //敵情報取得
     EnemyParamManager::Load();
     //敵生成
-    for (auto& spawn : m_Stage->GetEnemySpawns())
+    for (auto& spawn : m_stage->GetEnemySpawns())
     {
         //コウモリ生成
         if (spawn.type == "Bat")
         {
-            auto bat = std::make_shared<Bat>(m_Player.get());
+            auto bat = std::make_shared<Bat>(m_player.get());
             //初期位置設定
             bat->SetSpawnPos(Vector2D(spawn.x, spawn.y));
             //コンテナ追加
@@ -40,11 +40,22 @@ SceneGameMain::SceneGameMain() :m_gameState(GameState::Playing), m_gameStateTime
         }
     }
 
+    //ギミック情報をギミックマネージャーから取得
+    auto gimmicks = m_stage->GetGimmickManager().TakeGimmicks();
+    for (auto& gimmick : gimmicks)
+    {
+        //ギミックからオブジェクトを生成できるように
+        gimmick->SetObjectManager(&m_objectManager);
+
+        //コンテナ追加
+        m_objectManager.Add(gimmick);
+    }
+
     //ソナー情報登録
     SonarParam::Load();
 
     //カメラ設定
-    Camera::w_camera.SetTarget(m_Player.get());
+    Camera::w_camera.SetTarget(m_player.get());
 }
 
 SceneGameMain::~SceneGameMain()
@@ -86,7 +97,7 @@ void SceneGameMain::Draw()
 {
     //通常シーンをRTへ
     m_sonarRenderer.BeginScene();
-    m_Stage->Draw();
+    m_stage->Draw();
     m_objectManager.DrawByType(ObjectType::Enemy);
     m_sonarRenderer.EndScene();
 
@@ -134,6 +145,9 @@ void SceneGameMain::ProcessPlaying()
     //オブジェクト更新
     m_objectManager.Update();
 
+    //イベント
+    m_stage->GetEventManager().Update(m_player.get());
+
     //当たり判定
     m_objectManager.CheckCollision();
 
@@ -141,8 +155,8 @@ void SceneGameMain::ProcessPlaying()
     MYRECT camLimit{};
     camLimit.x = 0;
     camLimit.y = 0;
-    camLimit.w = m_Stage->GetTileMap()->GetMapWidth() * 64;
-    camLimit.h = m_Stage->GetTileMap()->GetMapHeight() * 64;
+    camLimit.w = m_stage->GetTileMap()->GetMapWidth() * 64;
+    camLimit.h = m_stage->GetTileMap()->GetMapHeight() * 64;
     Camera::w_camera._rcLimit = camLimit;
     //カメラ更新
     Camera::w_camera.Process();

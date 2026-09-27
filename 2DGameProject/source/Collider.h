@@ -19,7 +19,8 @@ enum class CollisionLayer
     Player,
     Enemy,
     Stage,
-    Gorl
+    Event,
+    Gimmick
 };
 
 class Collider
@@ -47,7 +48,7 @@ public:
     //ƒŒƒCƒ„[İ’è
     void SetLayer(CollisionLayer layer) { m_layer = layer; }
 
-    void DebugDraw();
+    //void DebugDraw();
 
 private:
 	//¶ãÀ•W
@@ -64,4 +65,3 @@ private:
     CollisionLayer m_layer;
 
 };
-

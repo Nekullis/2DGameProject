@@ -15,6 +15,14 @@ namespace
         if (a == CollisionLayer::Player && b == CollisionLayer::Enemy) { return true; }
         if (a == CollisionLayer::Enemy && b == CollisionLayer::Player) { return true; }
 
+        //Player‚ÆEvent
+        if (a == CollisionLayer::Player && b == CollisionLayer::Event) { return true; }
+        if (a == CollisionLayer::Event && b == CollisionLayer::Player) { return true; }
+
+        //Player‚ÆGimmick
+        if (a == CollisionLayer::Player && b == CollisionLayer::Gimmick) { return true; }
+        if (a == CollisionLayer::Gimmick && b == CollisionLayer::Player) { return true; }
+
         return false;
     }
 }
@@ -75,13 +83,13 @@ bool Collider::IsHit(const Collider& other) const
 	return false;
 }
 
-void Collider::DebugDraw()
-{
-    Vector2D pos =
-    {
-        m_position.x - Camera::w_camera._pos.x,
-        m_position.y - Camera::w_camera._pos.y
-    };
-
-    DrawBox(pos.x, pos.y, pos.x + m_width, pos.y + m_height, GetColor(255, 0, 0), TRUE);
-}
+//void Collider::DebugDraw()
+//{
+//    Vector2D pos =
+//    {
+//        m_position.x - Camera::w_camera._pos.x,
+//        m_position.y - Camera::w_camera._pos.y
+//    };
+//
+//    DrawBox(pos.x, pos.y, pos.x + m_width, pos.y + m_height, GetColor(255, 0, 0), TRUE);
+//}

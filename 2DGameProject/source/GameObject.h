@@ -16,7 +16,8 @@ enum class ObjectType
     None,
     Player,
     Enemy,
-    Item
+    Item,
+    Gimmick
 };
 
 class GameObject

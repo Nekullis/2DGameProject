@@ -59,9 +59,9 @@ public:
 
 private:
     //ステージ
-    std::shared_ptr<Stage> m_Stage;
+    std::shared_ptr<Stage> m_stage;
     //プレイヤー
-    std::shared_ptr<Player> m_Player;
+    std::shared_ptr<Player> m_player;
     //オブジェクト管理
     GameObjectManager m_objectManager;
     //レンダー

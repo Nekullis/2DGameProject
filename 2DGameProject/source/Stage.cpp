@@ -3,7 +3,7 @@
 #include "JSONManager.h"
 #include "CaveBackground.h"
 
-Stage::Stage() :m_playerSpawnX(0), m_playerSpawnY(0), m_GoalX(0), m_GoalY(0)
+Stage::Stage() :m_playerSpawnX(0), m_playerSpawnY(0)
 {
 	m_tileMap = std::make_shared<TileMap>();
     m_backGround = std::make_shared<CaveBackground>();
@@ -38,9 +38,17 @@ bool Stage::Load(const std::string& path)
         m_enemySpawns.push_back(spawn);
     }
 
-	//ゴール
-	m_GoalX = data["goal"]["x"];
-	m_GoalY = data["goal"]["y"];
+    //イベント
+    if (data.contains("events"))
+    {
+        m_eventManager.Load(data["events"]);
+    }
+    
+    //ギミック
+    if (data.contains("gimmicks"))
+    {
+        m_gimmickManager.Load(data["gimmicks"]);
+    }
 
 	//BGM
 	m_bgmPath = data["bgm"];

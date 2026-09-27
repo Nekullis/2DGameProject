@@ -25,6 +25,13 @@ public:
     std::vector<std::shared_ptr<GameObject>> GetObjects() const { return m_objects; }
 
 protected:
+    //管理しているオブジェクト
 	std::vector<std::shared_ptr<GameObject>> m_objects;
+
+    //更新中に追加されたオブジェクト
+    std::vector<std::shared_ptr<GameObject>> m_pendingObjects;
+
+    //現在Update中か
+    bool m_isUpdating;
 };
 

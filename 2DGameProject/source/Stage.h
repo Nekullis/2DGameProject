@@ -8,6 +8,8 @@
 #include <memory>
 #include <string>
 #include <vector>
+#include "EventManager.h"
+#include "GimmickManager.h"
 
 class TileMap;
 class CaveBackground;
@@ -34,6 +36,8 @@ public:
 	float GetPlayerSpawnX()const { return m_playerSpawnX; }
 	float GetPlayerSpawnY()const { return m_playerSpawnY; }
     const std::vector<EnemySpawnData>& GetEnemySpawns() const { return m_enemySpawns; }
+    EventManager& GetEventManager() { return m_eventManager; }
+    GimmickManager& GetGimmickManager() { return m_gimmickManager; }
 
 private:
 	//ステージ名
@@ -47,11 +51,12 @@ private:
 	float m_playerSpawnY;
     //敵出現位置
     std::vector<EnemySpawnData> m_enemySpawns;
+    //イベント
+    EventManager m_eventManager;
+    //ギミック
+    GimmickManager m_gimmickManager;
 	//BGM
 	std::string m_bgmPath;
-	//ゴール座標
-	float m_GoalX;
-	float m_GoalY;
 
 };
 

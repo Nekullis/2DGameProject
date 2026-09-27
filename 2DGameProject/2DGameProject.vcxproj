@@ -19,6 +19,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="source\ObjectWaterDrop.cpp" />
+    <ClCompile Include="source\GimmickStalactite.cpp" />
+    <ClCompile Include="source\GimmickManager.cpp" />
+    <ClCompile Include="source\Gimmick.cpp" />
+    <ClCompile Include="source\EventManager.cpp" />
+    <ClCompile Include="source\EventGoal.cpp" />
+    <ClCompile Include="source\Event.cpp" />
     <ClCompile Include="source\CaveBackground.cpp" />
     <ClCompile Include="source\SonarManager.cpp" />
     <ClCompile Include="source\SonarParam.cpp" />
@@ -60,6 +67,13 @@
     <ClCompile Include="source\Stage.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="source\ObjectWaterDrop.h" />
+    <ClInclude Include="source\GimmickStalactite.h" />
+    <ClInclude Include="source\GimmickManager.h" />
+    <ClInclude Include="source\Gimmick.h" />
+    <ClInclude Include="source\EventManager.h" />
+    <ClInclude Include="source\EventGoal.h" />
+    <ClInclude Include="source\Event.h" />
     <ClInclude Include="source\CaveBackground.h" />
     <ClInclude Include="source\SonarManager.h" />
     <ClInclude Include="source\SonarParam.h" />
