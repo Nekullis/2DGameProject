@@ -31,8 +31,8 @@ void Player::Update()
 	ApplyGravity();
     //更新
     GameObject::Update();
-	//衝突判定
-	MapCollision();
+    //衝突
+    MapCollision();
     //接地判定
     CheckGround();
 	//状態更新
@@ -178,10 +178,13 @@ void Player::MapCollision()
 {
 	//接地初期化
 	m_isGround = false;
+
 	//壁一覧取得
 	auto walls = m_tilemap->GetWallRects();
+
 	//プレイヤー矩形取得
 	MYRECT playerRect = GetRect();
+
 	//全壁と判定
 	for (auto& wall : walls)
 	{
@@ -190,6 +193,7 @@ void Player::MapCollision()
 		{
 			continue;
 		}
+
         switch (hit)
         {
         case CollisionSide::Top:
@@ -201,7 +205,7 @@ void Player::MapCollision()
             break;
         case CollisionSide::Left:
         case CollisionSide::Right:
-            //m_velocity.x = 0;
+            m_velocity.x = 0;
             break;
         }
         //rect結果反映
@@ -380,5 +384,4 @@ void Player::UpdateState()
     }
 	
 }
-
 

@@ -43,6 +43,7 @@ public:
 	//当たり判定
 	void MapCollision();
     void OnCollision(GameObject* other) override;
+    //ダメージ
     void Damage();
     virtual void OnSonarHit()override;
     //ゲッター

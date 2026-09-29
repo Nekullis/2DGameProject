@@ -82,24 +82,120 @@ std::vector<MYRECT> TileMap::GetWallRects() const
 	//戻り値
 	std::vector<MYRECT> walls;
 
+    //マップの高さをintで扱う
+    const int mapHeight = static_cast<int>(m_mapData.size());
+
+    //どの壁タイルを矩形化しているか記録する
+    std::vector<std::vector<bool>> used;
+    //各行をその行のタイル数と同じ大きさにする
+    used.resize(m_mapData.size());
+    //初期化
+    for (int y = 0; y < static_cast<int>(m_mapData.size()); y++)
+    {
+        used[y].resize(m_mapData[y].size(), false);
+    }
+
 	//全タイル走査
-	for (int y = 0; y < m_mapData.size(); y++)
+	for (int y = 0; y < mapHeight; y++)
 	{
-		for (int x = 0; x < m_mapData[y].size(); x++)
+		for (int x = 0; x < static_cast<int>(m_mapData[y].size()); x++)
 		{
 			//壁じゃない場合
 			if (m_mapData[y][x] != 1)
 			{
 				continue;
 			}
-			//Rect作成
+
+            //すでに別の矩形に使っている
+            if (used[y][x])
+            {
+                continue;
+            }
+
+            //縦方向にどこまで続いているか調べる
+            int height = 1;
+
+            while (y + height < static_cast<int>(m_mapData.size()))
+            {
+                int nextY = y + height;
+
+                //次の行に、このx位置に壁がない
+                if (x >= static_cast<int>(m_mapData[nextY].size()))
+                {
+                    break;
+                }
+
+                //壁ではない
+                if (m_mapData[nextY][x] != 1)
+                {
+                    break;
+                }
+
+                //既に使われている
+                if (used[nextY][x])
+                {
+                    break;
+                }
+
+                height++;
+            }
+
+            //縦方向に纏める
+            if (height > 1)
+            {
+                MYRECT rect{};
+                rect.x = x * m_tileSize;
+                rect.y = y * m_tileSize;
+                rect.w = m_tileSize;
+                rect.h = height * m_tileSize;
+
+                walls.push_back(rect);
+
+                //使用済みにする
+                for (int yy = y; yy < y + height; yy++)
+                {
+                    used[yy][x] = true;
+                }
+
+                continue;
+            }
+
+            //縦に続いてなければ横方向を調べる
+            int width = 1;
+
+            while (x + width < static_cast<int>(m_mapData[y].size()))
+            {
+                int nextX = x + width;
+
+                //壁ではない
+                if (m_mapData[y][nextX] != 1)
+                {
+                    break;
+                }
+
+                //既に使われている
+                if (used[y][nextX])
+                {
+                    break;
+                }
+
+                width++;
+            }
+
+            //横方向に纏める
             MYRECT rect{};
-			rect.x = x * m_tileSize;
-			rect.y = y * m_tileSize;
-			rect.w = m_tileSize;
-			rect.h = m_tileSize;
-			//追加
-			walls.push_back(rect);
+            rect.x = x * m_tileSize;
+            rect.y = y * m_tileSize;
+            rect.w = width * m_tileSize;
+            rect.h = m_tileSize;
+
+            walls.push_back(rect);
+
+            //使用済みにする
+            for (int xx = x; xx < x + width; xx++)
+            {
+                used[y][xx] = true;
+            }
 		}
 	}
 

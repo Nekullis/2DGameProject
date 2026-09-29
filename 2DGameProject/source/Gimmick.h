@@ -9,6 +9,7 @@
 #include "GameObject.h"
 
 class GameObjectManager;
+class TileMap;
 
 class Gimmick : public GameObject
 {
@@ -25,11 +26,17 @@ public:
     //オブジェクトマネージャー設定
     void SetObjectManager(GameObjectManager* manager) { m_objectManager = manager; }
 
-private:
+    //タイルマップ設定
+    void SetTileMap(TileMap* tileMap) { m_tileMap = tileMap; }
+
+protected:
     //ギミック種類
     std::string m_gimmickType;
 
     //オブジェクト管理
     GameObjectManager* m_objectManager;
+
+    //マップ
+    TileMap* m_tileMap;
 };
 

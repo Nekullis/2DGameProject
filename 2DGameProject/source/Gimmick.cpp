@@ -1,7 +1,8 @@
 #include "Gimmick.h"
 #include "GameObjectManager.h"
+#include "TileMap.h"
 
-Gimmick::Gimmick(const std::string& gimmickType, float x, float y) : m_gimmickType(gimmickType), m_objectManager(nullptr)
+Gimmick::Gimmick(const std::string& gimmickType, float x, float y) : m_gimmickType(gimmickType), m_objectManager(nullptr), m_tileMap(nullptr)
 {
     m_objType = ObjectType::Gimmick;
 

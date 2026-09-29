@@ -12,6 +12,8 @@
 class GameObjectManager
 {
 public:
+    GameObjectManager();
+
 	//’Ç‰Á
 	void Add(std::shared_ptr<GameObject> obj);
 	//XV

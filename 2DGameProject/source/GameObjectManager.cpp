@@ -1,6 +1,10 @@
 #include "GameObjectManager.h"
 #include "GameObject.h"
 
+GameObjectManager::GameObjectManager() : m_isUpdating(false)
+{
+}
+
 void GameObjectManager::Add(std::shared_ptr<GameObject> obj)
 {
     if (m_isUpdating)
